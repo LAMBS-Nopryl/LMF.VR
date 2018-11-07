@@ -26,17 +26,12 @@ if !(lmf_warmup) exitWith {};
 waitUntil {simulationEnabled player};
 [true] call lmf_admin_fnc_playerSafety;
 
-
 //DISPLAY CONTROL
-//SIZE VARIATION
-private _hValue = 3.7;
-if (typename var_respawnType == "SCALAR") then {_hValue = 4.2;} else {if (var_respawnType == "WAVE") then {_hValue = 4.2;}};
-
-// Use profile settings from CfgUIGrids.hpp
+//USE PROFILE SETTINGS FROM CFGUIGRIDS.HPP
 private _xPos = profilenamespace getVariable ["IGUI_GRID_ACE_displayText_X", ((safezoneX + safezoneW) - (10 *(((safezoneW / safezoneH) min 1.2) / 10)) - 2.9 *(((safezoneW / safezoneH) min 1.2) / 40))];
 private _yPos = profilenamespace getVariable ["IGUI_GRID_ACE_displayText_Y", safeZoneY + 0.175 * safezoneH];
 private _wPos =  (14 *(((safezoneW / safezoneH) min 1.2) / 40));
-private _hPos = _hValue * (2 *((((safezoneW / safezoneH) min 1.2) / 1.2) / 25));
+private _hPos = 4.2 * (2 *((((safezoneW / safezoneH) min 1.2) / 1.2) / 25));
 
 // Ensure still in bounds for large width/height
 _xPos = safezoneX max (_xPos min (safezoneX + safezoneW - _wPos));
@@ -53,50 +48,37 @@ while {lmf_warmup} do {
 	private _txt = format ["<t align='Center'>Safe start enabled  (%1)",[time, "MM:SS"] call BIS_fnc_secondsToString];
 	private _br = format ["<br/>"];
 
-	private _arsenal = "";
-	if (var_personalArsenal) then {_arsenal = "On";} else {_arsenal = "Off";};
-	private _personalArsenal = format ["<t color='#FFBA26' size='1.0'align='left'>PERSONAL ARSENAL:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_arsenal];
+	//PERSONAL ARSENAL
+	private _personalArsenal = format ["<t color='#FFBA26' size='1.0'align='left'>PERSONAL ARSENAL:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",["Off", "On"] select var_personalArsenal];
 
+	//GET MAP
 	private _map = "";
 	if (var_playerMaps == 0) then {_map = "All";};
 	if (var_playerMaps == 1) then {_map = "Leaders";};
 	if (var_playerMaps == 2) then {_map = "None";};
 	private _maps = format ["<t color='#ffba26' size='1.0'align='left'>MAPS:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_map];
 
-	private _radio = "";
-	if (var_personalRadio) then {_radio = "All";};
-	if (!var_personalRadio) then {_radio = "None";};
-	private _radios = format ["<t color='#ffba26' size='1.0'align='left'>SQUAD RADIOS:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_radio];
+	//PERSONAL RADIO
+	private _radios = format ["<t color='#ffba26' size='1.0'align='left'>SQUAD RADIOS:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",["None", "All"] select var_personalRadio];
 
-	private _kRole = "";
-	private _keepRole = "";
-	if (var_keepRole) then {_kRole = "Yes";} else {_kRole = "No";};
-	if (typename var_respawnType == "SCALAR") then {
-		_keepRole = format ["<t color='#FFBA26' size='1.0'align='left'>KEEP ROLE:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_kRole];
-	} else {
-		if (var_respawnType == "WAVE") then {
-			_keepRole = format ["<t color='#FFBA26' size='1.0'align='left'>KEEP ROLE:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_kRole];
-		};
+	//KEEP ROLE AFTER RESPAWN
+	private _keepRole = format ["<t color='#FFBA26' size='1.0'align='left'>KEEP ROLE:  </t> <t color='#ffffff' size='1.0'align='right'>-</t><br/>"];
+	if (typeName var_respawnType == "SCALAR" || {var_respawnType == "WAVE"}) then {
+		_keepRole = format ["<t color='#FFBA26' size='1.0'align='left'>KEEP ROLE:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",["No", "Yes"] select var_keepRole];
 	};
 
+	//RESPAWN TYPE
 	private _respawn = "";
-	private _resp = "";
-	private _respT = "";
-	if (typename var_respawnType == "STRING") then {
+	if (typename var_respawnType == "SCALAR") then {
+		_respawn = format ["<t color='#ffba26' size='1.0'align='left'>RESPAWN:  </t> <t color='#ffffff' size='1.0'align='right'>Yes (%1s)</t><br/>",var_respawnType];
+	} else {
 		if (var_respawnType == "OFF") then {
-			 _resp = "None";
-			 _respawn = format ["<t color='#ffba26' size='1.0'align='left'>RESPAWN:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_resp];
+			_respawn = format ["<t color='#ffba26' size='1.0'align='left'>RESPAWN:  </t> <t color='#ffffff' size='1.0'align='right'>None</t><br/>"];
 		};
 		if (var_respawnType == "WAVE") then {
-			 _resp = "Wave";
-			 _respT = format ["<t color='#ffffff'>%1",[var_respawnTime, "MM"] call BIS_fnc_secondsToString];
-			 _respawn = format ["<t color='#ffba26' size='1.0'align='left'>RESPAWN:  </t> <t color='#ffffff' size='1.0'align='right'>%1 (%2m)</t><br/>",_resp,_respT];
+			private _respTime = format ["<t color='#ffffff'>%1",[var_respawnTime, "MM"] call BIS_fnc_secondsToString];
+			_respawn = format ["<t color='#ffba26' size='1.0'align='left'>RESPAWN:  </t> <t color='#ffffff' size='1.0'align='right'>Wave (%1m)</t><br/>",_respTime];
 		};
-	};
-	if (typeName var_respawnType == "SCALAR") then {
-		 _resp = "Yes";
-		 _respT = var_respawnType;
-		 _respawn = format ["<t color='#ffba26' size='1.0'align='left'>RESPAWN:  </t> <t color='#ffffff' size='1.0'align='right'>%1 (%2s)</t><br/>",_resp,_respT];
 	};
 
 	//DISPLAY IT
@@ -107,12 +89,10 @@ while {lmf_warmup} do {
 //WAIT UNTIL WARMUP IS OVER
 waitUntil {!lmf_warmup};
 
-//START MISSION ///////////////////////////////////////////////////////////////////////////////////
-//DELETE DISPLAY CONTROL
-ctrlDelete _ctrl;
 
-//CLEAR HINT LOOP
-hintSilent "";
+//START MISSION ///////////////////////////////////////////////////////////////////////////////////
+//DELETE DISPLAY CONTROL WITH BRIEFING INTRO
+ctrlDelete _ctrl;
 
 //COUNTDOWN
 for "_i" from 1 to 10 do
