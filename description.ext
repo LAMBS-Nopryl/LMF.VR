@@ -3,25 +3,12 @@
 	- Description.ext handles all sorts of framework important settings.
 */
 // HEADER /////////////////////////////////////////////////////////////////////////////////////////
-
 class Header
 {
 	gameType = Coop;
 	minPlayers = 1;
 	maxPlayers = 99;
 };
-
-//MISSION PRESENTATION (set your mission name here, it is also a good idea to add version numbers so you can differentiate between mission versions!)
-author = "Some innocent lamb";
-#define MISSIONNAME "LMF Framework v1"
-#define MISSIONDESCRIPTION "Long mission description text seen in mission load and mission select screen"
-
-
-// LEAVE THESE ALONE //////////////////////////////////////////////////////////////////////////////
-OnLoadName = MISSIONNAME; // Mission name (short)
-briefingName = MISSIONNAME; // Mission name in mission select
-onLoadMission = MISSIONDESCRIPTION; // Text that appears while mission is loading
-overviewText = MISSIONDESCRIPTION; // Mission description in mission select
 
 //RESPAWN
 respawn = 3;
