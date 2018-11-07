@@ -27,11 +27,23 @@ waitUntil {simulationEnabled player};
 [true] call lmf_admin_fnc_playerSafety;
 
 
-//CREATE DISPLAY CONTROL
-private _h = 0.17;
-if (typename var_respawnType == "SCALAR") then {_h = 0.19;} else {if (var_respawnType == "WAVE") then {_h = 0.19;}};
+//DISPLAY CONTROL
+//SIZE VARIATION
+private _hValue = 3.7;
+if (typename var_respawnType == "SCALAR") then {_hValue = 4.2;} else {if (var_respawnType == "WAVE") then {_hValue = 4.2;}};
+
+// Use profile settings from CfgUIGrids.hpp
+private _xPos = profilenamespace getVariable ["IGUI_GRID_ACE_displayText_X", ((safezoneX + safezoneW) - (10 *(((safezoneW / safezoneH) min 1.2) / 10)) - 2.9 *(((safezoneW / safezoneH) min 1.2) / 40))];
+private _yPos = profilenamespace getVariable ["IGUI_GRID_ACE_displayText_Y", safeZoneY + 0.175 * safezoneH];
+private _wPos =  (14 *(((safezoneW / safezoneH) min 1.2) / 40));
+private _hPos = _hValue * (2 *((((safezoneW / safezoneH) min 1.2) / 1.2) / 25));
+
+// Ensure still in bounds for large width/height
+_xPos = safezoneX max (_xPos min (safezoneX + safezoneW - _wPos));
+_yPos = safeZoneY max (_yPos min (safeZoneY + safezoneH - _hPos));
+
 private _ctrl = (findDisplay 46) ctrlCreate ["RscStructuredText", -2];
-_ctrl ctrlSetPosition [safeZoneX+safeZoneW*0.84,safeZoneY-(safeZoneY*1.5),safeZoneW*0.15,safeZoneH*_h];
+_ctrl ctrlSetPosition [_xPos,_yPos,_wPos,_hPos];
 _ctrl ctrlSetBackgroundColor [0, 0, 0, 0.10];
 _ctrl ctrlCommit 0;
 
