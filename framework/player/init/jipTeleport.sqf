@@ -24,6 +24,12 @@ private _jipActionCode = {
 	private _target = [] call lmf_player_fnc_jipChooseTarget;
 	private _vicSpot = [_target] call lmf_player_fnc_jipEmptySeat;
 
+	if (!_vicSpot && {speed _target > 19 || {(getPosATL _target) select 2 > 5}}) exitWith {
+		private _title1 = "<t color='#FFBA26' size='1' >CAN NOT TELEPORT!</t><br/>";
+		private _title2 = "<t color='#FFFFFF' size='1' >Teleport target moving too fast or currently in air. Try again in a bit!</t><br/>";
+		[_title1 + _title2, 2, player, 14] call ace_common_fnc_displayTextStructured;
+	};
+
 	player allowDamage false;
 	cutText  ["", "BLACK OUT", 1, true];
 	if (_vicSpot) then {
@@ -41,5 +47,5 @@ player setVariable ["_sPos" ,getPosASL player];
 private _jipTeleAction = ["tpToGroup","TELEPORT TO GROUP","\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\transport_ca.paa",_jipActionCode,{player distance2D (player getvariable ["_sPos",[0,0,0]]) < 200}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], _jipTeleAction] call ace_interact_menu_fnc_addActionToObject;
 
-//REMOVE ACTION AFTER 300 SECONDS
-[{[player,1,["ACE_SelfActions","tpToGroup"]] call ace_interact_menu_fnc_removeActionFromObject;}, [], 300] call CBA_fnc_waitAndExecute;
+//REMOVE ACTION AFTER 600 SECONDS (10 minutes)
+[{[player,1,["ACE_SelfActions","tpToGroup"]] call ace_interact_menu_fnc_removeActionFromObject;}, [], 600] call CBA_fnc_waitAndExecute;
