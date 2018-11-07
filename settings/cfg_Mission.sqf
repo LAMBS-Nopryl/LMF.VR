@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //VARIOUS
 var_author = "Author"; // Your name, which shows up at the end of the warmup.
+var_location = "Virtual Reality"; // Location where scenario takes place, which can be seen in intro.
 var_debug = false; // For mission testing, will turn on some debug options. (default: false)
 var_warmup = true; // Start mission with warmup? (default: true)
 var_jipTP = false; // Allow players that JIP to teleport? (default: false)
