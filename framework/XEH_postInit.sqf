@@ -32,6 +32,27 @@ enableSaving [false,false];
 //ACRE CHANNEL LABLES
 [] execVM "framework\shared\init\acreChannelLabels.sqf";
 
+//UNCONSCIOUS EH
+["ace_unconscious", {
+    params [["_unit", objNull],["_state", false]];
+    if (ace_medical_enableUnconsciousnessAI == 0 || {!_state || {!(local _unit)}}) exitWith {};
+
+    if (isPlayer _unit) then {
+        [{ace_player setUnitTrait ["camouflageCoef",var_camoCoef];}, [], 30] call CBA_fnc_waitAndExecute;
+    } else {
+        [_unit] spawn {
+            params [["_unit", objNull]];
+            while {alive _unit && {_unit getVariable ["ACE_isUnconscious", false]}} do {
+                sleep 5;
+                if (12.5 > random 100) then {
+                    [_unit, false] call ace_medical_fnc_setUnconscious;
+                };
+                sleep 15;
+            };
+        };
+    };
+}] call CBA_fnc_addEventHandler;
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,23 +89,6 @@ if (isServer) then {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // AI /////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//CHANCE FOR AI TO WAKE UP
-["ace_unconscious", {
-    params [["_unit", objNull],["_state", false]];
-    if (ace_medical_enableUnconsciousnessAI == 0 || {!_state || {!(local _unit) || {isPlayer _unit}}}) exitWith {};
-
-    [_unit] spawn {
-        params [["_unit", objNull]];
-        while {alive _unit && {_unit getVariable ["ACE_isUnconscious", false]}} do {
-            sleep 5;
-            if (12.5 > random 100) then {
-                [_unit, false] call ace_medical_fnc_setUnconscious;
-            };
-            sleep 15;
-        };
-    };
-}] call CBA_fnc_addEventHandler;
-
 //'APPLY EVENTHANDLERS' EVENT (To avoid problems with locality change. (thanks Diwako))
 ["lmf_ai_listener", {
     //PARAMS INITIALLY PASSED FROM LOCAL EVENT IN INITMAN.SQF
