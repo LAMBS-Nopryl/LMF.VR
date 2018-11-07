@@ -21,43 +21,74 @@ player enableSimulation true;
 if !(lmf_warmup) exitWith {};
 
 
-// WAMRUP /////////////////////////////////////////////////////////////////////////////////////////
+// WARMUP /////////////////////////////////////////////////////////////////////////////////////////
 //DISABLE WEAPONS AND DISALLOW DAMMAGE
 waitUntil {simulationEnabled player};
 [true] call lmf_admin_fnc_playerSafety;
 
 
+//CREATE DISPLAY CONTROL
+private _h = 0.17;
+if (typename var_respawnType == "SCALAR") then {_h = 0.19;} else {if (var_respawnType == "WAVE") then {_h = 0.19;}};
+private _ctrl = (findDisplay 46) ctrlCreate ["RscStructuredText", -2];
+_ctrl ctrlSetPosition [safeZoneX+safeZoneW*0.84,safeZoneY-(safeZoneY*1.5),safeZoneW*0.15,safeZoneH*_h];
+_ctrl ctrlSetBackgroundColor [0, 0, 0, 0.10];
+_ctrl ctrlCommit 0;
+
 //PLAY INFO LOOP
 while {lmf_warmup} do {
-	private _title = "<t font='PuristaBold' color='#FFBA26' size='1.3' align='Center'>Mission Briefing Stage</t><br/>";
+	private _title = "<t font='PuristaBold' color='#FFBA26' size='1.3' align='Center'>Briefing Stage</t><br/>";
 	private _txt = format ["<t align='Center'>Safe start enabled  (%1)",[time, "MM:SS"] call BIS_fnc_secondsToString];
 	private _br = format ["<br/>"];
 
-	private _jipTP = "";
-	if (var_jipTP) then {_jipTP = "On";} else {_jipTP = "Off";};
-	private _jipTeleport = format ["<t color='#FFBA26' size='1.0'align='left'>JIP TELEPORT:  </t> <t color='#9DA698' size='1.0'align='right'>%1</t><br/>",_jipTP];
+	private _arsenal = "";
+	if (var_personalArsenal) then {_arsenal = "On";} else {_arsenal = "Off";};
+	private _personalArsenal = format ["<t color='#FFBA26' size='1.0'align='left'>PERSONAL ARSENAL:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_arsenal];
 
-	private _grpMrk = "";
-	if (var_groupMarkers) then {_grpMrk = "On";} else {_grpMrk = "Off";};
-	private _groupMarkers = format ["<t color='#FFBA26' size='1.0'align='left'>GROUP MARKERS:  </t> <t color='#9DA698' size='1.0'align='right'>%1</t><br/>",_grpMrk];
+	private _map = "";
+	if (var_playerMaps == 0) then {_map = "All";};
+	if (var_playerMaps == 1) then {_map = "Leaders";};
+	if (var_playerMaps == 2) then {_map = "None";};
+	private _maps = format ["<t color='#ffba26' size='1.0'align='left'>MAPS:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_map];
 
-	private _unitMrk = "";
-	if (var_unitTracker) then {_unitMrk = "On";} else {_unitMrk = "Off";};
-	private _unitMarkers = format ["<t color='#FFBA26' size='1.0'align='left'>UNIT MARKERS:  </t> <t color='#9DA698' size='1.0'align='right'>%1</t><br/>",_unitMrk];
+	private _radio = "";
+	if (var_personalRadio) then {_radio = "All";};
+	if (!var_personalRadio) then {_radio = "None";};
+	private _radios = format ["<t color='#ffba26' size='1.0'align='left'>SQUAD RADIOS:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_radio];
 
-	private _camoCoef = str var_camoCoef;
-	private _camoCoefficient = format ["<t color='#FFBA26' size='1.0'align='left'>PLAYER CAMO-COEFF:  </t> <t color='#9DA698' size='1.0'align='right'>%1</t><br/>",_camoCoef];
-
-	private _resp = "";
-	if (typename var_respawnType == "STRING") then {
-		if (var_respawnType == "WAVE") then {_resp = "Wave";} else {_resp = "Off";};
+	private _kRole = "";
+	private _keepRole = "";
+	if (var_keepRole) then {_kRole = "Yes";} else {_kRole = "No";};
+	if (typename var_respawnType == "SCALAR") then {
+		_keepRole = format ["<t color='#FFBA26' size='1.0'align='left'>KEEP ROLE:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_kRole];
+	} else {
+		if (var_respawnType == "WAVE") then {
+			_keepRole = format ["<t color='#FFBA26' size='1.0'align='left'>KEEP ROLE:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_kRole];
+		};
 	};
-	if (typename var_respawnType == "SCALAR") then {_resp = var_respawnType};
-	private _respawn = format ["<t color='#FFBA26' size='1.0'align='left'>RESPAWN:  </t> <t color='#9DA698' size='1.0'align='right'>%1</t><br/>",_resp];
 
+	private _respawn = "";
+	private _resp = "";
+	private _respT = "";
+	if (typename var_respawnType == "STRING") then {
+		if (var_respawnType == "OFF") then {
+			 _resp = "None";
+			 _respawn = format ["<t color='#ffba26' size='1.0'align='left'>RESPAWN:  </t> <t color='#ffffff' size='1.0'align='right'>%1</t><br/>",_resp];
+		};
+		if (var_respawnType == "WAVE") then {
+			 _resp = "Wave";
+			 _respT = format ["<t color='#ffffff'>%1",[var_respawnTime, "MM"] call BIS_fnc_secondsToString];
+			 _respawn = format ["<t color='#ffba26' size='1.0'align='left'>RESPAWN:  </t> <t color='#ffffff' size='1.0'align='right'>%1 (%2m)</t><br/>",_resp,_respT];
+		};
+	};
+	if (typeName var_respawnType == "SCALAR") then {
+		 _resp = "Yes";
+		 _respT = var_respawnType;
+		 _respawn = format ["<t color='#ffba26' size='1.0'align='left'>RESPAWN:  </t> <t color='#ffffff' size='1.0'align='right'>%1 (%2s)</t><br/>",_resp,_respT];
+	};
 
 	//DISPLAY IT
-	hintSilent parseText (_title + _txt + _br + _br + _respawn + _jipTeleport + _camoCoefficient + _groupMarkers + _unitMarkers);
+	_ctrl ctrlSetStructuredText parsetext (_title + _txt + _br + _br + _personalArsenal + _radios + _maps + _respawn + _keepRole);
 	sleep 1;
 };
 
@@ -65,7 +96,8 @@ while {lmf_warmup} do {
 waitUntil {!lmf_warmup};
 
 //START MISSION ///////////////////////////////////////////////////////////////////////////////////
-
+//DELETE DISPLAY CONTROL
+ctrlDelete _ctrl;
 
 //CLEAR HINT LOOP
 hintSilent "";
@@ -77,7 +109,7 @@ for "_i" from 1 to 10 do
 	sleep 1;
 };
 
-//ENABLE WEAPONS AND ALLOW DAMMAGE
+//ENABLE WEAPONS AND ALLOW DAMAGE
 [false] call lmf_admin_fnc_playerSafety;
 
 //MISSION INTRO
