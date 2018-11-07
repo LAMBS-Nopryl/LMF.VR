@@ -7,7 +7,7 @@
 
 	- USAGE:
 		1) Spawn Position.
-		2) Group Type [OPTIONAL] ("squad", "team", "sentry","atTeam","aaTeam" or number of soldiers) (default: "TEAM")
+		2) Group Type [OPTIONAL] ("squad", "team", "sentry","atTeam","aaTeam", "mgTeam" or number of soldiers.) (default: "TEAM")
 		3) Patrol Radius. [OPTIONAL] (default: 200)
 
 	- EXAMPLE: 0 = [this,"TEAM",200] spawn lmf_ai_fnc_patrol;

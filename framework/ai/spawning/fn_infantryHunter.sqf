@@ -9,7 +9,7 @@
 
 	- USAGE:
 		1) Spawn Position.
-		2) Group Type [OPTIONAL] ("squad", "team", "sentry","atTeam","aaTeam" or number of soldiers) (default: "TEAM")
+		2) Group Type [OPTIONAL] ("squad", "team", "sentry","atTeam","aaTeam", "mgTeam" or number of soldiers.) (default: "TEAM")
 		3) Hunting Radius [OPTIONAL] (default: 500)
 		4) Spawn Tickets [OPTIONAL] (default: 1)
 

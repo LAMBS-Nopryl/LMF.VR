@@ -7,7 +7,7 @@
 
 	- USAGE:
 		1) Spawn Position.
-		2) Group Type [OPTIONAL] ("squad", "team", "sentry","atTeam","aaTeam" or number of soldiers.) (default: "TEAM")
+		2) Group Type [OPTIONAL] ("squad", "team", "sentry","atTeam","aaTeam", "mgTeam" or number of soldiers.) (default: "TEAM")
 		3) Garrison Radius. [OPTIONAL] (number) (default: 100)
 		4) Distribution [OPTIONAL] (0 = fill evenly, 1 = building by building) (default: 1)
 
