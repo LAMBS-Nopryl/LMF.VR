@@ -1,0 +1,97 @@
+// DESCRIPTION ////////////////////////////////////////////////////////////////////////////////////
+/*
+	- Description.ext handles all sorts of framework important settings.
+*/
+// HEADER /////////////////////////////////////////////////////////////////////////////////////////
+
+class Header
+{
+	gameType = Coop;
+	minPlayers = 1;
+	maxPlayers = 99;
+};
+
+//MISSION PRESENTATION (set your mission name here, it is also a good idea to add version numbers so you can differentiate between mission versions!)
+author = "Some innocent lamb";
+#define MISSIONNAME "LMF Framework v1"
+#define MISSIONDESCRIPTION "Long mission description text seen in mission load and mission select screen"
+
+
+// LEAVE THESE ALONE //////////////////////////////////////////////////////////////////////////////
+OnLoadName = MISSIONNAME; // Mission name (short)
+briefingName = MISSIONNAME; // Mission name in mission select
+onLoadMission = MISSIONDESCRIPTION; // Text that appears while mission is loading
+overviewText = MISSIONDESCRIPTION; // Mission description in mission select
+
+//RESPAWN
+respawn = 3;
+respawnDelay = 30;
+respawnDialog = 0;
+respawnOnStart = -1;
+respawnTemplates[] = {};
+
+//MISC
+disabledai = 1;
+enableDebugConsole = 1;
+enableTargetDebug = 1;
+disableChannels[]={0,2,4,5};
+cba_settings_hasSettingsFile = 1;
+
+//CORPSES & WRECKS
+corpseManagerMode = 3;
+corpseLimit = 20;
+corpseRemovalMinTime = 200;
+corpseRemovalMaxTime = 600;
+
+wreckManagerMode = 3;
+wreckLimit = 10;
+wreckRemovalMinTime = 200;
+wreckRemovalMaxTime = 1200;
+
+
+// FUNCTIONS //////////////////////////////////////////////////////////////////////////////////////
+class CfgFunctions {
+	createShortcuts = 1;
+	#include "framework\functions.hpp"
+};
+
+//PRE-INIT EHS
+class Extended_PreInit_EventHandlers {
+	class lambs_preInit {
+		Init = "[] call compile preprocessFileLineNumbers 'framework\XEH_PreInit.sqf'";
+	};
+	class diw_unknownwp_settings {
+		Init = "call compile preprocessFileLineNumbers 'framework\shared\diw_unknownwp\fn_addCbaSettings.sqf'";
+	};
+};
+
+//POST-INIT EHS
+class Extended_PostInit_EventHandlers {
+	class lambs_postInit {
+		init = "[] call compile preprocessFileLineNumbers 'framework\XEH_PostInit.sqf'";
+	};
+};
+
+//INIT-POST EHS
+class Extended_InitPost_EventHandlers {
+	class Air {
+		init = "_this call lmf_common_fnc_sortAirVics;";
+	};
+	class LandVehicle {
+		init = "_this call lmf_common_fnc_sortGroundVics;";
+	};
+	class CAManBase {
+		init = "_this call lmf_common_fnc_sortUnits;";
+	};
+	class ReammoBox_F {
+		init = "_this call lmf_common_fnc_sortSupplies;";
+	};
+};
+
+//DEBRIEFING
+class CfgDebriefingSections {
+	class acex_killTracker {
+		title = "Acex Killed Events";
+		variable = "acex_killTracker_outputText";
+	};
+};

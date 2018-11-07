@@ -1,0 +1,8 @@
+# Description
+# This Framework is based on the original LAMBS Framework and as such contains portions of code from it.
+
+# MAIN CONTRIBUTORS OF CODE
+Drgn V4karian
+Diwako
+nkenny
+Alex2k
