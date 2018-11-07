@@ -24,7 +24,7 @@ private _collect = {
 	player createDiarySubject ["Admin","Admin Tools"];
 	player creatediaryrecord ["Admin",["Admin", format ["
 	<font face='PuristaBold' color='#FFBA26' size='16'>ADMIN FRAMEWORK</font><br/>
-	<font color='#D7DBD5'>This will only work if you are an admin or whitelisted as one.</font color><br/><br/>
+	<font color='#D7DBD5'>This will only work if you are an admin or whitelisted as one.<br/><br/> Framework version: %1</font color><br/><br/>
 
 	<font color='#A34747'>END BRIEFING STAGE</font><br/>
 	- <execute expression='[player] remoteExec [""lmf_admin_fnc_endWarmup"",2]'>PRESS HERE TO END BRIEFING STAGE</execute><br/><br/>
@@ -52,7 +52,7 @@ private _collect = {
 
 	<font color='#A34747'>END MISSION FAILED</font><br/>
 	- <execute expression='[player,false] remoteExec [""lmf_admin_fnc_endMission"",2]'>PRESS HERE TO END MISSION</execute>
-	"]]];
+	", var_version]]];
 };
 
 
