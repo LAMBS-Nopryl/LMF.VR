@@ -218,6 +218,11 @@ if (CBA_missionTime > 5*60) then {
 //INTRO + WARMUP
 [] execVM "framework\player\init\warmup.sqf";
 
+//ARES MODULES
+if !(isnil "Ares_fnc_RegisterCustomModule") then {
+    [] execVM "framework\player\init\achillesModules.sqf";
+};
+
 //CHANNEL SETUP
 0 enableChannel false;
 1 enableChannel true;
