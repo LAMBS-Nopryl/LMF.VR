@@ -36,6 +36,7 @@ class ai {
         class infantryQRF {};
         class infantryHunter {};
         class vehicleQRF {};
+        class paraQRF {};
     };
 };
 class server {
