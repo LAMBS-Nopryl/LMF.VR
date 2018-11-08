@@ -41,11 +41,12 @@ _grp2 deleteGroupWhenEmpty true;
 //ORDERS
 private _wp = _grp addWaypoint [getPos _veh,0];
 _wp setWaypointType "GUARD";
+{_x disableAI "AUTOCOMBAT"} count units _grp;
 private _flyHeight = 300 + random 200;
 _veh flyInHeightASL [_flyHeight, _flyHeight, _flyHeight];
 
 //WAIT UNTIL THEY SHALL DEPLOY
-waitUntil {sleep 2; allPlayers findIf {_x distance2D _veh < 300 + random 300} != -1 || {{alive _x} count units _grp < 1 || {!alive _veh}}};
+waitUntil {sleep 2; allPlayers findIf {_x distance2D _veh < 500 + random 200} != -1 || {{alive _x} count units _grp < 1 || {!alive _veh}}};
 waitUntil {sleep 3; !(position _veh isFlatEmpty [-1, -1, -1, -1, 0, false] isEqualTo []) || {{alive _x} count units _grp < 1 || {!alive _veh}}};
 
 
