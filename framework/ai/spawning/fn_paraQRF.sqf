@@ -41,7 +41,8 @@ _grp2 deleteGroupWhenEmpty true;
 //ORDERS
 private _wp = _grp addWaypoint [getPos _veh,0];
 _wp setWaypointType "GUARD";
-_veh flyInHeightASL [300, 300, 300];
+private _flyHeight = 300 + random 200;
+_veh flyInHeightASL [_flyHeight, _flyHeight, _flyHeight];
 
 //WAIT UNTIL THEY SHALL DEPLOY
 waitUntil {sleep 2; allPlayers findIf {_x distance2D _veh < 300 + random 300} != -1 || {{alive _x} count units _grp < 1 || {!alive _veh}}};
@@ -50,6 +51,7 @@ waitUntil {sleep 3; !(position _veh isFlatEmpty [-1, -1, -1, -1, 0, false] isEqu
 
 //DEPLOY THE PARATROOPS IF VEHICLE AND TROOPERS ARE ALIVE
 if (alive _veh && {count units _grp2 > 0}) then {
+	private _flyDir = getDir _veh;
 	{
 		if !(alive _veh) exitWith {};
 		private _unit = _x;
@@ -84,9 +86,9 @@ if (alive _veh && {count units _grp2 > 0}) then {
 
 	//MAKE HELICOPTER FLY AWAY AND DESPAWN ONCE OUT OF SIGHT
 	{deleteWaypoint ((waypoints _grp) select 0)} count waypoints _grp;
-	_veh doMove (getPosASL _veh vectorAdd [-10000,-10000,0]);
+	_veh doMove (_veh getPos [10000,_flyDir - 180]);
 	_veh flyInHeightASL [100, 100, 100];
-	waitUntil {allPlayers findIf {_x distance2D _veh > 3000} != -1 || {!alive _veh || {count units _grp < 1}}};
+	waitUntil {allPlayers findIf {_x distance2D _veh > 5000} != -1 || {!alive _veh || {count units _grp < 1}}};
 	if (alive _veh && {count units _grp > 0}) then {
 		{_veh deleteVehicleCrew _x} count crew _veh;
 		deleteVehicle _veh;
