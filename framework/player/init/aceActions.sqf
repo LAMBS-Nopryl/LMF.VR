@@ -17,11 +17,11 @@ lmf_spawnerCreateObject = {
     params ["_vehType",["_spawnPad",objNull,[objNull]]];
 
 	if (count (_spawnPad nearEntities [["Man", "Air", "Land", "Ship"], 10]) > 0) exitWith {
-		titleText ["<t color='#FFBA26' size='2'>WARNING!</t><br/><t color='#FFFFFF' size='1.5'>Spawn pad occupied!</t>", "PLAIN", -1, false, true];
+		titleText ["<t color='#FFBA26' size='2'>WARNING!</t><br/><t color='#FFFFFF' size='1.5'>Spawn pad occupied!</t>", "PLAIN", 0.3, false, true];
 	};
 
 	if (rank ace_player == "PRIVATE" || {rank ace_player == "CORPORAL"}) exitWith {
-		titleText ["<t color='#FFBA26' size='2'>WARNING!</t><br/><t color='#FFFFFF' size='1.5'>Only for NCOs and Officers!</t>", "PLAIN", -1, false, true];
+		titleText ["<t color='#FFBA26' size='2'>WARNING!</t><br/><t color='#FFFFFF' size='1.5'>Only for NCOs and Officers!</t>", "PLAIN", 0.3, false, true];
 	};
 
     private _vehicle = _vehType createVehicle getPosATL _spawnPad;
