@@ -32,6 +32,7 @@ toUpper _vicType;
 
 // PREPARE AND SPAWN //////////////////////////////////////////////////////////////////////////////
 private _initTickets = _tickets;
+private _grp = grpNull;
 
 while {_initTickets > 0} do {
 
@@ -51,7 +52,7 @@ while {_initTickets > 0} do {
 
         //CREW
         private _type = selectRandom _team;
-        private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
+        _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
         _grp addVehicle _veh;
         {_x moveInAny _veh;} forEach units _grp;
@@ -69,7 +70,7 @@ while {_initTickets > 0} do {
 
         //CREW
         private _type = selectRandom _sentry;
-        private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
+        _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
         _grp addVehicle _veh;
         {_x moveInAny _veh;} forEach units _grp;
@@ -86,7 +87,7 @@ while {_initTickets > 0} do {
 
         //CREW
         private _type = selectRandom _squad;
-        private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
+        _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
         {_x moveInAny _veh;} forEach units _grp;
 
@@ -102,22 +103,21 @@ while {_initTickets > 0} do {
         _veh setDir _dir;
 
         //CREW
-        private _type = _vehicleCrew;
-        private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
+        _grp = [_spawnPos,var_enemySide,_vehicleCrew] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
         _grp addVehicle _veh;
         {_x moveInAny _veh;} forEach units _grp;
 
         //PASSENGERS
-        private _type2 = selectRandom [selectRandom _squad,selectRandom _team];
-        private _grp2 = [_spawnPos,var_enemySide,_type2] call BIS_fnc_spawnGroup;
+        private _type = selectRandom [selectRandom _squad,selectRandom _team];
+        private _grp2 = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp2 deleteGroupWhenEmpty true;
         {_x moveInCargo _veh;} forEach units _grp2;
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
         waitUntil {sleep 5; behaviour leader _grp == "COMBAT" || {{alive _x} count units _grp < 1 || {!alive _veh || {{alive _x} count units _grp2 < 1}}}};
-        waitUntil {sleep 3; !(position (vehicle leader _grp) isFlatEmpty [-1, -1, -1, -1, 0, false] isEqualTo []);};
+        waitUntil {sleep 3; !(position _veh isFlatEmpty [-1, -1, -1, -1, 0, false] isEqualTo []);};
         doStop driver _veh;
         doGetOut units _grp2;
         _grp2 leaveVehicle _veh;
@@ -135,8 +135,7 @@ while {_initTickets > 0} do {
         _veh setDir _dir;
 
         //CREW
-        private _type = _vehicleCrew;
-        private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
+        _grp = [_spawnPos,var_enemySide,_vehicleCrew] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
         _grp addVehicle _veh;
         {_x moveInAny _veh;} forEach units _grp;
@@ -152,15 +151,14 @@ while {_initTickets > 0} do {
         _veh setDir _dir;
 
         //CREW
-        private _type = _heliCrew;
-        private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
+        _grp = [_spawnPos,var_enemySide,_heliCrew] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
         _grp addVehicle _veh;
         {_x moveInAny _veh;} forEach units _grp;
 
         //PASSENGERS
-        private _type2 = selectRandom [selectRandom _squad,selectRandom _team];
-        private _grp2 = [_spawnPos,var_enemySide,_type2] call BIS_fnc_spawnGroup;
+        private _type = selectRandom _squad;
+        private _grp2 = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp2 deleteGroupWhenEmpty true;
         {_x moveInCargo _veh;} forEach units _grp2;
 
@@ -181,7 +179,7 @@ while {_initTickets > 0} do {
         _veh setDir _dir;
 
         //CREW
-        private _grp = createGroup var_enemySide;
+        _grp = createGroup var_enemySide;
         [_veh, _grp, false, "",_Pilot] call BIS_fnc_spawnCrew;
         _grp deleteGroupWhenEmpty true;
 
