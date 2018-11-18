@@ -118,7 +118,7 @@
 ["Spawn", "LMF Spawn AI Vehicle QRF", {
 	//SPAWNPOS
 	private _pos = _this select 0;
-	private _options = ["CAR","CARARMED","TURCK","APC","TANK","HELITRANSPORT","HELIATTACK"];
+	private _options = ["CAR","CARARMED","TRUCK","APC","TANK","HELITRANSPORT","HELIATTACK"];
 
 	//CHOSE OPTIONS
 	private _dialogResult = [
