@@ -39,6 +39,17 @@ class ai {
         class paraQRF {};
     };
 };
+class ai_civ {
+    tag = "lmf_ai_civ";
+    class functions {
+        file = "framework\ai\civ";
+        class initCiv {};
+    };
+    class eventhandlers {
+        file = "framework\ai\civ\eh";
+        class firedNear {};
+    };
+};
 class server {
 	tag = "lmf_server";
 	class functions {

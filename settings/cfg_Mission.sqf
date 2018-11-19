@@ -11,6 +11,7 @@ var_debug = false; // For mission testing, will turn on some debug options. (def
 var_warmup = true; // Start mission with warmup? (default: true)
 var_jipTP = false; // Allow players that JIP to teleport? (default: false)
 var_enemySide = EAST; // What side is the enemy? (WEST,EAST,INDEPENDENT) (default: EAST)
+var_civPanic = true; // Will civs panic when there is a firefight? (default: true)
 
 //RESPAWN
 var_respawnType = "OFF"; // What type of Respawn? ("WAVE", "OFF" or number in seconds) (default: "OFF")
