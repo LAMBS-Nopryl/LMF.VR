@@ -35,7 +35,7 @@ enableSaving [false,false];
 //UNCONSCIOUS EH
 ["ace_unconscious", {
     params [["_unit", objNull],["_state", false]];
-    if (ace_medical_enableUnconsciousnessAI == 0 || {!_state || {!(local _unit)}}) exitWith {};
+    if (ace_medical_enableUnconsciousnessAI == 0 || {!_state || {!(local _unit) || {var_enemySide != (side _unit) }}}) exitWith {};
 
     if (isPlayer _unit) then {
         [{ace_player setUnitTrait ["camouflageCoef",var_camoCoef];}, [], 30] call CBA_fnc_waitAndExecute;
