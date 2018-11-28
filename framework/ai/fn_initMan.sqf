@@ -101,6 +101,7 @@ if (_type == _Rifleman || {_type == _Squad_Leader}) then {
 if (_type == _Autorifleman) then {
 	if (_LMG_Ammo select 0 == "") then {_LMG_Ammo = 0;} else {_LMG_Ammo = selectRandom _LMG_Ammo};
 	[_unit, selectRandom _LMG, 10, _LMG_Ammo] call BIS_fnc_addWeapon;
+	_unit setSkill ((skill _unit) * 1.4);
 };
 
 //LAT
@@ -123,7 +124,7 @@ if (_type == _Grenadier) then {
 if (_type == _MMG_Gunner) then {
 	if (_MMG_Ammo select 0 == "") then {_MMG_Ammo = 0;} else {_MMG_Ammo = selectRandom _MMG_Ammo};
 	[_unit, selectRandom _MMG, 10, _MMG_Ammo] call BIS_fnc_addWeapon;
-
+	_unit setSkill ((skill _unit) * 1.4);
 };
 
 //MAT
@@ -138,7 +139,6 @@ if (_type == _MAT_Gunner) then {
 if (_type == _Marksman) then {
 	if (_DMR_Ammo select 0 == "") then {_DMR_Ammo = 0;} else {_DMR_Ammo = selectRandom _DMR_Ammo};
 	[_unit, selectRandom _DMR, 10, _DMR_Ammo] call BIS_fnc_addWeapon;
-
 };
 
 //CREW AND PILOT
@@ -153,7 +153,6 @@ if (_type == _AA_Gunner) then {
 	if (_AA_Ammo select 0 == "") then {_AA_Ammo = 0;} else {_AA_Ammo = selectRandom _AA_Ammo};
 	[_unit, selectRandom _Rifle, 12, _Rifle_Ammo] call BIS_fnc_addWeapon;
 	[_unit, selectRandom _AA, 4, _AA_Ammo] call BIS_fnc_addWeapon;
-
 };
 
 //OFF
@@ -169,7 +168,7 @@ if (50 > random 100) then {_unit addItem selectRandom _Grenade;};
 if (50 > random 100) then {_unit addItem selectRandom _Grenade_Smoke;};
 
 //ADD FAK
-if (50 > random 100) then {for "_i" from 1 to 2 do {_unit addItem "FirstAidKit";};};
+if (20 > random 100) then {for "_i" from 0 to 2 do {_unit addItem "ACE_fieldDressing";};};
 
 //WEAPON ATTACH
 removeAllPrimaryWeaponItems _unit;
