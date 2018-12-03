@@ -30,7 +30,7 @@ lmf_player_tracklist = [];
 
 		//UPDATE THE MARKER COLOR
 		{
-			private _marker = ("nk_m_"+ str(_x));
+			private _marker = format ["nk_m_%1",_x];
 			if (assignedTeam _x == "MAIN") then {_marker setMarkerColorLocal "ColorWhite"};
 			if (assignedTeam _x == "RED") then {_marker setMarkerColorLocal "ColorRed"};
 			if (assignedTeam _x == "GREEN") then {_marker setMarkerColorLocal "ColorGreen"};
