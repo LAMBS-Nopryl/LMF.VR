@@ -50,5 +50,5 @@ var_keepRole = true; // Should players keep their role upon respawn? (default: t
 
 // MARKERS ////////////////////////////////////////////////////////////////////////////////////////
 var_markerSide = "ColorWEST"; // What colorsheme should markers on playerside use? ("ColorWEST", "ColorEAST", "ColorGUER") (default: "ColorWEST")
-var_groupMarkers = true; // Use group-icons on map. (default: true)
+var_groupTracker = true; // Use group-icons on map. (default: true)
 var_unitTracker = false; // Use unit-icons on map. (default: false)
