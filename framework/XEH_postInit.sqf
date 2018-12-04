@@ -203,6 +203,7 @@ if (var_playerGear) then {
 
 //ACRE CHANNEL PRESET
 [] execVM "framework\player\init\acreChannelPreset.sqf";
+[] execVM "framework\player\init\acreSignalCalc.sqf";
 
 //PLAYER CAMOCOEF
 [{player setUnitTrait ["camouflageCoef",var_camoCoef];}, [], 5] call CBA_fnc_waitAndExecute;
