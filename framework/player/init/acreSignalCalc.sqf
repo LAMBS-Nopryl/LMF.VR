@@ -5,8 +5,8 @@
 	Exec this globally in debug console to boost receive or send power times 2
 	There is still a max range as this just feeds new values into the original acre function
 
-	player setVariable ["acre_send_power",2,true];
-	player setVariable ["acre_receive_power",2,true];
+	player setVariable ["acre_send_power",2];
+	player setVariable ["acre_receive_power",2];
 
 	Of course you can crank up that number as much as you like
 */
