@@ -40,9 +40,9 @@ private _trackingEH = ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Dr
 	{
 		private _color = [assignedTeam _x] call {
 			if (_this#0 == "RED") exitwith {[1,0,0,1]};
-			if (_this#0 == "GREEN") exitwith{[0,1,0,1]};
-			if (_this#0 == "BLUE") exitwith{[0,0,1,1]};
-			if (_this#0 == "YELLOW") exitwith{[1,1,0,1]};
+			if (_this#0 == "GREEN") exitwith {[0,1,0,1]};
+			if (_this#0 == "BLUE") exitwith {[0,0,1,1]};
+			if (_this#0 == "YELLOW") exitwith {[1,1,0,1]};
 			[1,1,1,1]
 		};
 		(_this#0) drawIcon ["iconMan",[0,0,0,1],getPosASL _x,20,20,getDir _x];
