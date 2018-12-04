@@ -56,6 +56,4 @@ private _brf_administration = [
 ];
 
 //SPECIAL THANKS (if you don't want this in your briefing leave the "" empty.)
-private _testers = "
-Thanks to name for the assets he provided and thanks to all my pals that helped me test this mission.
-";
+private _testers = "";
