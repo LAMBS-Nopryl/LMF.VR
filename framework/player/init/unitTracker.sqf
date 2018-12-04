@@ -13,7 +13,7 @@ lmf_player_tracklist = [];
 
 // ADD PLAYERS CYCLE //////////////////////////////////////////////////////////////////////////////
 [] spawn {
-	private _fnc_addUnitMarker =  {
+	private _fnc_addUnit =  {
 		private _unit = _this#0;
 		lmf_player_tracklist pushbackunique _unit;
 	};
@@ -21,7 +21,7 @@ lmf_player_tracklist = [];
 	while {true} do {
 		//ADD PLAYERS FROM PLAYER GROUP TO LIST (MINUS GROUP LEADER)
 		{
-			if (_x in lmf_player_tracklist) then {} else {0 =[_x] call _fnc_addUnitMarker};
+			if (_x in lmf_player_tracklist) then {} else {0 =[_x] call _fnc_addUnit};
 		} forEach (units group player - [leader group player]);
 		//REMOVE FROM TRACKLIST IF LEFT GROUP OR BECAME GROUP LEADER OR BECAME OBJNULL
 		{
