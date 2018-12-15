@@ -8,6 +8,9 @@ params ["_unit"];
 //BLACK FADE
 cutText  ["", "BLACK FADED", 10, true];
 
+//MOVE OUT OF ACE SPECTATOR
+[false] call ace_spectator_fnc_setSpectator;
+
 //PLAYER GEAR
 if (var_playerGear) then {
 	if !(var_keepRole) then {

@@ -26,9 +26,15 @@ if (typename var_respawnType == "SCALAR") then {
 	setPlayerRespawnTime var_respawnType;
 };
 
+if (playerRespawnTime < 10) then {
+	setPlayerRespawnTime 10;
+};
+
 //SLEEP FOR A WHILE
 sleep 6;
 
+//ACE SPECTATOR INTERFACE
+[true] call ace_spectator_fnc_setSpectator;
 
 // SPECTATOR SETTINGS /////////////////////////////////////////////////////////////////////////////
 0 enableChannel false;
