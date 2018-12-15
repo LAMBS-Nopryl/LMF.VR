@@ -50,13 +50,6 @@ class ai_civ {
         class firedNear {};
     };
 };
-class server {
-	tag = "lmf_server";
-	class functions {
-		file = "framework\server";
-        class spectatorChannel {};
-	};
-};
 class player {
 	tag = "lmf_player";
 	class functions {
