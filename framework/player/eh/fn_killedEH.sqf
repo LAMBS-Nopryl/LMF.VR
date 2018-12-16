@@ -5,10 +5,6 @@
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
 params ["_unit"];
 
-
-//BLACK OUT ///////////////////////////////////////////////////////////////////////////////////////
-cutText  ["", "BLACK FADED", 4, true];
-
 //CALCULATE RESPAWNTIME
 if (typename var_respawnType == "STRING") then {
 
@@ -29,6 +25,11 @@ if (typename var_respawnType == "SCALAR") then {
 if (playerRespawnTime < 10) then {
 	setPlayerRespawnTime 10;
 };
+
+sleep 3;
+
+//BLACK OUT ///////////////////////////////////////////////////////////////////////////////////////
+cutText  ["", "BLACK OUT", 4, true];
 
 //SLEEP FOR A WHILE
 sleep 6;
