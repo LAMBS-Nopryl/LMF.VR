@@ -29,7 +29,7 @@ if (playerRespawnTime < 10) then {
 sleep 3;
 
 //BLACK OUT ///////////////////////////////////////////////////////////////////////////////////////
-cutText  ["", "BLACK OUT", 4, true];
+cutText ["","BLACK OUT",4,true];
 
 //SLEEP FOR A WHILE
 sleep 6;
@@ -46,4 +46,4 @@ sleep 6;
 5 enableChannel false;
 
 //FADE IN
-cutText  ["", "BLACK IN", 4, true];
+cutText ["","BLACK IN",4,true];
