@@ -5,21 +5,11 @@
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
 params ["_unit"];
 
-
-//JOIN NEW GROUP
-[_unit] joinSilent grpNull;
-clearRadio;
-
 //BLACK FADE
 cutText  ["", "BLACK FADED", 10, true];
 
-//TERMINATE SPECTATOR
-["Terminate"] call BIS_fnc_EGSpectator;
-[false] call acre_api_fnc_setSpectator;
-
-//REMOVE CUSTOM CHAT CHANNEL
-[_unit,false] remoteExec ["lmf_server_fnc_spectatorChannel", 2];
-
+//MOVE OUT OF ACE SPECTATOR
+[false] call ace_spectator_fnc_setSpectator;
 
 //PLAYER GEAR
 if (var_playerGear) then {

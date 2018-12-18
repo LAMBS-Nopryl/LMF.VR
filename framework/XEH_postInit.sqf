@@ -71,17 +71,6 @@ if (isServer) then {
 
     //CREATE VARIOUS MARKERS
     [] execVM "framework\server\init\markers.sqf";
-
-    //CREATE CUSTOM SPECTATOR CHANNEL
-    radio_channel_1 = radioChannelCreate [[1,0.6,0,1], "SPECTATOR", "%UNIT_NAME", []];
-
-    //APPLY TEXTURES TO LAPTOPS
-    if !(isNil "ammoSpawner") then {ammoSpawner setObjectTextureGlobal [0, "framework\fx\clan_flag_Nopryl.paa"];};
-    if !(isNil "groundSpawner") then {groundSpawner setObjectTextureGlobal [0, "framework\fx\clan_flag_Nopryl.paa"];};
-    if !(isNil "airSpawner") then {airSpawner setObjectTextureGlobal [0, "framework\fx\clan_flag_Nopryl.paa"];};
-    if !(isNil "crateGearSquad") then {crateGearSquad setObjectTextureGlobal [0, "framework\fx\clan_flag_Nopryl.paa"];};
-    if !(isNil "crateGearPlt") then {crateGearPlt setObjectTextureGlobal [0, "framework\fx\clan_flag_Nopryl.paa"];};
-    if !(isNil "crateGearCrew") then {crateGearCrew setObjectTextureGlobal [0, "framework\fx\clan_flag_Nopryl.paa"];};
 };
 
 
@@ -168,7 +157,7 @@ player addEventHandler ["Killed", {
 //KILLED MESSAGES
 ["acex_killtracker_death",{
     params ["_killerName", "_killInfo"];
-    [{titleText [format ["Died: %1 %2", _this select 0, _this select 1], "PLAIN", 0.5, true,true];}, [_killerName,_killInfo], 3] call CBA_fnc_waitAndExecute;
+    [{titleText [format ["Died: %1 %2", _this select 0, _this select 1], "PLAIN", 0.5, true,true];}, [_killerName,_killInfo], 4] call CBA_fnc_waitAndExecute;
 }] call CBA_fnc_addEventHandler;
 
 //RESPAWN EH
@@ -235,3 +224,11 @@ if !(isnil "Ares_fnc_RegisterCustomModule") then {
 3 enableChannel true;
 4 enableChannel false;
 5 enableChannel false;
+
+//APPLY TEXTURES TO LAPTOPS
+if !(isNil "ammoSpawner") then {ammoSpawner setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};
+if !(isNil "groundSpawner") then {groundSpawner setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};
+if !(isNil "airSpawner") then {airSpawner setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};
+if !(isNil "crateGearSquad") then {crateGearSquad setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};
+if !(isNil "crateGearPlt") then {crateGearPlt setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};
+if !(isNil "crateGearCrew") then {crateGearCrew setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};

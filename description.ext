@@ -15,7 +15,7 @@ respawn = 3;
 respawnDelay = 30;
 respawnDialog = 0;
 respawnOnStart = -1;
-respawnTemplates[] = {};
+respawnTemplates[] = {"counter"};
 
 //MISC
 disabledai = 1;
