@@ -14,7 +14,7 @@ cutText  ["", "BLACK FADED", 10, true];
 //PLAYER GEAR
 if (var_playerGear) then {
 	if !(var_keepRole) then {
-		[player, "Rifleman"] call lmf_player_fnc_initPlayerGear;
+		[player] call lmf_loadout_fnc_rifleman;
 	} else {
 		[player] call lmf_player_fnc_initPlayerGear;
 	};

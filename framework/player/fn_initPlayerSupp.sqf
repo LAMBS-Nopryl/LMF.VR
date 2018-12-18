@@ -18,32 +18,35 @@ clearBackpackCargoGlobal _supp;
 
 //ADD NEW ITEMS
 if (typeOf _supp == var_supSmall) exitWith {
-	if ((_Carbine_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_Carbine_Ammo select 0), 15];};
-	if ((_Rifle_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_Rifle_Ammo select 0), 15];};
-	if ((_Rifle_GL_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_Rifle_GL_Ammo select 0), 15];};
-	if ((_LMG_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_LMG_Ammo select 0), 4];};
-	if ((_MMG_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_MMG_Ammo select 0), 4];};
-	if ((_MAT_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_MAT_Ammo select 0), 4];};
-	if ((_Rifle_GL_HE select 0) != "") then {_supp addMagazineCargoGlobal [(_Rifle_GL_HE select 0), 4];};
-	if ((_Grenade select 0) != "") then {_supp addMagazineCargoGlobal [(_Grenade select 0), 4];};
-	if ((_Grenade_Smoke select 0) != "") then {_supp addMagazineCargoGlobal [(_Grenade_Smoke select 0), 4];};
+	if (_Carbine_Ammo != "") then {_supp addMagazineCargoGlobal [_Carbine_Ammo, 15];};
+	if (_Rifle_Ammo != "") then {_supp addMagazineCargoGlobal [_Rifle_Ammo, 15];};
+	if (_Rifle_GL_Ammo != "") then {_supp addMagazineCargoGlobal [_Rifle_GL_Ammo, 15];};
+	if (_LMG_Ammo != "") then {_supp addMagazineCargoGlobal [_LMG_Ammo, 4];};
+	if (_MMG_Ammo != "") then {_supp addMagazineCargoGlobal [_MMG_Ammo, 4];};
+	if (_MAT_Ammo != "") then {_supp addMagazineCargoGlobal [_MAT_Ammo, 4];};
+	if (_Rifle_GL_HE != "") then {_supp addMagazineCargoGlobal [_Rifle_GL_HE, 4];};
+	if (_Grenade != "") then {_supp addMagazineCargoGlobal [_Grenade, 4];};
+	if (_Grenade_Smoke != "") then {_supp addMagazineCargoGlobal [_Grenade_Smoke, 4];};
+	if (_Grenade_Smoke_Grn != "") then {_supp addMagazineCargoGlobal [_Grenade_Smoke_Grn, 4];};
 };
 
 if (typeOf _supp == var_supLarge) exitWith {
-	if ((_Carbine_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_Carbine_Ammo select 0), 40];};
-	if ((_Rifle_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_Rifle_Ammo select 0), 40];};
-	if ((_Rifle_GL_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_Rifle_GL_Ammo select 0), 40];};
-	if ((_LMG_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_LMG_Ammo select 0), 10];};
-	if ((_MMG_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_MMG_Ammo select 0), 10];};
-	if ((_MAT_Ammo select 0) != "") then {_supp addMagazineCargoGlobal [(_MAT_Ammo select 0), 10];};
-	if ((_Rifle_GL_HE select 0) != "") then {_supp addMagazineCargoGlobal [(_Rifle_GL_HE select 0), 20];};
-	if ((_Rifle_GL_Flare select 0) != "") then {_supp addMagazineCargoGlobal [(_Rifle_GL_Flare select 0), 30];};
-	if ((_Rifle_GL_Smoke_Grn select 0) != "") then {_supp addMagazineCargoGlobal [(_Rifle_GL_Smoke_Grn select 0), 10];};
-	if ((_Rifle_GL_Smoke_Red select 0) != "") then {_supp addMagazineCargoGlobal [(_Rifle_GL_Smoke_Red select 0), 10];};
-	if ((_Grenade select 0) != "") then {_supp addMagazineCargoGlobal [(_Grenade select 0), 10];};
-	if ((_Grenade_Smoke select 0) != "") then {_supp addMagazineCargoGlobal [(_Grenade_Smoke select 0), 10];};
+	if (_Carbine_Ammo != "") then {_supp addMagazineCargoGlobal [_Carbine_Ammo, 40];};
+	if (_Rifle_Ammo != "") then {_supp addMagazineCargoGlobal [_Rifle_Ammo, 40];};
+	if (_Rifle_GL_Ammo != "") then {_supp addMagazineCargoGlobal [_Rifle_GL_Ammo, 40];};
+	if (_LMG_Ammo != "") then {_supp addMagazineCargoGlobal [_LMG_Ammo, 10];};
+	if (_MMG_Ammo != "") then {_supp addMagazineCargoGlobal [_MMG_Ammo, 10];};
+	if (_MAT_Ammo != "") then {_supp addMagazineCargoGlobal [_MAT_Ammo, 10];};
+	if (_Rifle_GL_HE != "") then {_supp addMagazineCargoGlobal [_Rifle_GL_HE, 20];};
+	if (_Rifle_GL_Flare != "") then {_supp addMagazineCargoGlobal [_Rifle_GL_Flare, 30];};
+	if (_Rifle_GL_Smoke_Grn != "") then {_supp addMagazineCargoGlobal [_Rifle_GL_Smoke_Grn, 10];};
+	if (_Rifle_GL_Smoke_Red != "") then {_supp addMagazineCargoGlobal [_Rifle_GL_Smoke_Red, 10];};
+	if (_Grenade != "") then {_supp addMagazineCargoGlobal [_Grenade, 10];};
+	if (_Grenade_Smoke != "") then {_supp addMagazineCargoGlobal [_Grenade_Smoke, 10];};
+	if (_Grenade_Smoke_Grn != "") then {_supp addMagazineCargoGlobal [_Grenade_Smoke_Grn, 10];};
 
-	if ((_LAT select 0) != "") then {_supp addWeaponCargoGlobal [(_LAT select 0), 6];};
+
+	if (_LAT != "") then {_supp addWeaponCargoGlobal [_LAT, 6];};
 
 	_supp addItemCargoGlobal ["ACE_Wirecutter",5];
 };
@@ -85,7 +88,7 @@ if (typeOf _supp == var_supSpecial) exitWith {
 	_supp addItemCargoGlobal ["ACE_VectorDay",5];
 	_supp addItemCargoGlobal ["ItemGPS",5];
 
-	if ((_Backpack_Light select 0) != "") then {_supp addBackpackCargoGlobal [(_Backpack_Light select 0), 5];};
+	if ((_Backpack_Light#0) != "") then {_supp addBackpackCargoGlobal [(selectRandom _Backpack_Light), 5];};
 };
 
 if (typeOf _supp == var_supExplosives) exitWith {
@@ -93,5 +96,5 @@ if (typeOf _supp == var_supExplosives) exitWith {
 	_supp addItemCargoGlobal ["SatchelCharge_Remote_Mag", 2];
 	_supp addItemCargoGlobal ["ACE_M26_Clacker",2];
 
-	if ((_Backpack_Light select 0) != "") then {_supp addBackpackCargoGlobal [(_Backpack_Light select 0), 2];};
+	if ((_Backpack_Light#0) != "") then {_supp addBackpackCargoGlobal [(selectRandom _Backpack_Light), 2];};
 };

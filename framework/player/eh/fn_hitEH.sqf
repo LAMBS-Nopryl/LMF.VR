@@ -7,7 +7,7 @@
 params ["_unit"];
 
 //EXIT IF NOT ALIVE
-if !(alive _unit) exitWith {};
+if (vehicle _unit != _unit || {!alive _unit}) exitWith {};
 
 //APPLY EFFECT
 private _blur = ppEffectCreate ["dynamicBlur", 401];

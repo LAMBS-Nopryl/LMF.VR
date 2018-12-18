@@ -30,14 +30,18 @@ if !(isNil "Grp_FOX_6") then {[Grp_FOX_6,"b_hq","FOX6"] call _lmf_fnc_createIcon
 if !(isNil "Grp_FOX_1") then {[Grp_FOX_1,"b_inf","FOX1"] call _lmf_fnc_createIcon};
 if !(isNil "Grp_FOX_2") then {[Grp_FOX_2,"b_inf","FOX2"] call _lmf_fnc_createIcon};
 if !(isNil "Grp_FOX_3") then {[Grp_FOX_3,"b_inf","FOX3"] call _lmf_fnc_createIcon};
-if !(isNil "Grp_FOX_4") then {[Grp_FOX_4,"b_inf","FOX4"] call _lmf_fnc_createIcon};
 
 //WOLF PLATOON
 if !(isNil "Grp_WOLF_6") then {[Grp_WOLF_6,"b_hq","WOLF6"] call _lmf_fnc_createIcon};
 if !(isNil "Grp_WOLF_1") then {[Grp_WOLF_1,"b_inf","WOLF1"] call _lmf_fnc_createIcon};
 if !(isNil "Grp_WOLF_2") then {[Grp_WOLF_2,"b_inf","WOLF2"] call _lmf_fnc_createIcon};
 if !(isNil "Grp_WOLF_3") then {[Grp_WOLF_3,"b_inf","WOLF3"] call _lmf_fnc_createIcon};
-if !(isNil "Grp_WOLF_4") then {[Grp_WOLF_4,"b_inf","WOLF4"] call _lmf_fnc_createIcon};
+
+//DOG PLATOON
+if !(isNil "Grp_DOG_6") then {[Grp_DOG_6,"b_hq","DOG6"] call _lmf_fnc_createIcon};
+if !(isNil "Grp_DOG_1") then {[Grp_DOG_1,"b_inf","DOG1"] call _lmf_fnc_createIcon};
+if !(isNil "Grp_DOG_2") then {[Grp_DOG_2,"b_inf","DOG2"] call _lmf_fnc_createIcon};
+if !(isNil "Grp_DOG_3") then {[Grp_DOG_3,"b_inf","DOG3"] call _lmf_fnc_createIcon};
 
 //ARMOR
 if !(isNil "Grp_DGR1") then {[Grp_DGR1,"b_motor_inf","DAGGER1"] call _lmf_fnc_createIcon};

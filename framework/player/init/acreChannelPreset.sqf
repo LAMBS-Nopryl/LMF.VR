@@ -27,7 +27,3 @@ if (_id == "FOX2") exitWith {
 if (_id == "FOX3") exitWith {
 	[_personalRadio, 3] call acre_api_fnc_setRadioChannel;
 };
-
-if (_id == "FOX4") exitWith {
-	[_personalRadio, 4] call acre_api_fnc_setRadioChannel;
-};

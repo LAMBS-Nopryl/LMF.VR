@@ -17,9 +17,9 @@ clearItemCargoGlobal _air;
 clearBackpackCargoGlobal _air;
 
 //ADD NEW ITEMS
-if ((_SMG_Ammo select 0) != "") then {_air addMagazineCargoGlobal [(_SMG_Ammo select 0), 5 + (random 10)];};
-if ((_Grenade_Smoke select 0) != "") then {_air addMagazineCargoGlobal [(_Grenade_Smoke select 0), 2 + (random 2)];};
+if (_SMG_Ammo != "") then {_air addMagazineCargoGlobal [_SMG_Ammo, 5 + (random 10)];};
+if (_Grenade_Smoke != "") then {_air addMagazineCargoGlobal [_Grenade_Smoke, 2 + (random 2)];};
 
 _air addItemCargoGlobal ["Toolkit",1];
 
-if ((_Grenade_Smoke select 0) != "") then {_air addBackpackCargoGlobal [_Backpack_Light,1];};
+if ((_Backpack_Light#0) != "") then {_air addBackpackCargoGlobal [(selectRandom _Backpack_Light),1];};
