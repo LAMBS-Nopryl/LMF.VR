@@ -55,6 +55,7 @@ class player {
 	class functions {
 		file = "framework\player";
         class initPlayerGear {};
+        class acreChannelPreset {};
         class initPlayerAir {};
         class initPlayerVic {};
         class initPlayerSupp {};

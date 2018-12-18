@@ -191,7 +191,7 @@ if (var_playerGear) then {
 };
 
 //ACRE CHANNEL PRESET
-[] execVM "framework\player\init\acreChannelPreset.sqf";
+[] spawn lmf_player_fnc_acreChannelPreset;
 
 //PLAYER CAMOCOEF
 [{player setUnitTrait ["camouflageCoef",var_camoCoef];}, [], 5] call CBA_fnc_waitAndExecute;

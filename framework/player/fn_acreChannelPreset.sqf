@@ -3,13 +3,14 @@
     - File that presets the SR channel for selected infantry groups.
 */
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
+if !(isClass (configFile >> "CfgPatches" >> "acre_main")) exitWith {};
 waitUntil {([] call acre_api_fnc_isInitialized)};
 
 private _id = groupID group player;
 private _personalRadio = ["ACRE_PRC343"] call acre_api_fnc_getRadioByType;
 
-//EXIT IF NO RADIO
-if (isNil "_personalRadio") exitWith {};
+//EXIT IF NO RADIO OR NOT LOCAL
+if (!local player || {isNil "_personalRadio"}) exitWith {};
 
 //APPLY CHANNEL IF RADIO
 if (_id == "FOX6") exitWith {

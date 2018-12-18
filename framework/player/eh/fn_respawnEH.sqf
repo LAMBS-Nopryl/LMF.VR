@@ -28,8 +28,9 @@ if (var_playerGear) then {
 4 enableChannel false;
 5 enableChannel false;
 
-//FADE IN SET THE CHANNEL BACK TO GROUP AND SET THE CAMOCOEF BACK ASWELL
+//FADE IN SET THE CHANNEL BACK TO GROUP AND SET THE CAMOCOEF BACK ASWELL AND SET RADIO CHANNEL
 sleep 5;
 setCurrentChannel 3;
 [{player setUnitTrait ["camouflageCoef",var_camoCoef];}, [], 5] call CBA_fnc_waitAndExecute;
+[] spawn lmf_player_fnc_acreChannelPreset;
 cutText  ["", "BLACK IN", 5, true];
