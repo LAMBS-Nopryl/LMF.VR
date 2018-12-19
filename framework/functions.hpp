@@ -96,3 +96,29 @@ class diwako_unknownwp {
     class reloadedEh {};
   };
 };
+class loadouts {
+	tag = "lmf_loadout";
+	class functions {
+		file = "framework\player\loadouts";
+		class platoonLeader {};
+		class platoonSergeant {};
+        class medic {};
+		class rto {};
+		class fac {};
+		class squadLeader {};
+		class teamLeader {};
+        class autorifleman {};
+		class grenadier {};
+		class rifleman {};
+		class machineGunner {};
+		class machineGunnerAssistant {};
+		class atGunner {};
+		class atAssistant {};
+        class crewLeader {};
+        class crewSgt {};
+		class crew {};
+		class heloPilot {};
+		class heloCrew {};
+		class pilot {};
+	};
+};

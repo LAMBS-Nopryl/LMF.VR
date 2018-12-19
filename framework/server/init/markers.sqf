@@ -15,8 +15,8 @@ if (getMarkerColor "respawn" != "") then {
 	"respawn" setMarkerAlpha 0;
 };
 
-if !(isNil "crateGearPlt") then {
-	_gearSelectMkr = createMarker ["mrk_gearSelect", getPosASL crateGearPlt];
+if !(isNil "crateRoles") then {
+	_gearSelectMkr = createMarker ["mrk_gearSelect", getPosASL crateRoles];
 	_gearSelectMkr setMarkerType "b_inf";
 	_gearSelectMkr setMarkerSize [0.75,0.75];
 	_gearSelectMkr setMarkerColor var_markerSide;

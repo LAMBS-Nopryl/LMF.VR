@@ -190,9 +190,6 @@ if (var_playerGear) then {
     }];
 };
 
-//ACRE CHANNEL PRESET
-[] execVM "framework\player\init\acreChannelPreset.sqf";
-
 //PLAYER CAMOCOEF
 [{player setUnitTrait ["camouflageCoef",var_camoCoef];}, [], 5] call CBA_fnc_waitAndExecute;
 
@@ -226,9 +223,7 @@ if !(isnil "Ares_fnc_RegisterCustomModule") then {
 5 enableChannel false;
 
 //APPLY TEXTURES TO LAPTOPS
-if !(isNil "ammoSpawner") then {ammoSpawner setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};
-if !(isNil "groundSpawner") then {groundSpawner setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};
-if !(isNil "airSpawner") then {airSpawner setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};
-if !(isNil "crateGearSquad") then {crateGearSquad setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};
-if !(isNil "crateGearPlt") then {crateGearPlt setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};
-if !(isNil "crateGearCrew") then {crateGearCrew setObjectTexture [0, "framework\fx\clan_flag_Nopryl.paa"];};
+if !(isNil "ammoSpawner") then {ammoSpawner setObjectTexture [0, "framework\fx\supplies.jpg"];};
+if !(isNil "airSpawner") then {airSpawner setObjectTexture [0, "framework\fx\airVehicles.jpg"];};
+if !(isNil "crateRoles") then {crateRoles setObjectTexture [0, "framework\fx\roles.jpg"];};
+if !(isNil "groundSpawner") then {groundSpawner setObjectTexture [0, "framework\fx\groundVehicles.jpg"];};
