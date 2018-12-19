@@ -13,12 +13,9 @@ private _ACRE_ITR = "ACRE_PRC148"; // Long Range Radio
 private _ACRE_PRR = "ACRE_PRC343"; // Short Range Radio
 
 //INFANTRY UNIFORM
-private _Uniform = ["U_B_CombatUniform_mcam_vest"]; // Uniform(s) (Rest)
-private _Uniform_L = ["U_B_CombatUniform_mcam","U_B_CombatUniform_mcam_vest"]; // Uniform(s) (PLT CMD, PLT SGT, SQL)
+private _Uniform = ["U_B_CombatUniform_mcam_vest"]; // Uniform(s)
 private _Vest = ["V_PlateCarrier2_rgr"]; // Vest(s)
-private _Vest_L = ["V_PlateCarrier2_rgr"]; // Vest(s) (PLT CMD, PLT SGT, SQL)
-private _Headgear = ["H_HelmetSpecB","H_HelmetSpecB_blk","H_HelmetSpecB_paint2","H_HelmetSpecB_paint1","H_HelmetSpecB_sand","H_HelmetSpecB_snakeskin"]; // Headgear(s) (Rest)
-private _Headgear_L = ["H_HelmetSpecB_blk"]; // Headgear(s) (PLT CMD, PLT SGT, SQL)
+private _Headgear = ["H_HelmetSpecB","H_HelmetSpecB_blk","H_HelmetSpecB_paint2","H_HelmetSpecB_paint1","H_HelmetSpecB_sand","H_HelmetSpecB_snakeskin"]; // Headgear(s)
 private _Headgear_A = ["H_HelmetSpecB_paint2","H_HelmetSpecB_paint1"]; // Headgear(s) (Available in Personal Arsenal)
 private _Goggles = [""]; // Goggle(s)
 private _Goggles_A = [""]; // Goggle(s) (Available in Perosnal Arsenal)

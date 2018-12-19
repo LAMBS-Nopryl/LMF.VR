@@ -115,11 +115,11 @@ if !(isNil "crateRoles") then {
 
 	//SUB ACTIONS
 	//INFANTRY HQ
-	private _pltLead = ["platoonLeader","Platoon Leader","\A3\ui_f\data\map\vehicleicons\iconManOfficer_ca.paa",{[player] call lmf_loadout_fnc_platoonLeader;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _pltSgt = ["platoonSergeant","Platoon Sergeant","\A3\ui_f\data\map\vehicleicons\iconManLeader_ca.paa",{[player] call lmf_loadout_fnc_platoonSergeant;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _medic = ["medic","Medic","\A3\ui_f\data\map\vehicleicons\iconManMedic_ca.paa",{[player] call lmf_loadout_fnc_medic;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _rto = ["rto","RTO","\A3\ui_f\data\map\vehicleicons\iconManVirtual_ca.paa",{[player] call lmf_loadout_fnc_rto;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _fac = ["fac","FAC","\A3\ui_f\data\map\vehicleicons\iconManVirtual_ca.paa",{[player] call lmf_loadout_fnc_fac;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
+	private _pltLead = ["platoonLeader","Platoon Leader","\A3\ui_f\data\map\vehicleicons\iconManOfficer_ca.paa",{[player] call lmf_loadout_fnc_platoonLeader},{true}] call ace_interact_menu_fnc_createAction;
+	private _pltSgt = ["platoonSergeant","Platoon Sergeant","\A3\ui_f\data\map\vehicleicons\iconManLeader_ca.paa",{[player] call lmf_loadout_fnc_platoonSergeant},{true}] call ace_interact_menu_fnc_createAction;
+	private _medic = ["medic","Medic","\A3\ui_f\data\map\vehicleicons\iconManMedic_ca.paa",{[player] call lmf_loadout_fnc_medic},{true}] call ace_interact_menu_fnc_createAction;
+	private _rto = ["rto","RTO","\A3\ui_f\data\map\vehicleicons\iconManVirtual_ca.paa",{[player] call lmf_loadout_fnc_rto},{true}] call ace_interact_menu_fnc_createAction;
+	private _fac = ["fac","FAC","\A3\ui_f\data\map\vehicleicons\iconManVirtual_ca.paa",{[player] call lmf_loadout_fnc_fac},{true}] call ace_interact_menu_fnc_createAction;
 
 	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentHQ"], _pltLead] call ace_interact_menu_fnc_addActionToObject;
 	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentHQ"], _pltSgt] call ace_interact_menu_fnc_addActionToObject;
@@ -128,15 +128,15 @@ if !(isNil "crateRoles") then {
 	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentHQ"], _fac] call ace_interact_menu_fnc_addActionToObject;
 
 	//INFANTRY SQUAD
-	private _squadLeader = ["squadLeader","Squad Leader","\A3\ui_f\data\map\vehicleicons\iconManLeader_ca.paa",{[player] call lmf_loadout_fnc_squadLeader;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _squad2ic = ["squad2ic","Squad 2iC","\A3\ui_f\data\map\vehicleicons\iconManLeader_ca.paa",{[player] call lmf_loadout_fnc_teamLeader;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _grenadier = ["genadier","Grenadier","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_grenadier;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _autorifleman = ["autorifleman","Autorifleman","\A3\ui_f\data\map\vehicleicons\iconManMG_ca.paa",{[player] call lmf_loadout_fnc_autorifleman;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _rifleman = ["rifleman","Rifleman","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_rifleman;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _mmgG = ["mmgGunner","Machine Gunner","\A3\ui_f\data\map\vehicleicons\iconManMG_ca.paa",{[player] call lmf_loadout_fnc_machineGunner;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _mmgA = ["mmgAssistant","Asst. Machine Gunner","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_machineGunnerAssistant;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _matG = ["matGunner","AT Gunner","\A3\ui_f\data\map\vehicleicons\iconManAT_ca.paa",{[player] call lmf_loadout_fnc_atGunner;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
-	private _matA = ["matAssistant","Asst. AT Gunner","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_atAssistant;[] spawn lmf_player_fnc_acreChannelPreset},{true}] call ace_interact_menu_fnc_createAction;
+	private _squadLeader = ["squadLeader","Squad Leader","\A3\ui_f\data\map\vehicleicons\iconManLeader_ca.paa",{[player] call lmf_loadout_fnc_squadLeader},{true}] call ace_interact_menu_fnc_createAction;
+	private _squad2ic = ["squad2ic","Squad 2iC","\A3\ui_f\data\map\vehicleicons\iconManLeader_ca.paa",{[player] call lmf_loadout_fnc_teamLeader},{true}] call ace_interact_menu_fnc_createAction;
+	private _grenadier = ["genadier","Grenadier","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_grenadier},{true}] call ace_interact_menu_fnc_createAction;
+	private _autorifleman = ["autorifleman","Autorifleman","\A3\ui_f\data\map\vehicleicons\iconManMG_ca.paa",{[player] call lmf_loadout_fnc_autorifleman},{true}] call ace_interact_menu_fnc_createAction;
+	private _rifleman = ["rifleman","Rifleman","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_rifleman},{true}] call ace_interact_menu_fnc_createAction;
+	private _mmgG = ["mmgGunner","Machine Gunner","\A3\ui_f\data\map\vehicleicons\iconManMG_ca.paa",{[player] call lmf_loadout_fnc_machineGunner},{true}] call ace_interact_menu_fnc_createAction;
+	private _mmgA = ["mmgAssistant","Asst. Machine Gunner","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_machineGunnerAssistant},{true}] call ace_interact_menu_fnc_createAction;
+	private _matG = ["matGunner","AT Gunner","\A3\ui_f\data\map\vehicleicons\iconManAT_ca.paa",{[player] call lmf_loadout_fnc_atGunner},{true}] call ace_interact_menu_fnc_createAction;
+	private _matA = ["matAssistant","Asst. AT Gunner","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_atAssistant},{true}] call ace_interact_menu_fnc_createAction;
 
 	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _squadLeader] call ace_interact_menu_fnc_addActionToObject;
 	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _squad2ic] call ace_interact_menu_fnc_addActionToObject;
