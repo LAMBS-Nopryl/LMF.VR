@@ -17,7 +17,7 @@ private _Uniform = ["U_B_CombatUniform_mcam_vest"]; // Uniform(s)
 private _Vest = ["V_PlateCarrier2_rgr"]; // Vest(s)
 private _Headgear = ["H_HelmetSpecB","H_HelmetSpecB_blk","H_HelmetSpecB_paint2","H_HelmetSpecB_paint1","H_HelmetSpecB_sand","H_HelmetSpecB_snakeskin"]; // Headgear(s)
 private _Headgear_A = ["H_HelmetSpecB_paint2","H_HelmetSpecB_paint1"]; // Headgear(s) (Available in Personal Arsenal)
-private _Goggles = [""]; // Goggle(s)
+private _Goggles = ["G_Balaclava_TI_G_blk_F"]; // Goggle(s)
 private _Goggles_A = [""]; // Goggle(s) (Available in Perosnal Arsenal)
 
 //PILOT UNIFORM
@@ -71,7 +71,7 @@ private _Carbine_Attach1 = "acc_pointer_ir"; // Carbine Attachement #1
 private _Carbine_Attach2 = "muzzle_snds_h"; // Carbine Attachement #2
 private _Carbine_Bipod = ""; // Carbine Bipod
 
-//RIFLE (Used by: Plt.Lead, Plt.Sgt, Rifleman)
+//RIFLE (Used by: Plt.Lead, Plt.Sgt, Squad Leader, Rifleman)
 private _Rifle = "arifle_MX_F"; // Rifle
 private _Rifle_Ammo = "30Rnd_65x39_caseless_mag"; // Rifle Ammo
 private _Rifle_Ammo_T = "30Rnd_65x39_caseless_mag_Tracer"; // Rifle Tracer Ammo
@@ -80,7 +80,7 @@ private _Rifle_Attach1 = "acc_pointer_ir"; // Rifle Attachement #1
 private _Rifle_Attach2 = "muzzle_snds_h"; // Rifle Attachement #2
 private _Rifle_Bipod = ""; // Rifle Bipod
 
-//RIFLE GL (Used by: Squad Leader, Squad 2iC, FAC, Grenadier)
+//RIFLE GL (Used by: Assistant Squad Leader, Grenadier, FAC)
 private _Rifle_GL = "arifle_MX_GL_F"; // GL Rifle
 private _Rifle_GL_Ammo = "30Rnd_65x39_caseless_mag"; // GL Rifle Ammo
 private _Rifle_GL_Ammo_T = "30Rnd_65x39_caseless_mag_Tracer"; // GL Rifle Tracer Ammo
@@ -93,7 +93,7 @@ private _Rifle_GL_Attach1 = "acc_pointer_ir"; // GL Rifle Attachement #1
 private _Rifle_GL_Attach2 = "muzzle_snds_h"; // GL Rifle Attachement #2
 private _Rifle_GL_Bipod = ""; // GL Rifle Bipod
 
-//LIGHT MACHINE GUN
+//LIGHT MACHINE GUN (Used by: Automatic Rifleman)
 private _LMG = "arifle_MX_SW_F"; // LMG
 private _LMG_Ammo = "100Rnd_65x39_caseless_mag"; // LMG Ammo
 private _LMG_Ammo_T = "100Rnd_65x39_caseless_mag_Tracer"; // LMG Tracer Ammo
@@ -102,7 +102,7 @@ private _LMG_Attach1 = "acc_pointer_ir"; // LMG Attachement #1
 private _LMG_Attach2 = "muzzle_snds_h"; // LMG Attachement #2
 private _LMG_Bipod = ""; // LMG Bipod
 
-//MEDIUM MACHINE GUN
+//MEDIUM MACHINE GUN (Used by: Machine Gunner)
 private _MMG = "MMG_02_sand_F"; // MMG
 private _MMG_Ammo = "130Rnd_338_Mag"; // MMG Ammo
 private _MMG_Optic = "optic_aco"; // MMG Optic
@@ -110,11 +110,11 @@ private _MMG_Attach1 = "acc_pointer_ir"; // MMG Attachement #1
 private _MMG_Attach2 = "muzzle_snds_338_black"; // MMG Attachement #2
 private _MMG_Bipod = ""; // MMG Bipod
 
-//LIGHT ANTI-TANK
+//LIGHT ANTI-TANK (Used by: Rifleman)
 private _LAT = "launch_NLAW_F"; // LAT
 private _LAT_Ammo = ""; // LAT Ammo
 
-//MEDIUM ANTI-TANK
+//MEDIUM ANTI-TANK (Used by: AT Gunner)
 private _MAT = "launch_MRAWS_green_F"; // MAT
 private _MAT_Ammo = "MRAWS_HEAT_F"; // MAT Ammo
 private _MAT_Optic = ""; // MAT Optic

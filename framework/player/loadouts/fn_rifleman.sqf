@@ -16,7 +16,7 @@ _unit setUnitLoadout [
 		[_LAT,"","","",[_LAT_Ammo,99],[],""],
 		[],
 		[(selectRandom _Uniform),[]],
-		[(selectRandom _Vest),[[_Rifle_Ammo,5,999],[_Rifle_Ammo_T,3,999],[_Grenade,2,1],[_Grenade_Smoke,1,1]]],
+		[(selectRandom _Vest),[[_Rifle_Ammo,5,999],[_Rifle_Ammo_T,3,999],[_Grenade,2,1]]],
 		[],(selectRandom _Headgear),(selectRandom _Goggles),
 		[],
 		["","","ItemRadioAcreFlagged","","ItemWatch",""]

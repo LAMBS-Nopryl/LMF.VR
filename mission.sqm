@@ -8,7 +8,7 @@ class EditorData
 	toggles=5;
 	class ItemIDProvider
 	{
-		nextID=527;
+		nextID=529;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=90;
+		nextID=120;
 	};
 	class Camera
 	{
-		pos[]={396,30,471};
-		dir[]={0,-0.70710683,0.70710683};
-		up[]={0,0.70710677,0.70710677};
-		aside[]={0.99999994,0,-0};
+		pos[]={369.01929,64.050735,413.48105};
+		dir[]={0.55435348,-0.62610579,0.54841352};
+		up[]={0.44512576,0.77971733,0.44035617};
+		aside[]={0.70331192,1.7392449e-007,-0.71093112};
 	};
 };
 binarizationWanted=0;
@@ -2317,8 +2317,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX1_GL_GREEN";
-						description="Grenadier";
+						name="FOX1_CLS_GREEN";
+						description="Medic";
 						isPlayable=1;
 					};
 					id=316;
@@ -2377,8 +2377,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX1_R_GREEN";
-						description="Rifleman";
+						name="FOX1_GL_GREEN";
+						description="Grenadier";
 						isPlayable=1;
 					};
 					id=317;
@@ -2557,8 +2557,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX1_GL_RED";
-						description="Grenadier";
+						name="FOX1_R1_RED";
+						description="Rifleman";
 						isPlayable=1;
 					};
 					id=320;
@@ -2617,7 +2617,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX1_R_RED";
+						name="FOX1_R2_RED";
 						description="Rifleman";
 						isPlayable=1;
 					};
@@ -2812,8 +2812,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX2_GL_GREEN";
-						description="Grenadier";
+						name="FOX2_CLS_GREEN";
+						description="Medic";
 						isPlayable=1;
 					};
 					id=325;
@@ -2872,8 +2872,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX2_R_GREEN";
-						description="Rifleman";
+						name="FOX2_GL_GREEN";
+						description="Grenadier";
 						isPlayable=1;
 					};
 					id=326;
@@ -3052,8 +3052,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX2_GL_RED";
-						description="Grenadier";
+						name="FOX2_R1_RED";
+						description="Rifleman";
 						isPlayable=1;
 					};
 					id=329;
@@ -3112,7 +3112,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX2_R_RED";
+						name="FOX2_R2_RED";
 						description="Rifleman";
 						isPlayable=1;
 					};
@@ -3307,8 +3307,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX3_GL_GREEN";
-						description="Grenadier";
+						name="FOX3_CLS_GREEN";
+						description="Medic";
 						isPlayable=1;
 					};
 					id=334;
@@ -3367,8 +3367,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX3_R_GREEN";
-						description="Rifleman";
+						name="FOX3_GL_GREEN";
+						description="Grenadier";
 						isPlayable=1;
 					};
 					id=335;
@@ -3547,8 +3547,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX3_GL_RED";
-						description="Grenadier";
+						name="FOX3_R1_RED";
+						description="Rifleman";
 						isPlayable=1;
 					};
 					id=338;
@@ -3607,7 +3607,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="FOX3_R_RED";
+						name="FOX3_R2_RED";
 						description="Rifleman";
 						isPlayable=1;
 					};
@@ -3997,8 +3997,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF1_GL_GREEN";
-						description="Grenadier";
+						name="WOLF1_CLS_GREEN";
+						description="Medic";
 						isPlayable=1;
 					};
 					id=347;
@@ -4057,8 +4057,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF1_R_GREEN";
-						description="Rifleman";
+						name="WOLF1_GL_GREEN";
+						description="Grenadier";
 						isPlayable=1;
 					};
 					id=348;
@@ -4237,8 +4237,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF1_GL_RED";
-						description="Grenadier";
+						name="WOLF1_R1_RED";
+						description="Rifleman";
 						isPlayable=1;
 					};
 					id=351;
@@ -4297,7 +4297,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF1_R_RED";
+						name="WOLF1_R2_RED";
 						description="Rifleman";
 						isPlayable=1;
 					};
@@ -4492,8 +4492,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF2_GL_GREEN";
-						description="Grenadier";
+						name="WOLF2_CLS_GREEN";
+						description="Medic";
 						isPlayable=1;
 					};
 					id=356;
@@ -4552,8 +4552,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF2_R_GREEN";
-						description="Rifleman";
+						name="WOLF2_GL_GREEN";
+						description="Grenadier";
 						isPlayable=1;
 					};
 					id=357;
@@ -4732,8 +4732,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF2_GL_RED";
-						description="Grenadier";
+						name="WOLF2_R1_RED";
+						description="Rifleman";
 						isPlayable=1;
 					};
 					id=360;
@@ -4792,7 +4792,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF2_R_RED";
+						name="WOLF2_R2_RED";
 						description="Rifleman";
 						isPlayable=1;
 					};
@@ -4987,8 +4987,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF3_GL_GREEN";
-						description="Grenadier";
+						name="WOLF3_CLS_GREEN";
+						description="Medic";
 						isPlayable=1;
 					};
 					id=365;
@@ -5047,8 +5047,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF3_R_GREEN";
-						description="Rifleman";
+						name="WOLF3_GL_GREEN";
+						description="Grenadier";
 						isPlayable=1;
 					};
 					id=366;
@@ -5227,8 +5227,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF3_GL_RED";
-						description="Grenadier";
+						name="WOLF3_R1_RED";
+						description="Rifleman";
 						isPlayable=1;
 					};
 					id=369;
@@ -5287,7 +5287,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="WOLF3_R_RED";
+						name="WOLF3_R2_RED";
 						description="Rifleman";
 						isPlayable=1;
 					};
@@ -5677,8 +5677,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG1_GL_GREEN";
-						description="Grenadier";
+						name="DOG1_CLS_GREEN";
+						description="Medic";
 						isPlayable=1;
 					};
 					id=378;
@@ -5737,8 +5737,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG1_R_GREEN";
-						description="Rifleman";
+						name="DOG1_GL_GREEN";
+						description="Grenadier";
 						isPlayable=1;
 					};
 					id=379;
@@ -5917,8 +5917,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG1_GL_RED";
-						description="Grenadier";
+						name="DOG1_R1_RED";
+						description="Rifleman";
 						isPlayable=1;
 					};
 					id=382;
@@ -5977,7 +5977,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG1_R_RED";
+						name="DOG1_R2_RED";
 						description="Rifleman";
 						isPlayable=1;
 					};
@@ -6172,8 +6172,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG2_GL_GREEN";
-						description="Grenadier";
+						name="DOG2_CLS_GREEN";
+						description="Medic";
 						isPlayable=1;
 					};
 					id=387;
@@ -6232,8 +6232,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG2_R_GREEN";
-						description="Rifleman";
+						name="DOG2_GL_GREEN";
+						description="Grenadier";
 						isPlayable=1;
 					};
 					id=388;
@@ -6412,8 +6412,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG2_GL_RED";
-						description="Grenadier";
+						name="DOG2_R1_RED";
+						description="Rifleman";
 						isPlayable=1;
 					};
 					id=391;
@@ -6472,7 +6472,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG2_R_RED";
+						name="DOG2_R2_RED";
 						description="Rifleman";
 						isPlayable=1;
 					};
@@ -6667,8 +6667,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG3_GL_GREEN";
-						description="Grenadier";
+						name="DOG3_CLS_GREEN";
+						description="Medic";
 						isPlayable=1;
 					};
 					id=396;
@@ -6727,8 +6727,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG3_R_GREEN";
-						description="Rifleman";
+						name="DOG3_GL_GREEN";
+						description="Grenadier";
 						isPlayable=1;
 					};
 					id=397;
@@ -6907,8 +6907,8 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG3_GL_RED";
-						description="Grenadier";
+						name="DOG3_R1_RED";
+						description="Rifleman";
 						isPlayable=1;
 					};
 					id=400;
@@ -6967,7 +6967,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
-						name="DOG3_R_RED";
+						name="DOG3_R2_RED";
 						description="Rifleman";
 						isPlayable=1;
 					};

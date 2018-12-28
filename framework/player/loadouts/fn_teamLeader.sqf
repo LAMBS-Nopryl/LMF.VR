@@ -16,8 +16,8 @@ _unit setUnitLoadout [
 		[],
 		[],
 		[(selectRandom _Uniform),[]],
-		[selectRandom _Vest,[[_Rifle_GL_Ammo,5,999],[_Rifle_GL_Ammo_T,3,999],[_Rifle_GL_HE,5,99],[_Rifle_GL_Flare,5,99],[_Grenade,2,1],[_Grenade_Smoke,1,1],[_Grenade_Smoke_Grn,2,1]]],
-		[(selectRandom _Backpack_Light),[]],(selectRandom _Headgear),(selectRandom _Goggles),
+		[selectRandom _Vest,[[_Rifle_GL_Ammo,5,999],[_Rifle_GL_Ammo_T,3,999],[_Rifle_GL_HE,4,99],[_Rifle_GL_Flare,6,99],[_Grenade,2,1],[_Grenade_Smoke,1,1],[_Grenade_Smoke_Grn,2,1]]],
+		[(selectRandom _Backpack_Leader),[[_ACRE_ITR,1]]],(selectRandom _Headgear),(selectRandom _Goggles),
 		[_Binocular,"","","",[],[],""],
 		["","","ItemRadioAcreFlagged","","ItemWatch",""]
 	],true

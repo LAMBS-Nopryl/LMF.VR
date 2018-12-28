@@ -16,7 +16,7 @@ _unit setUnitLoadout [
 		[],
 		[_Pistol,_Pistol_Attach1,_Pistol_Attach2,"",[],[],""],
 		[(selectRandom _Uniform),[]],
-		[(selectRandom _Vest),[[_MMG_Ammo,2,999],[_Pistol_Ammo,3,99],[_Grenade,2,1],[_Grenade_Smoke,1,1]]],
+		[(selectRandom _Vest),[[_MMG_Ammo,2,999],[_Pistol_Ammo,3,99],[_Grenade_Smoke,2,1]]],
 		[(selectRandom _Backpack_AR_MMG),[[_MMG_Ammo,4,999]]],(selectRandom _Headgear),(selectRandom _Goggles),
 		[],
 		["","","ItemRadioAcreFlagged","","ItemWatch",""]

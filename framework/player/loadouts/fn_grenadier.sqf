@@ -16,7 +16,7 @@ _unit setUnitLoadout [
 		[],
 		[],
 		[(selectRandom _Uniform),[]],
-		[(selectRandom _Vest),[[_Rifle_GL_Ammo,5,999],[_Rifle_GL_Ammo_T,3,999],[_Rifle_GL_HE,8,99],[_Grenade,2,1],[_Grenade_Smoke,1,1]]],
+		[(selectRandom _Vest),[[_Rifle_GL_Ammo,5,999],[_Rifle_GL_Ammo_T,3,999],[_Rifle_GL_HE,8,99],[_Rifle_GL_Flare,4,99],[_Grenade,2,1],[_Grenade_Smoke,1,1]]],
 		[],(selectRandom _Headgear),(selectRandom _Goggles),
 		[],
 		["","","ItemRadioAcreFlagged","","ItemWatch",""]

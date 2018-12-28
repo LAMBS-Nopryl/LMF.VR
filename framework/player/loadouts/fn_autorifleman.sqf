@@ -16,7 +16,7 @@ _unit setUnitLoadout [
 		[],
 		[],
 		[(selectRandom _Uniform),[]],
-		[(selectRandom _Vest),[[_LMG_Ammo,2,999],[_Grenade,2,1],[_Grenade_Smoke,1,1]]],
+		[(selectRandom _Vest),[[_LMG_Ammo,2,999],[_Grenade_Smoke,2,1]]],
 		[(selectRandom _Backpack_AR_MMG),[[_LMG_Ammo,2,999],[_LMG_Ammo_T,2,999]]],(selectRandom _Headgear),(selectRandom _Goggles),
 		[],
 		["","","ItemRadioAcreFlagged","","ItemWatch",""]

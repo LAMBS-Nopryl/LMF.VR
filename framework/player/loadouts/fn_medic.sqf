@@ -10,9 +10,9 @@ if !(local _unit) exitWith {};
 
 
 // APPLY NEW ROLE SPECIFIC LOADOUT ////////////////////////////////////////////////////////////////
-private _bContentMedic = [(selectRandom _Backpack_Medic),[["ACE_elasticBandage",30],["ACE_packingBandage",30],["ACE_salineIV",10],["ACE_epinephrine",10],["ACE_morphine",10],["ACE_personalAidKit",1]]];
+private _bContentMedic = [(selectRandom _Backpack_Medic),[["ACE_packingBandage",40],["ACE_salineIV",10],["ACE_epinephrine",10],["ACE_morphine",10]]];
 if (ace_medical_level == 1) then {
-	_bContentMedic = [(selectRandom _Backpack_Medic),[["ACE_fieldDressing",60],["ACE_bloodIV",15],["ACE_epinephrine",10],["ACE_morphine",20]]];
+	_bContentMedic = [(selectRandom _Backpack_Medic),[["ACE_fieldDressing",40],["ACE_bloodIV",15],["ACE_epinephrine",10],["ACE_morphine",20]]];
 };
 _unit setUnitLoadout [
 	[
@@ -20,7 +20,7 @@ _unit setUnitLoadout [
 		[],
 		[],
 		[(selectRandom _Uniform),[]],
-		[(selectRandom _Vest),[[_Carbine_Ammo,5,999],[_Carbine_Ammo_T,3,999],[_Grenade,2,1],[_Grenade_Smoke,6,1]]],
+		[(selectRandom _Vest),[[_Carbine_Ammo,5,999],[_Carbine_Ammo_T,3,999],[_Grenade_Smoke,6,1]]],
 		_bContentMedic,(selectRandom _Headgear),(selectRandom _Goggles),
 		[],
 		["","","ItemRadioAcreFlagged","","ItemWatch",""]
