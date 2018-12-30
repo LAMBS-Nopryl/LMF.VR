@@ -26,7 +26,7 @@ Installation is done.
 Here a small rundown on how create a mission using the Framework.
 
 __VR Mission:__\
-The Framework comes with a form of template mission. In this template you will find examples on how to configure your mission
+The Framework comes with a template mission. In this template you will find examples on how to configure your mission
 to properly use most of the Frameworks' various components. There are many different ways to get the components from this VR
 mission into yours, but as an example let's just say you changed the .VR ending of the template mission folder to fit the map
 you want your mission to be on and then dragged all components to where you want them to be.
@@ -48,7 +48,7 @@ and read over the information on top.\
 You can find them in: `framework\ai\spawning`.
 
 __Testing:__\
-It is highly recommended to test your mission extensively while having "show script errors" is enabled.\
+It is highly recommended to test your mission extensively while having "show script errors" enabled.\
 That way it is more likely you will spot any form of mistake you have made while setting up your mission
 and scripts.
 
