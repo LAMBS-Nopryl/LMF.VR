@@ -1,7 +1,8 @@
-# LMF_Revised
+# LAMBS Mission Framework
 ## Description
-This revise of the LMF Framework is intended to bring old code up to date, address previously unresolved issues,
+This revision of LMF is intended to bring old code up to date, address previously unresolved issues,
 and add functionality all while making sure it stays simple and easy to understand for end users.
+It will not however be directly compatible with older LMF missions.
 
 ## Requirements:
 In order to use this Framework, you need to run these mods alongside it:
@@ -9,6 +10,13 @@ In order to use this Framework, you need to run these mods alongside it:
 * ACE3
 * ACEX
 * ACRE2
+
+## Major Features:
+* Easy to configure gearing for both player and AI factions.
+* A set of easily tweaked mission-settings.
+* AI spawning system with various useful functionality.
+* Pre-defined briefing file. Just input your text.
+* A useful admin-system for logged-in or pre-defined admins.
 
 ## Installation:
 Copy over the contents of the "LMF_R.VR" folder into your mpmission folder.\
@@ -48,5 +56,4 @@ and scripts.
 This Framework uses global variables starting with prefix var_ and prefix lmf_.
 
 ## Additional
-If you are unsure of what you are doing and this is your first time using this Framework to make a mission, it is recommended to get help from
-someone that is more experienced with it.
+If you are unsure of what you are doing and this is your first time using this Framework to make a mission, it is recommended to get help from someone that is more experienced with it.
