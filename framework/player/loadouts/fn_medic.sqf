@@ -10,7 +10,7 @@ if !(local _unit) exitWith {};
 
 
 // APPLY NEW ROLE SPECIFIC LOADOUT ////////////////////////////////////////////////////////////////
-private _bContentMedic = [(selectRandom _Backpack_Medic),[["ACE_packingBandage",40],["ACE_salineIV",10],["ACE_epinephrine",10],["ACE_morphine",10]]];
+private _bContentMedic = [(selectRandom _Backpack_Medic),[["ACE_packingBandage",40],["ACE_salineIV",10],["ACE_epinephrine",10],["ACE_morphine",10],["ACE_tourniquet",10]]];
 if (ace_medical_level == 1) then {
 	_bContentMedic = [(selectRandom _Backpack_Medic),[["ACE_fieldDressing",40],["ACE_bloodIV",15],["ACE_epinephrine",10],["ACE_morphine",20]]];
 };
