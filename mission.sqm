@@ -30,18 +30,14 @@ binarizationWanted=0;
 addons[]=
 {
 	"A3_Air_F_Heli_Light_01",
-	"ace_realisticnames",
 	"A3_Air_F_Beta_Heli_Attack_01",
 	"A3_Armor_F_Beta_APC_Wheeled_01",
-	"acre_sys_intercom",
 	"A3_Air_F_Jets_Plane_Fighter_01",
 	"A3_Soft_F_Beta_Truck_01",
-	"ace_cargo",
 	"A3_Armor_F_EPC_MBT_01",
 	"A3_Armor_F_Tank_AFV_Wheeled_01",
 	"A3_Weapons_F_Ammoboxes",
 	"A3_Air_F_Beta_Heli_Transport_01",
-	"ace_explosives",
 	"A3_Structures_F_EPC_Items_Electronics",
 	"A3_Structures_F_Civ_Camping",
 	"A3_Structures_F_Mil_Helipads",
@@ -54,9 +50,6 @@ addons[]=
 	"A3_Structures_F_Argo_Cultural_Statues",
 	"A3_Characters_F",
 	"A3_Characters_F_Mark",
-	"ace_nouniformrestrictions",
-	"ace_gforces",
-	"ace_parachute",
 	"A3_Modules_F_Curator_Curator"
 };
 class AddonsMetaData
