@@ -10,18 +10,35 @@ if !(local _unit) exitWith {};
 
 
 // APPLY NEW ROLE SPECIFIC LOADOUT ////////////////////////////////////////////////////////////////
-_unit setUnitLoadout [
-	[
-		[_Rifle_GL,_Rifle_GL_Attach1,_Rifle_GL_Attach2,_Rifle_GL_Optic,[],[],_Rifle_GL_Bipod],
-		[],
-		[],
-		[(selectRandom _Uniform),[]],
-		[(selectRandom _Vest),[[_Rifle_GL_Ammo,5,999],[_Rifle_GL_Ammo_T,3,999],[_Rifle_GL_HE,8,99],[_Rifle_GL_Flare,4,99],[_Grenade,2,1],[_Grenade_Smoke,1,1]]],
-		[],(selectRandom _Headgear),(selectRandom _Goggles),
-		[],
-		["","","ItemRadioAcreFlagged","","ItemWatch",""]
-	],true
-];
+removeAllWeapons _unit;
+removeAllItems _unit;
+removeAllAssignedItems _unit;
+removeUniform _unit;
+removeVest _unit;
+removeBackpack _unit;
+removeHeadgear _unit;
+removeGoggles _unit;
+
+_unit addWeapon _Rifle_GL;
+_unit addPrimaryWeaponItem _Rifle_GL_Attach1;
+_unit addPrimaryWeaponItem _Rifle_GL_Attach2;
+_unit addPrimaryWeaponItem _Rifle_GL_Optic;
+_unit addPrimaryWeaponItem _Rifle_GL_Bipod;
+
+_unit forceAddUniform selectRandom _Uniform;
+
+_unit addVest selectRandom _Vest_G;
+for "_i" from 1 to 4 do {_unit addItemToVest _Rifle_GL_Ammo;};
+for "_i" from 1 to 2 do {_unit addItemToVest _Rifle_GL_Ammo_T;};
+for "_i" from 1 to 8 do {_unit addItemToVest _Rifle_GL_HE;};
+for "_i" from 1 to 2 do {_unit addItemToVest _Grenade;};
+_unit addItemToVest _Grenade_Smoke;
+
+_unit addHeadgear selectRandom _Headgear;
+_unit addGoggles selectRandom _Goggles;
+
+_unit linkItem "ItemWatch";
+_unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
 if (var_personalRadio) then {_unit addItem _ACRE_PRR};
@@ -54,6 +71,10 @@ if (var_pistolAll) then {
 
 //DISABLE SHIFT CLICK ON MAP
 onMapSingleClick "_shift";
+
+//TRAITS
+_unit setUnitTrait ["medic",false];
+_unit setUnitTrait ["engineer",false];
 
 //RANK
 _unit setRank "PRIVATE";

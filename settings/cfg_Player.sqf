@@ -13,17 +13,22 @@ private _ACRE_ITR = "ACRE_PRC148"; // Long Range Radio
 private _ACRE_PRR = "ACRE_PRC343"; // Short Range Radio
 
 //INFANTRY UNIFORM
-private _Uniform = ["U_B_CombatUniform_mcam_vest"]; // Uniform(s)
-private _Vest = ["V_PlateCarrier2_rgr"]; // Vest(s)
-private _Headgear = ["H_HelmetSpecB","H_HelmetSpecB_blk","H_HelmetSpecB_paint2","H_HelmetSpecB_paint1","H_HelmetSpecB_sand","H_HelmetSpecB_snakeskin"]; // Headgear(s)
-private _Headgear_A = ["H_HelmetSpecB_paint2","H_HelmetSpecB_paint1"]; // Headgear(s) (Available in Personal Arsenal)
-private _Goggles = ["G_Balaclava_TI_G_blk_F"]; // Goggle(s)
-private _Goggles_A = [""]; // Goggle(s) (Available in Perosnal Arsenal)
+private _Uniform = ["U_B_CombatUniform_mcam","U_B_CombatUniform_mcam_vest"]; // Uniform(s)
+private _Vest = ["V_PlateCarrier1_rgr"]; // Vest(s)
+private _Vest_G = ["V_PlateCarrierGL_rgr"]; // Vest(s) GL (FAC, SQL, TL, Grenadier)
+private _Vest_M = ["V_PlateCarrierSpec_rgr"]; // Vest(s) CLS (Medic)
+private _Vest_MG = ["V_PlateCarrier2_rgr"]; // Vest(s) MG (AR, MMG)
+private _Headgear = ["H_HelmetSpecB","H_HelmetSpecB_blk","H_HelmetSpecB_paint2","H_HelmetSpecB_paint1","H_HelmetSpecB_sand","H_HelmetSpecB_snakeskin"]; // Headgear(s) (Rest)
+private _Headgear_L = ["H_Beret_02"]; // Headgear(s) (PLT CMD, PLT SGT)
+private _Headgear_A = ["H_HelmetSpecB","H_HelmetSpecB_blk","H_HelmetSpecB_paint2","H_HelmetSpecB_paint1","H_HelmetSpecB_sand","H_HelmetSpecB_snakeskin","H_Beret_02"]; // Headgear(s) (Available in Personal Arsenal)
+private _Goggles = ["","G_Shades_Black",""]; // Goggle(s)
+private _Goggles_A = ["G_Aviator","G_Combat","G_Tactical_Black","G_Shades_Black"]; // Goggle(s) (Available in Perosnal Arsenal)
 
 //PILOT UNIFORM
 private _Heli_Uniform = ["U_B_HeliPilotCoveralls"]; // Pilot Uniform(s)
 private _Heli_Vest = ["V_TacVest_blk"]; // Pilot Vest(s)
 private _Heli_Headgear = ["H_PilotHelmetHeli_B"]; // Pilot Headgear(s)
+private _Heli_Headgear_C = ["H_CrewHelmetHeli_B"]; // Crew Headgear(s)
 
 private _Plane_Uniform = ["U_B_PilotCoveralls"]; // Plane Uniform(s)
 private _Plane_Vest = ["V_Rangemaster_belt"]; // Plane Vest(s)

@@ -10,21 +10,44 @@ if !(local _unit) exitWith {};
 
 
 // APPLY NEW ROLE SPECIFIC LOADOUT ////////////////////////////////////////////////////////////////
-_unit setUnitLoadout [
-	[
-		[_SMG,_SMG_Attach1,_SMG_Attach2,_SMG_Optic,[],[],_SMG_Bipod],
-		[],
-		[],
-		[(selectRandom _Heli_Uniform),[["ACE_Flashlight_XL50",1]]],
-		[(selectRandom _Heli_Vest),[[_SMG_Ammo,5,999],[_FlareGun_Ammo,4,99]]],
-		[(selectRandom _Backpack_Pilot),[[_ACRE_ITR,1],[[_FlareGun,"","","",[],[],""],1]]],(selectRandom _Heli_Headgear),(selectRandom _Goggles),
-		[],
-		["ItemMap","","ItemRadioAcreFlagged","ItemCompass","ItemWatch",""]
-	],true
-];
+removeAllWeapons _unit;
+removeAllItems _unit;
+removeAllAssignedItems _unit;
+removeUniform _unit;
+removeVest _unit;
+removeBackpack _unit;
+removeHeadgear _unit;
+removeGoggles _unit;
+
+_unit addWeapon _SMG;
+_unit addPrimaryWeaponItem _SMG_Attach1;
+_unit addPrimaryWeaponItem _SMG_Attach2;
+_unit addPrimaryWeaponItem _SMG_Optic;
+_unit addPrimaryWeaponItem _SMG_Bipod;
+
+_unit forceAddUniform selectRandom _Heli_Uniform;
+
+_unit addVest selectRandom _Heli_Vest;
+for "_i" from 1 to 5 do {_unit addItemToVest _SMG_Ammo;};
+for "_i" from 1 to 4 do {_unit addItemToVest _FlareGun_Ammo;};
+
+_unit addBackpack selectRandom _Backpack_Pilot;
+_unit addItemToBackpack _ACRE_ITR;
+_unit addItemToBackpack _FlareGun;
+
+_unit addHeadgear selectRandom _Heli_Headgear;
+_unit addGoggles selectRandom _Goggles;
+
+_unit linkItem "ItemWatch";
+_unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
 if (var_personalRadio) then {_unit addItem _ACRE_PRR};
+
+//MAP
+_unit linkItem "ItemMap";
+_unit linkItem "ItemCompass";
+_unit addItem "ACE_Flashlight_XL50";
 
 //REST
 for "_i" from 1 to 2 do {_unit addItem "FirstAidKit"};
@@ -39,6 +62,10 @@ if (var_pistolAll) then {
 	_unit addHandgunItem _Pistol_Attach2;
 	for "_i" from 1 to 3 do {_unit addItem _Pistol_Ammo};
 };
+
+//TRAITS
+_unit setUnitTrait ["medic",false];
+_unit setUnitTrait ["engineer",true];
 
 //RANK
 _unit setRank "LIEUTENANT";

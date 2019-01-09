@@ -29,6 +29,7 @@ if (_specialRoles findIf {_x == _role} == -1) then {
 
 	if (_role == _HeloPilot || {_role == _HeloCrew}) then {
 		[player, _Heli_Headgear, false, false] call BIS_fnc_addVirtualItemCargo;
+		[player, _Heli_Headgear_C, false, false] call BIS_fnc_addVirtualItemCargo;
 		[player, _Goggles_A, false, false] call BIS_fnc_addVirtualItemCargo;
 	};
 

@@ -10,18 +10,33 @@ if !(local _unit) exitWith {};
 
 
 // APPLY NEW ROLE SPECIFIC LOADOUT ////////////////////////////////////////////////////////////////
-_unit setUnitLoadout [
-	[
-		[_Carbine,_Carbine_Attach1,_Carbine_Attach2,_Carbine_Optic,[],[],_Carbine_Bipod],
-		[],
-		[],
-		[(selectRandom _Heli_Uniform),[]],
-		[(selectRandom _Heli_Vest),[[_Carbine_Ammo,5,999]]],
-		[(selectRandom _Backpack_Pilot),[]],(selectRandom _Heli_Headgear),(selectRandom _Goggles),
-		[],
-		["","","ItemRadioAcreFlagged","","ItemWatch",""]
-	],true
-];
+removeAllWeapons _unit;
+removeAllItems _unit;
+removeAllAssignedItems _unit;
+removeUniform _unit;
+removeVest _unit;
+removeBackpack _unit;
+removeHeadgear _unit;
+removeGoggles _unit;
+
+_unit addWeapon _Carbine;
+_unit addPrimaryWeaponItem _Carbine_Attach1;
+_unit addPrimaryWeaponItem _Carbine_Attach2;
+_unit addPrimaryWeaponItem _Carbine_Optic;
+_unit addPrimaryWeaponItem _Carbine_Bipod;
+
+_unit forceAddUniform selectRandom _Heli_Uniform;
+
+_unit addVest selectRandom _Heli_Vest;
+for "_i" from 1 to 5 do {_unit addItemToVest _Carbine_Ammo;};
+
+_unit addBackpack selectRandom _Backpack_Pilot;
+
+_unit addHeadgear selectRandom _Heli_Headgear_C;
+_unit addGoggles selectRandom _Goggles;
+
+_unit linkItem "ItemWatch";
+_unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
 if (var_personalRadio) then {_unit addItem _ACRE_PRR};
@@ -49,6 +64,10 @@ if (var_pistolAll) then {
 
 //DISABLE SHIFT CLICK ON MAP
 onMapSingleClick "_shift";
+
+//TRAITS
+_unit setUnitTrait ["medic",false];
+_unit setUnitTrait ["engineer",false];
 
 //RANK
 _unit setRank "CORPORAL";
