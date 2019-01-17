@@ -8,36 +8,10 @@
 if !(hasinterface) exitWith {};
 waitUntil {time > 1};
 
-lmf_player_tracklist = [];
-
-
-// ADD PLAYERS CYCLE //////////////////////////////////////////////////////////////////////////////
-[] spawn {
-	private _fnc_addUnit =  {
-		private _unit = _this#0;
-		lmf_player_tracklist pushbackunique _unit;
-	};
-
-	while {true} do {
-		//ADD PLAYERS FROM PLAYER GROUP TO LIST (MINUS GROUP LEADER)
-		{
-			private _unit = _x;
-			if (lmf_player_tracklist findIf {_unit == _x} == -1) then {[_x] call _fnc_addUnit};
-		} forEach (units group player - [leader group player]);
-		//REMOVE FROM TRACKLIST IF LEFT GROUP OR BECAME GROUP LEADER OR BECAME OBJNULL
-		{
-			if (group _x != group player || {_x == leader group player || {isNull _x}}) then {
-				lmf_player_tracklist = lmf_player_tracklist - [_x];
-			};
-		} forEach lmf_player_tracklist;
-		sleep 15;
-	};
-};
-
 
 // TRACKING MAGIC /////////////////////////////////////////////////////////////////////////////////
 private _trackingEH = ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Draw",{
-	if (!visibleMap || {lmf_player_tracklist isEqualTo []}) exitWith {};
+	if (!visibleMap || {(units group player - [leader group player]) isEqualTo []}) exitWith {};
 	private _map = _this#0;
 	{
 		private _color = assignedTeam _x call {
@@ -49,5 +23,5 @@ private _trackingEH = ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Dr
 		};
 		(_map) drawIcon ["iconMan",[0,0,0,1],getPosASL _x,20,20,getDir _x];
 		(_map) drawIcon ["iconMan",_color,(getPosASL _x),16,16,getDir _x];
-	} count lmf_player_tracklist;
+	} count (units group player - [leader group player]);
 }];

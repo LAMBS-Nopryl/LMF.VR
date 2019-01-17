@@ -10,22 +10,50 @@ if !(local _unit) exitWith {};
 
 
 // APPLY NEW ROLE SPECIFIC LOADOUT ////////////////////////////////////////////////////////////////
-private _bContentMedic = [(selectRandom _Backpack_Medic),[["ACE_packingBandage",40],["ACE_salineIV",10],["ACE_epinephrine",10],["ACE_morphine",10],["ACE_tourniquet",10]]];
+removeAllWeapons _unit;
+removeAllItems _unit;
+removeAllAssignedItems _unit;
+removeUniform _unit;
+removeVest _unit;
+removeBackpack _unit;
+removeHeadgear _unit;
+removeGoggles _unit;
+
+_unit addWeapon _Carbine;
+_unit addPrimaryWeaponItem _Carbine_Attach1;
+_unit addPrimaryWeaponItem _Carbine_Attach2;
+_unit addPrimaryWeaponItem _Carbine_Optic;
+_unit addPrimaryWeaponItem _Carbine_Bipod;
+
+_unit forceAddUniform selectRandom _Uniform;
+
+_unit addVest selectRandom _Vest_M;
+for "_i" from 1 to 4 do {_unit addItemToVest _Carbine_Ammo;};
+for "_i" from 1 to 2 do {_unit addItemToVest _Carbine_Ammo_T;};
+for "_i" from 1 to 2 do {_unit addItemToVest _Grenade;};
+for "_i" from 1 to 6 do {_unit addItemToVest _Grenade_Smoke;};
+
+_unit addBackpack selectRandom _Backpack_Medic;
 if (ace_medical_level == 1) then {
-	_bContentMedic = [(selectRandom _Backpack_Medic),[["ACE_fieldDressing",40],["ACE_bloodIV",15],["ACE_epinephrine",10],["ACE_morphine",20]]];
+	for "_i" from 1 to 40 do {_unit addItemToBackpack "ACE_fieldDressing";};
+	for "_i" from 1 to 15 do {_unit addItemToBackpack "ACE_morphine";};
+	for "_i" from 1 to 10 do {_unit addItemToBackpack "ACE_epinephrine";};
+	for "_i" from 1 to 10 do {_unit addItemToBackpack "ACE_bloodIV";};
+} else {
+	_unit addItemToBackpack "ACE_personalAidKit";
+	for "_i" from 1 to 25 do {_unit addItemToBackpack "ACE_packingBandage";};
+	for "_i" from 1 to 25 do {_unit addItemToBackpack "ACE_elasticBandage";};
+	for "_i" from 1 to 10 do {_unit addItemToBackpack "ACE_morphine";};
+	for "_i" from 1 to 10 do {_unit addItemToBackpack "ACE_epinephrine";};
+	for "_i" from 1 to 6 do {_unit addItemToBackpack "ACE_tourniquet";};
+	for "_i" from 1 to 5 do {_unit addItemToBackpack "ACE_salineIV";};
 };
-_unit setUnitLoadout [
-	[
-		[_Carbine,_Carbine_Attach1,_Carbine_Attach2,_Carbine_Optic,[],[],_Carbine_Bipod],
-		[],
-		[],
-		[(selectRandom _Uniform),[]],
-		[(selectRandom _Vest),[[_Carbine_Ammo,5,999],[_Carbine_Ammo_T,3,999],[_Grenade_Smoke,6,1]]],
-		_bContentMedic,(selectRandom _Headgear),(selectRandom _Goggles),
-		[],
-		["","","ItemRadioAcreFlagged","","ItemWatch",""]
-	],true
-];
+
+_unit addHeadgear selectRandom _Headgear;
+_unit addGoggles selectRandom _Goggles;
+
+_unit linkItem "ItemWatch";
+_unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
 if (var_personalRadio) then {_unit addItem _ACRE_PRR};
@@ -53,6 +81,10 @@ if (var_pistolAll) then {
 
 //DISABLE SHIFT CLICK ON MAP
 onMapSingleClick "_shift";
+
+//TRAITS
+_unit setUnitTrait ["medic",true];
+_unit setUnitTrait ["engineer",false];
 
 //RANK
 _unit setRank "CORPORAL";

@@ -10,18 +10,36 @@ if !(local _unit) exitWith {};
 
 
 // APPLY NEW ROLE SPECIFIC LOADOUT ////////////////////////////////////////////////////////////////
-_unit setUnitLoadout [
-	[
-		[_SMG,_SMG_Attach1,_SMG_Attach2,_SMG_Optic,[],[],_SMG_Bipod],
-		[],
-		[],
-		[(selectRandom _Crew_Uniform),[]],
-		[(selectRandom _Crew_Vest),[[_SMG_Ammo,5,999]]],
-		[(selectRandom _Backpack_Crew),[]],(selectRandom _Crew_Headgear),(selectRandom _Goggles),
-		[_Binocular,"","","",[],[],""],
-		["","","ItemRadioAcreFlagged","","ItemWatch",""]
-	],true
-];
+removeAllWeapons _unit;
+removeAllItems _unit;
+removeAllAssignedItems _unit;
+removeUniform _unit;
+removeVest _unit;
+removeBackpack _unit;
+removeHeadgear _unit;
+removeGoggles _unit;
+
+_unit addWeapon _SMG;
+_unit addPrimaryWeaponItem _SMG_Attach1;
+_unit addPrimaryWeaponItem _SMG_Attach2;
+_unit addPrimaryWeaponItem _SMG_Optic;
+_unit addPrimaryWeaponItem _SMG_Bipod;
+
+_unit forceAddUniform selectRandom _Crew_Uniform;
+
+_unit addVest selectRandom _Crew_Vest;
+for "_i" from 1 to 5 do {_unit addItemToVest _SMG_Ammo;};
+
+_unit addBackpack selectRandom _Backpack_Crew;
+_unit addItemToBackpack _ACRE_ITR;
+
+_unit addHeadgear selectRandom _Crew_Headgear;
+_unit addGoggles selectRandom _Goggles;
+
+_unit addWeapon _Binocular;
+
+_unit linkItem "ItemWatch";
+_unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
 if (var_personalRadio) then {_unit addItem _ACRE_PRR};
@@ -49,6 +67,10 @@ if (var_pistolAll) then {
 
 //DISABLE SHIFT CLICK ON MAP
 onMapSingleClick "_shift";
+
+//TRAITS
+_unit setUnitTrait ["medic",false];
+_unit setUnitTrait ["engineer",true];
 
 //RANK
 _unit setRank "CORPORAL";
