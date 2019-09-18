@@ -12,10 +12,16 @@ params ["_unit",["_state", false]];
 if (lmf_warmup) exitWith {"Warmup has not even ended yet!!!" remoteExec ["systemChat",_unit]};
 
 //REMOTE EXEC DISABLE OR ENABLE PLAYER SAFETY
-if (_state && {!lmf_isSafe}) then {
-	[true] remoteExec ["lmf_admin_fnc_playerSafety",0];
-	lmf_isSafe = true;
+if (_state) then {
+	if !(lmf_isSafe) then {
+		[true] remoteExec ["lmf_admin_fnc_playerSafety",0];
+		lmf_isSafe = true;
+		"Safety On" remoteExec ["systemChat",_unit];
+	};
 } else {
-	[false] remoteExec ["lmf_admin_fnc_playerSafety",0];
-	lmf_isSafe = false;
+	if (lmf_isSafe) then {
+		[false] remoteExec ["lmf_admin_fnc_playerSafety",0];
+		lmf_isSafe = false;
+		"Safety Off" remoteExec ["systemChat",_unit];
+	};
 };
