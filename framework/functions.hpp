@@ -86,6 +86,14 @@ class admin {
         class initAdminTP {};
 	};
 };
+class chat {
+    tag = "lmf_chat";
+    class functions {
+        file = "framework\player\chat";
+        class getPlayer {};
+        class sendChatMessage {};
+    };
+};
 class diwako_unknownwp {
   tag="diwako_unknownwp";
   class functions {

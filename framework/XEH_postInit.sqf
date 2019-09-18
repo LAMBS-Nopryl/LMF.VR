@@ -74,6 +74,10 @@ if (isServer) then {
 
     //VARIABLE FOR INITPLAYERSAFETY
 	lmf_isSafe = false;
+
+    //CREATE A RADIO CHANNEL FOR CHAT COMMANDS
+    lmf_chatChannel = radioChannelCreate [[0.9,0.1,0.1,1], "Chat", "Chat", [], true];
+    publicVariable "lmf_chatChannel";    
 };
 
 
@@ -217,6 +221,34 @@ if !(isNil "zen_custom_modules_fnc_register") then {
 if !(isnil "Ares_fnc_RegisterCustomModule") then {
     [] execVM "framework\player\init\achillesModules.sqf";
 };
+
+//CHAT COMMANDS
+["lmf_chatMessage", {
+    params ["_sender", "_msg", "_type", "_receiver", ["_ping", true]];
+
+    private _args = switch (toLower _type) do {
+        case "zeus": {
+            [{!(profileName isEqualTo _sender) && !isNull (getAssignedCuratorLogic player)}, format ["(Zeus) %1:", _sender]];
+        };
+        case "whisper": {
+            [{profileName isEqualTo _receiver}, format ["Whisper from %1:", _sender]];
+        };
+        default {
+            [{true}, format ["Notice (%1):", _sender]];
+        };
+    };
+    _args params ["_condition", "_text"];
+
+    if ([] call _condition) then {
+        lmf_chatChannel radioChannelAdd [ACE_player];
+        lmf_chatChannel radioChannelSetCallsign _text;
+        ACE_player customChat [lmf_chatChannel, _msg];
+        lmf_chatChannel radioChannelRemove [ACE_player];
+        playSound "3DEN_notificationWarning";
+    };
+}] call CBA_fnc_addEventHandler;
+
+[] execVM "framework\player\init\chatCommands.sqf";
 
 //CHANNEL SETUP
 0 enableChannel false;
