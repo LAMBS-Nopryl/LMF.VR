@@ -71,6 +71,9 @@ if (isServer) then {
 
     //CREATE VARIOUS MARKERS
     [] execVM "framework\server\init\markers.sqf";
+
+    //VARIABLE FOR INITPLAYERSAFETY
+	lmf_isSafe = false;
 };
 
 
@@ -204,6 +207,11 @@ if (CBA_missionTime > 5*60) then {
 
 //INTRO + WARMUP
 [] execVM "framework\player\init\warmup.sqf";
+
+//ZEUS MODULES
+if !(isNil "zen_custom_modules_fnc_register") then {
+	[] execVM "framework\player\init\zenModules.sqf";
+};
 
 //ARES MODULES
 if !(isnil "Ares_fnc_RegisterCustomModule") then {
