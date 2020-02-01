@@ -16,12 +16,12 @@
 lmf_spawnerCreateObject = {
 	params ["_vehType",["_spawnPad",objNull,[objNull]]];
 
-	if (count (_spawnPad nearEntities [["Man", "Air", "Land", "Ship"], 7]) > 0) exitWith {
-		titleText ["<t font='PuristaBold' shadow='2' color='#FFBA26' size='2'>WARNING!</t><br/><t font='PuristaBold' shadow='2' color='#FFFFFF' size='1.5'>Spawn pad occupied!</t>", "PLAIN", 0.3, false, true];
+	if (rank ace_player == "PRIVATE" || {rank ace_player == "CORPORAL"}) exitWith {
+		titleText ["<t font='PuristaBold' shadow='2' color='#F2513C' size='2'>UNQUALIFIED</t><br/><t font='PuristaBold' shadow='2' color='#FFFFFF' size='1.5'>Must be NCO or Officer.</t>", "PLAIN", 0.3, false, true];
 	};
 
-	if (rank ace_player == "PRIVATE" || {rank ace_player == "CORPORAL"}) exitWith {
-		titleText ["<t font='PuristaBold' shadow='2' color='#FFBA26' size='2'>WARNING!</t><br/><t font='PuristaBold' shadow='2' color='#FFFFFF' size='1.5'>Only for NCOs and Officers!</t>", "PLAIN", 0.3, false, true];
+	if (count (_spawnPad nearEntities [["Man", "Air", "Land", "Ship"], 7]) > 0) exitWith {
+		titleText ["<t font='PuristaBold' shadow='2' color='#F2513C' size='2'>WARNING!</t><br/><t font='PuristaBold' shadow='2' color='#FFFFFF' size='1.5'>Spawn pad occupied!</t>", "PLAIN", 0.3, false, true];
 	};
 
 	private _vehicle = _vehType createVehicle getPosATL _spawnPad;
