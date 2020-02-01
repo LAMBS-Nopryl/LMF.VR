@@ -19,12 +19,12 @@ LMF_groupTypes = ["TEAM", "SQUAD", "SENTRY","ATTEAM","AATEAM", "MGTEAM","CUSTOM 
 
 }] call zen_custom_modules_fnc_register;
 
-//RESPAWN SINGLE UNIT
-["LMF", "Respawn Single Unit",{
+//RESPAWN SINGLE Player
+["LMF", "Respawn Single Player",{
 	private _players = [] call ace_spectator_fnc_players;
 	if (count _players == 0) exitWith {["ERROR: No Dead Players"] call zen_common_fnc_showMessage};
 	private _names = _players apply {name _x};
-	["Respawn Single Unit",[
+	["Respawn Single Player",[
 		//PARAMS
 		["COMBO", "Player", [_players, _names]]
 	],{
@@ -40,7 +40,7 @@ LMF_groupTypes = ["TEAM", "SQUAD", "SENTRY","ATTEAM","AATEAM", "MGTEAM","CUSTOM 
 }] call zen_custom_modules_fnc_register;
 
 //AI GARRISON
-["LMF", "AI Garrison",{
+["LMF", "AI: Infantry Garrison",{
 	["Garrison",[
 		//PARAMS
 		["COMBO","Group Type",[LMF_groupTypes,LMF_groupTypes,0]],
@@ -66,7 +66,7 @@ LMF_groupTypes = ["TEAM", "SQUAD", "SENTRY","ATTEAM","AATEAM", "MGTEAM","CUSTOM 
 }] call zen_custom_modules_fnc_register;
 
 //AI PATROL
-["LMF", "AI Patrol",{
+["LMF", "AI: Infantry Patrol",{
 	["Patrol",[
 		//PARAMS
 		["COMBO","Group Type",[LMF_groupTypes,LMF_groupTypes,0]],
@@ -90,7 +90,7 @@ LMF_groupTypes = ["TEAM", "SQUAD", "SENTRY","ATTEAM","AATEAM", "MGTEAM","CUSTOM 
 }] call zen_custom_modules_fnc_register;
 
 //AI QRF
-["LMF", "AI QRF",{
+["LMF", "AI: Infantry QRF",{
 	["QRF",[
 		//PARAMS
 		["COMBO","Group Type",[LMF_groupTypes,LMF_groupTypes,0]],
@@ -112,7 +112,7 @@ LMF_groupTypes = ["TEAM", "SQUAD", "SENTRY","ATTEAM","AATEAM", "MGTEAM","CUSTOM 
 }] call zen_custom_modules_fnc_register;
 
 //AI HUNTER
-["LMF", "AI Hunter",{
+["LMF", "AI: Infantry Hunter",{
 	["Hunter",[
 		//PARAMS
 		["COMBO","Group Type",[LMF_groupTypes,LMF_groupTypes,0]],
@@ -136,7 +136,7 @@ LMF_groupTypes = ["TEAM", "SQUAD", "SENTRY","ATTEAM","AATEAM", "MGTEAM","CUSTOM 
 }] call zen_custom_modules_fnc_register;
 
 //VEHICLE QRF
-["LMF", "Vehicle QRF",{
+["LMF", "AI: Vehicle QRF",{
 	private _options = ["CAR","CARARMED","TRUCK","APC","TANK","HELITRANSPORT","HELIATTACK"];
 	["Vehicle QRF",[
 		//PARAMS
@@ -155,7 +155,7 @@ LMF_groupTypes = ["TEAM", "SQUAD", "SENTRY","ATTEAM","AATEAM", "MGTEAM","CUSTOM 
 }] call zen_custom_modules_fnc_register;
 
 //PARA QRF
-["LMF", "PARA QRF",{
+["LMF", "AI: PARA QRF",{
 	//PARAMS
 	private _pos = ASLToATL (_this#0);
 
