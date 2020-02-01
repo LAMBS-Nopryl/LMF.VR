@@ -6,8 +6,7 @@
 */
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
 if !(hasinterface) exitWith {};
-waitUntil {time > 1};
-
+waitUntil {sleep 1; time > 10 && !isNull ((findDisplay 12) displayCtrl 51)};
 
 // TRACKING MAGIC /////////////////////////////////////////////////////////////////////////////////
 private _trackingEH = ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Draw",{
