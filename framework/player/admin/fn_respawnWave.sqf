@@ -8,4 +8,9 @@ params ["_unit"];
 #include "cfg_admin.sqf"
 
 //MAKE PEOPLE RESPAWN
-[5] remoteExec ["setPlayerRespawnTime", 0];
+[] spawn {
+	_result = ["Are you sure?", "CONFIRM: RESPAWN ALL DEAD PLAYERS", "RESPAWN", true] call BIS_fnc_guiMessage;
+	if (_result) then {
+		[5] remoteExec ["setPlayerRespawnTime", 0];
+	};
+};

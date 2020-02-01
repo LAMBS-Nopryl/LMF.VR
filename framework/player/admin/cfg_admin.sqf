@@ -13,6 +13,10 @@ private _adminList =  [
 "76561197968829665", // Alex2k
 "76561198202783595", // Aizen
 "76561197997590271", // G4rrus
+"76561197972818783", // Jager
+"76561197980054997", // Random
+"76561197978672934", // Gaz
+"76561197986217953", // Thorin
 "_SP_PLAYER_"
 ];
 
@@ -20,4 +24,4 @@ private _adminList =  [
 if (admin owner _unit > 0 || {_adminList findIf {_x == _uid} != -1}) then {_admin = true};
 
 //IF NOT
-if !(_admin) exitWith {"Only for certified members!!!" remoteExec ["systemChat",_unit]};
+if !(_admin) exitWith {"Not whitelisted as an admin." remoteExec ["systemChat",_unit]};
