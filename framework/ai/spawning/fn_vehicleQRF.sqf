@@ -115,11 +115,6 @@ while {_initTickets > 0} do {
         private _grp2 = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp2 deleteGroupWhenEmpty true;
         {_x moveInCargo _veh;} forEach units _grp2;
-        _grp2 setVariable ["lambs_danger_dangerAI","disabled"];
-	    {_x setVariable ["lambs_danger_disableAI",true]} count units _grp2;
-	    {_x disableAI "AUTOCOMBAT"} count units _grp2;
-	    _grp2 enableAttack false;
-	    _grp2 allowFleeing 0;
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
