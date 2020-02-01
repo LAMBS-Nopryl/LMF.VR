@@ -25,6 +25,7 @@ class ai {
 		file = "framework\ai\task";
         class taskSuppress {};
         class taskAssault {};
+		class taskAssault_b {};
         class taskUpdateWP {};
         class taskHunt {};
 	};

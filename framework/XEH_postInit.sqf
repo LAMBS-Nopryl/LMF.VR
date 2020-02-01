@@ -35,22 +35,27 @@ enableSaving [false,false];
 //UNCONSCIOUS EH
 ["ace_unconscious", {
     params [["_unit", objNull],["_state", false]];
-    if (ace_medical_enableUnconsciousnessAI == 0 || {!_state || {!(local _unit) || {var_enemySide != (side _unit) }}}) exitWith {};
+    if (!_state || {!(local _unit)}) exitWith {};
 
+    //PLAYER ONLY
     if (isPlayer _unit) then {
         [{ace_player setUnitTrait ["camouflageCoef",var_camoCoef];}, [], 30] call CBA_fnc_waitAndExecute;
-    } else {
-        [_unit] spawn {
-            params [["_unit", objNull]];
-            while {alive _unit && {_unit getVariable ["ACE_isUnconscious", false]}} do {
-                sleep 5;
-                if (12.5 > random 100) then {
-                    [_unit, false] call ace_medical_fnc_setUnconscious;
-                };
-                sleep 15;
+    };
+
+    //PLAYER AND AI (note: This does not work as unconscious state is dependent on vitals. Need a way to FORCE wake up.)
+    /*
+    [_unit] spawn {
+        params [["_unit", objNull]];
+        while {alive _unit && {_unit getVariable ["ACE_isUnconscious", false]}} do {
+            sleep 5;
+            if (30 > random 100) exitWith {
+                [_unit, false] call ace_medical_fnc_setUnconscious;
             };
+        sleep 10;
         };
     };
+    */
+
 }] call CBA_fnc_addEventHandler;
 
 
