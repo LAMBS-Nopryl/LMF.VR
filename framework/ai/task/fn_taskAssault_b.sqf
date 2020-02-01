@@ -3,14 +3,21 @@
 	- Originally by nkenny with some changes by Alex2k. Revised by Drgn V4karian with some help
 	  from Diwako.
 	- This function assigns the AI with a task to assault targets rather aggressively if in range.
+	- Alternative version that loads if LAMBS Danger is running.
 */
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
 params [["_grp",grpNull,[grpNull]],["_range",500,[0]]];
-if (isClass (configfile >> "CfgPatches" >> "lambs_danger")) exitWith {0 = [_grp] spawn lmf_ai_fnc_taskAssault_b;};
 private _cycle = 30;
+private _assaultRange = 50 + (random 50);
+private _randDist = _assaultRange + (50 + (random 100));
 _grp enableIRLasers false;
 _grp enableGunLights "ForceOff";
-
+_grp setSpeedMode "FULL";
+_grp setCombatMode "RED";
+_grp allowFleeing 0;
+_grp enableAttack false;
+{_x setSkill ["courage", 1];} count units _grp;
+{doStop _x} count units _grp;
 
 // START THE HUNT SCRIPT //////////////////////////////////////////////////////////////////////////
 while {count units _grp > 0} do {
@@ -28,7 +35,6 @@ while {count units _grp > 0} do {
 		};
 	} forEach _availabletargets;
 
-
 	// ORDERS ///////////////////////////////////////////////////////////////////////////////////////
 	if !(isNull _nearest) then {
 
@@ -42,39 +48,50 @@ while {count units _grp > 0} do {
 			sleep 10;
 		};
 
-		if (_nearestdist < 150) then {
-			//MOVE IN
-			if (_tracker knowsAbout _nearest > 1) then {
-				{deleteWaypoint ((wayPoints _grp) select 0);} count wayPoints _grp;
-				{_x doMove (getposATL _nearest);} count units _grp;
-				{_x enableAttack false;} count units _grp;
-				_grp enableIRLasers true;
-				if (20 > (random 100)) then {_grp enableGunLights "ForceOn"};
-			};
+		if (waypoints _grp isEqualTo []) then {
+			private _wp =_grp addWaypoint [getPos leader _grp, 0];
+			_wp setWaypointType "GUARD";
 		};
 
-		//AGGRESSIVE WHEN CLOSE
-		if (_nearestdist < 50) then {
-			{deleteWaypoint ((wayPoints _grp) select 0);} count wayPoints _grp;
-			{_x doMove (getposATL _nearest);} count units _grp;
-			{_x disableAI "AUTOCOMBAT";} count units _grp;
-			_grp setBehaviour "AWARE";
-			{_x enableAttack false;} count units _grp;
+		//CLOSE
+		if (_nearestdist < _assaultRange) then {
 			_grp enableIRLasers true;
 			_grp enableGunLights "ForceOn";
+
+			_newGroup = createGroup [var_enemySide, true];
+			(units _grp) joinSilent _newGroup;
+			_newGroup deleteGroupWhenEmpty true;
+
+			_newGroup setVariable ["lambs_danger_dangerAI","disabled"];
+			{_x setVariable ["lambs_danger_disableAI",true]} count units _newGroup;
+			{_x disableAI "AUTOCOMBAT"} count units _newGroup;
+			_newGroup setBehaviourStrong "AWARE";
+			_newGroup enableAttack false;
+			_newGroup allowFleeing 0;
+
+			0 = [_newGroup,1000] spawn lmf_ai_fnc_taskHunt;
 		};
 
-		//REGULAR WHEN FURTHER OUT
-		if (_nearestdist > 150) then {
-			{_x enableAI "AUTOCOMBAT";} count units _grp;
-			_grp setBehaviour "AWARE";
-			{_x enableAttack true;} count units _grp;
-			if (waypoints _grp isEqualTo []) then {
-				private _wp =_grp addWaypoint [getPos leader _grp, 0];
-				_wp setWaypointType "GUARD";
-			};
+		//MEDIUM
+		if (_nearestdist < _randDist && _nearestdist > _assaultRange) then {
+			_grp enableIRLasers true;
+			if (20 > (random 100)) then {_grp enableGunLights "ForceOn"};
+			_grp setFormation "WEDGE";
+			_grp setBehaviourStrong "AWARE";
+		};
+
+		//FAR
+		if (_nearestdist > _randDist) then {
 			if (20 > (random 100)) then {_grp enableIRLasers true};
 			_grp enableGunLights "ForceOff";
+			_grp setFormation "LINE";
+		};
+
+		//ANY DISTANCE
+		if (_tracker knowsAbout _nearest > 1) then {
+			[_grp, 0] setWaypointPosition [getPosASL _nearest, -1];
+			[_grp, 1] setWaypointPosition [getPosASL _nearest, -1];
+			{_x doMove (getposATL _nearest)} count units _grp;
 		};
 
 		_cycle = _nearestdist/8;
@@ -87,10 +104,10 @@ while {count units _grp > 0} do {
 			private _wp =_grp addWaypoint [getPos leader _grp, 0];
 			_wp setWaypointType "GUARD";
 		};
-		{_x enableAI "AUTOCOMBAT";} count units _grp;
-		_grp setBehaviour "AWARE";
 		_grp enableIRLasers false;
 		_grp enableGunLights "ForceOff";
+		_grp setFormation "STAG COLUMN";
+		_grp setBehaviourStrong "AWARE";
 	};
 
   	//WAIT

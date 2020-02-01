@@ -14,5 +14,10 @@ while {count units _grp > 0} do {
 	private _wp =_grp addWaypoint [getpos leader _grp, 0];
 	_wp setWaypointType "GUARD";
 
+	if ( !isNull ((leader _grp) findNearestEnemy (leader _grp)) ) then {
+		[_grp, 0] setWaypointPosition [getPosATL ((leader _grp) findNearestEnemy (leader _grp)), 25]; //getPosASL and -1 for exact position.
+		[_grp, 1] setWaypointPosition [getPosATL ((leader _grp) findNearestEnemy (leader _grp)), 25]; //getPosASL and -1 for exact position.
+	};
+
 	sleep 180;
 };
