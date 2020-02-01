@@ -2,8 +2,7 @@
 /*
 	- Originally by nkenny.
 	- Revised by Drgn V4karian.
-	- File to spawn a group of infantry that garrisons. The group will ungarrison/regarrison
-	  depending on their combat status and their distance to the closest enemy.
+	- Spawns a group of infantry that garrisons buildings.
 
 	- USAGE:
 		1) Spawn Position.
@@ -23,53 +22,54 @@ if !(_spawner) exitWith {};
 params [["_spawnPos", [0,0,0]],["_grpType", "TEAM"],["_garrisonRadius", 100],["_distribution", 1]];
 _spawnPos = _spawnPos call CBA_fnc_getPos;
 
-
 // PREPARE AND SPAWN THE GROUP ////////////////////////////////////////////////////////////////////
 private _type = [_grptype] call _typeMaker;
 private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
 _grp deleteGroupWhenEmpty true;
+_grp setFormation "DIAMOND";
 
+// GARRISON ///////////////////////////////////////////////////////////////////////////////////////
+[_spawnPos, nil, units _grp, _garrisonRadius, _distribution, true, true] call ace_ai_fnc_garrison;
 
-// GARRISON THEM //////////////////////////////////////////////////////////////////////////////////
-//APPLY GARRISON AND SELECT RANDOM STANCE
-[_spawnPos, nil, units _grp, _garrisonRadius, _distribution, selectRandom [true,false], true] call ace_ai_fnc_garrison;
-{_x setUnitPos selectRandom ["UP","UP","MIDDLE"];} count units _grp;
-
-//WAIT UNTIL THEY ARE IN COMBAT AND THEN CHANGE THEIR STANCE
-waitUntil {sleep 5; behaviour leader _grp == "COMBAT" || {{alive _x} count units _grp < 1}};
-if ({alive _x} count units _grp < 1) exitWith {};
-
-{_x setUnitPos "UP";} count units _grp;
-
-sleep 5 + random 10;
-
+//UNGARRISON SINGLE UNIT WHEN HIT
 {
-	if (typeOf _x == _Autorifleman || {typeOf _x == _MMG_Gunner}) then {
-		_x setUnitPos "UP";
-	} else {
-	_x setUnitPos "AUTO";
-	};
-} count units _grp;
+	_x addEventHandler ["Hit", {
+		params ["_unit", "_source", "_damage", "_instigator"];
+		if (alive _unit) then {
+			[[_unit]] call ace_ai_fnc_unGarrison;
+			//if (_unit knowsAbout _instigator > 1 && {(_unit distance _instigator) < (25 + (random 75))}) then {_unit doMove (getPosATL _instigator);};
+		};
+		_unit removeEventHandler ["Hit", _thisEventHandler];
+	}];
+} forEach (units _grp);
 
-//MAKE THEM UNGARRISON AND REGARRISON DEPENDING ON PLAYER DISTANCE
-while {count units _grp > 1} do {
-	waitUntil {sleep 5; behaviour leader _grp == "COMBAT" || {{alive _x} count units _grp < 1}};
-	if ({alive _x} count units _grp < 1) exitWith {};
-	private _nearEnemy = (leader _grp) findNearestEnemy (leader _grp);
-	private _range = 25 + random 25;
+//UNGARRISON SINGLE UNIT BASED ON NEARBY ENEMY FIRE, ITS OWN FIRE, OR NEARBY FRIENDLY FIRE
+{
+	_x addEventHandler ["FiredNear", {
+	params ["_unit", "_firer", "_distance", "_weapon", "_muzzle", "_mode", "_ammo", "_gunner"];
 
-	sleep 30;
-
-	if (!isNull _nearEnemy && {_nearEnemy distance (leader _grp) < _range}) then {
-		{_x disableAI "AUTOCOMBAT";} count units _grp;
-		_grp setBehaviour "AWARE";
-		[units _grp] call ace_ai_fnc_unGarrison;
-		sleep 5;
-		if ({alive _x} count units _grp > 1) then {
-			[_spawnPos, nil, units _grp, _garrisonRadius, _distribution, selectRandom [true,false], false] call ace_ai_fnc_garrison;
-			sleep 55;
-			{_x enableAI "AUTOCOMBAT";} count units _grp;
-			_grp setBehaviour "AWARE";
+	if (alive _unit) then {
+		//NEARBY ENEMY FIRE
+		if (side _firer != var_enemySide) then {
+			if (50 > random 100) then {
+				[[_unit]] call ace_ai_fnc_unGarrison;
+				if (_unit knowsAbout _firer > 1) then {_unit doMove (getPosATL _firer);};
+			};
+		};
+		//OWN FIRE
+		if (_firer == _unit) then {
+			if (50 > random 100) then {
+				[[_unit]] call ace_ai_fnc_unGarrison;
+			};
+		};
+		//NEARBY FRIENDLY FIRE
+		if (_firer != _unit && {side _firer == var_enemySide}) then {
+			if (20 > random 100) then {
+				[[_unit]] call ace_ai_fnc_unGarrison;
+				_unit doMove (getPosATL _firer);
+			};
 		};
 	};
-};
+	_unit removeEventHandler ["FiredNear", _thisEventHandler];
+	}];
+} forEach (units _grp);
