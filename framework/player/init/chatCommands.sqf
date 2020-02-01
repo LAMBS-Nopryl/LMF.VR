@@ -10,7 +10,7 @@
 	private _unit = _name call lmf_chat_fnc_getPlayer;
 	if (isNull _unit) exitWith {systemChat "Could not find unit"};
 
-	[player, _unit] call ace_medical_fnc_treatmentAdvanced_fullHeal;
+	[player] call ace_medical_treatment_fnc_fullHealLocal;
 	_unit setDamage 0;
 	systemChat format ["Fully healed %1.", name _unit];
 }, "admin"] call CBA_fnc_registerChatCommand;
