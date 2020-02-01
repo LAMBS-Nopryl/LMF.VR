@@ -7,7 +7,8 @@
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
 //SITUATION
 private _brf_situation = "
-This is the Situation section of the briefing. It is ment to provide players with a general idea of whats going on.
+This is the Situation section of the briefing. It is ment to provide players with a general idea of whats going on.<br/>
+You can <marker name='respawn'>LINK</marker> to map markers in the briefing.
 ";
 
 //ENEMY FORCES (every line must start and end with a " and all but the last must have a , at the end.)

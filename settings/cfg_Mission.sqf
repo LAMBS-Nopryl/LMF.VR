@@ -9,7 +9,7 @@ var_author = "Author"; // Your name, which shows up at the end of the warmup.
 var_location = "Virtual Reality"; // Location where scenario takes place, which can be seen in intro.
 var_debug = false; // For mission testing, will turn on some debug options. (default: false)
 var_warmup = true; // Start mission with warmup? (default: true)
-var_jipTP = true; // Allow players that JIP to teleport? (default: false)
+var_jipTP = true; // Allow players that JIP to teleport? (default: true)
 var_enemySide = EAST; // What side is the enemy? (WEST,EAST,INDEPENDENT) (default: EAST)
 var_civPanic = true; // Will civs panic when there is a firefight? (default: true)
 
@@ -39,13 +39,13 @@ var_supSpecial = "Box_NATO_WpsSpecial_F"; // Supply Spawnpad special supplies
 var_supExplosives = "Box_NATO_AmmoOrd_F"; // Supply Spawnpad explosives supplies
 
 //PLAYER GEAR (Only relevant if var_playerGear = true;)
-var_personalArsenal = true; // Give players access to a limited arsenal during briefing stage. (default: false)
+var_personalArsenal = true; // Give players access to a limited arsenal during briefing stage. (default: true)
 var_personalRadio = true; // Does everyone get a short range radio (AN/PRC 343)? (default: true)
-var_backpacksAll = true; // Give all players backpacks? (Certain roles will have backpacks regardless) (default: false)
+var_backpacksAll = true; // Give all players backpacks? (Certain roles will have backpacks regardless) (default: true)
 var_pistolAll = false; // Give all players sidearms? (default: false)
 var_playerNVG = 2; // Who gets NVGs? (0=ALL, 1=PILOTS, 2=NONE) (default: 2)
 var_playerMaps = 0; // Who gets Maps? (0=ALL, 1=LEADERS, 2=NONE) (default: 0)
-var_keepRole = true; // Should players keep their role upon respawn? (default: true)
+var_keepRole = false; // Should players keep their role upon respawn? (default: false)
 
 
 // MARKERS ////////////////////////////////////////////////////////////////////////////////////////
