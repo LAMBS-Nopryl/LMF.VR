@@ -19,23 +19,23 @@ if !(lmf_warmup) exitWith {};
 private _role = typeOf player;
 private _specialRoles = [_Crew,_HeloPilot,_HeloCrew,_Pilot,_CrewLeader,_CrewSgt];
 if (_specialRoles findIf {_x == _role} == -1) then {
-	[player, _Headgear_A, false, false] call BIS_fnc_addVirtualItemCargo;
-	[player, _Goggles_A, false, false] call BIS_fnc_addVirtualItemCargo;
+	[player, _Headgear, false, false] call BIS_fnc_addVirtualItemCargo;
+	[player, _Goggles, false, false] call BIS_fnc_addVirtualItemCargo;
 } else {
 	if (_role == _Crew || {_role == _CrewLeader || {_role == _CrewSgt}}) then {
 		[player, _Crew_Headgear, false, false] call BIS_fnc_addVirtualItemCargo;
-		[player, _Goggles_A, false, false] call BIS_fnc_addVirtualItemCargo;
+		[player, _Crew_Goggles, false, false] call BIS_fnc_addVirtualItemCargo;
 	};
 
 	if (_role == _HeloPilot || {_role == _HeloCrew}) then {
 		[player, _Heli_Headgear, false, false] call BIS_fnc_addVirtualItemCargo;
 		[player, _Heli_Headgear_C, false, false] call BIS_fnc_addVirtualItemCargo;
-		[player, _Goggles_A, false, false] call BIS_fnc_addVirtualItemCargo;
+		[player, _Heli_Goggles, false, false] call BIS_fnc_addVirtualItemCargo;
 	};
 
 	if (_role == _Pilot) then {
 		[player, _Plane_Headgear, false, false] call BIS_fnc_addVirtualItemCargo;
-		[player, _Goggles_A, false, false] call BIS_fnc_addVirtualItemCargo;
+		[player, _Plane_Goggles, false, false] call BIS_fnc_addVirtualItemCargo;
 	};
 };
 
