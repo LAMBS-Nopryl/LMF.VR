@@ -90,14 +90,21 @@ private _typeMaker = {
 	_selection
 };
 
-//CHECK IF PLAYERS FAR ENOUGH AWAY
+//CHECK PROXIMITY TO PLAYERS
 private _proximityChecker = {
 	params ["_pos",["_range",500]];
 	private _targetsToCheck = (switchableUnits + playableUnits - entities "HeadlessClient_F");
 	private _close = false;
 	{
 		private _dist = vehicle _x distance _pos;
-		if (isPlayer _x && {_dist < _range}) then {_close = true};
+		if (isTouchingGround (vehicle _x) && {isPlayer _x}) then {
+			if (_dist < _range) then {_close = "groundClose"};
+			if (_dist > _range) then {_close = "groundDistance"}
+		};
+		if (!isTouchingGround (vehicle _x) && {isPlayer _x}) then {
+			if (_dist < _range) then {_close = "airClose"};
+			if (_dist > _range) then {_close = "airDistance"}
+		};
 	} forEach _targetsToCheck;
 	_close
 };
