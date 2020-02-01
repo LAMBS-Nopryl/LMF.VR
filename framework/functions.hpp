@@ -62,6 +62,8 @@ class player {
         class vehicleService {};
         class jipChooseTarget {};
         class jipEmptySeat {};
+        class loadoutBriefing {};
+        class toeBriefing {};
 	};
     class eventhandlers {
 		file = "framework\player\eh";

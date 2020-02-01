@@ -80,9 +80,18 @@ if (isServer) then {
     //VARIABLE FOR INITPLAYERSAFETY
 	lmf_isSafe = false;
 
+    //UPDATE TOE BRIEFING ENTRY
+	addMissionEventHandler ["PlayerConnected",{
+		["lmf_updateToe",[]] call CBA_fnc_globalEvent;
+	}];
+
+	addMissionEventHandler ["PlayerDisconnected",{
+		[{["lmf_updateToe",[]] call CBA_fnc_globalEvent;}, [], 5] call CBA_fnc_waitAndExecute;
+	}];
+
     //CREATE A RADIO CHANNEL FOR CHAT COMMANDS
     lmf_chatChannel = radioChannelCreate [[0.9,0.1,0.1,1], "Chat", "Chat", [], true];
-    publicVariable "lmf_chatChannel";    
+    publicVariable "lmf_chatChannel";
 };
 
 
@@ -213,6 +222,11 @@ if (var_personalArsenal) then {
 if (CBA_missionTime > 5*60) then {
     [] execVM "framework\player\init\jipTeleport.sqf";
 };
+
+//UPDATE TOE EVENT
+["lmf_updateToe",{
+	player setDiaryRecordText [["Diary", lmf_toeBriefing], ["  TO/E",[] call lmf_player_fnc_toeBriefing]];
+}] call CBA_fnc_addEventHandler;
 
 //INTRO + WARMUP
 [] execVM "framework\player\init\warmup.sqf";
