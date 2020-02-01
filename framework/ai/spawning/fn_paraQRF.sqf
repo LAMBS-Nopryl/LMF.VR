@@ -30,11 +30,13 @@ private _initTickets = _tickets;
 
 while {_initTickets > 0} do {
 
-	//IF THE INITAL TICKETS WERE HIGHER THAN ONE
-    if (_tickets > 1) then {
-        //WAIT UNTIL PROXIMTY IS FINE
-        waitUntil {sleep 5; [_spawnPos,_range] call _proximityChecker isEqualTo false};
-    };
+	//CHECK AIR PROXIMITY
+	if ([_spawnPos,_range] call _proximityChecker isEqualTo "airClose") then {
+		//IF TOO CLOSE, WAIT UNTIL IT'S FINE, OR UNTIL GROUND PROXIMITY BREAKS
+		waitUntil {sleep 5; [_spawnPos,_range] call _proximityChecker isEqualTo "airDistance" || {[_spawnPos,_range] call _proximityChecker isEqualTo "groundClose"}};
+	};
+	//EXIT IF GROUND PROXIMITY LIMIT HAS BEEN BROKEN
+	if ([_spawnPos,_range] call _proximityChecker isEqualTo "groundClose") exitWith {};
 
 	//IF PROXIMITY IS FINE
 	private _veh = createVehicle [selectRandom _heli_Transport, _spawnPos, [], 0, "CAN_COLLIDE"];
@@ -107,12 +109,11 @@ while {_initTickets > 0} do {
 		};
 	};
 
-    //IF THE INITAL TICKETS WERE HIGHER THAN ONE
-    if (_tickets > 1) then {
-        //WAIT UNTIL EVERYONE DEAD
-        waitUntil {sleep 5; !alive _veh || {{alive _x} count units _grp < 1}};
-        sleep _respawnTime;
-    };
+	//IF THE INITAL TICKETS WERE HIGHER THAN ONE
+	if (_tickets > 1) then {
+		//WAIT UNTIL EVERYONE DEAD OR GROUND PROXIMITY HAS BEEN BROKEN
+		waitUntil {sleep 5; {alive _x} count units _grp < 1 || {!alive _veh} || {[_spawnPos,_range] call _proximityChecker isEqualTo "groundClose"}};
+	};
 
     //SUBTRACT TICKET
     _initTickets = _initTickets - 1;

@@ -32,27 +32,31 @@ private _initTickets = _tickets;
 
 while {_initTickets > 0} do {
 
-	//IF THE INITAL TICKETS WERE HIGHER THAN ONE
-	if (_tickets > 1) then {
-		//WAIT UNTIL PROXIMTY IS FINE
-		waitUntil {sleep 5; [_spawnPos,_range] call _proximityChecker isEqualTo false};
+	//CHECK AIR PROXIMITY
+	if ([_spawnPos,_range] call _proximityChecker isEqualTo "airClose") then {
+		//IF TOO CLOSE, WAIT UNTIL IT'S FINE, OR UNTIL GROUND PROXIMITY BREAKS
+		waitUntil {sleep 5; [_spawnPos,_range] call _proximityChecker isEqualTo "airDistance" || {[_spawnPos,_range] call _proximityChecker isEqualTo "groundClose"}};
 	};
+	//EXIT IF GROUND PROXIMITY LIMIT HAS BEEN BROKEN
+	if ([_spawnPos,_range] call _proximityChecker isEqualTo "groundClose") exitWith {};
 
-	//ONCE THE PROXIMITY IS FINE
+	//SPAWN GROUP + SETTINGS
 	private _type = [_grptype] call _typeMaker;
 	private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
 	_grp deleteGroupWhenEmpty true;
 
-	0 = [_grp,_radius] spawn lmf_ai_fnc_taskHunt;
+	_grp setVariable ["lambs_danger_dangerAI","disabled"];
+	{_x setVariable ["lambs_danger_disableAI",true]} count units _grp;
+	{_x disableAI "AUTOCOMBAT"} count units _grp;
+	_grp enableAttack false;
+	_grp allowFleeing 0;
 
-	{_x disableAI "AUTOCOMBAT";} count units _grp;
-	{_x allowFleeing 0;} count units _grp;
-	{_x enableAttack false;} count units _grp;
+	0 = [_grp,_radius] spawn lmf_ai_fnc_taskHunt;
 
 	//IF THE INITAL TICKETS WERE HIGHER THAN ONE
 	if (_tickets > 1) then {
-		//WAIT UNTIL EVERYONE DEAD
-		waitUntil {sleep 5; {alive _x} count units _grp < 1};
+		//WAIT UNTIL EVERYONE DEAD OR GROUND PROXIMITY HAS BEEN BROKEN
+		waitUntil {sleep 5; {alive _x} count units _grp < 1 || {[_spawnPos,_range] call _proximityChecker isEqualTo "groundClose"}};
 	};
 
 	//SUBTRACT TICKET

@@ -31,35 +31,31 @@ private _initTickets = _tickets;
 
 while {_initTickets > 0} do {
 
-	//IF THE INITAL TICKETS WERE HIGHER THAN ONE
-	if (_tickets > 1) then {
-		//WAIT UNTIL PROXIMTY IS FINE
-		waitUntil {sleep 5; [_spawnPos,_range] call _proximityChecker isEqualTo false};
+	//CHECK AIR PROXIMITY
+	if ([_spawnPos,_range] call _proximityChecker isEqualTo "airClose") then {
+		//IF TOO CLOSE, WAIT UNTIL IT'S FINE, OR UNTIL GROUND PROXIMITY BREAKS
+		waitUntil {sleep 5; [_spawnPos,_range] call _proximityChecker isEqualTo "airDistance" || {[_spawnPos,_range] call _proximityChecker isEqualTo "groundClose"}};
 	};
+	//EXIT IF GROUND PROXIMITY LIMIT HAS BEEN BROKEN
+	if ([_spawnPos,_range] call _proximityChecker isEqualTo "groundClose") exitWith {};
 
-	//ONCE THE PROXIMITY IS FINE
+	//SPAWN GROUP + SETTINGS
 	private _type = [_grptype] call _typeMaker;
 	private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
 	_grp deleteGroupWhenEmpty true;
 
-	_wp = _grp addWaypoint [_spawnPos,0];
+	private _wp = _grp addWaypoint [_spawnPos,0];
 	_wp setWaypointType "GUARD";
-	_grp setFormation "DIAMOND";
-	_grp allowFleeing 0.1;
+	_grp setFormation "STAG COLUMN";
 
-	waitUntil {sleep 1; behaviour leader _grp == "COMBAT" || {{alive _x} count units _grp < 1}};
-
-	_grp setCombatMode "GREEN";
-	_grp setFormation "LINE";
-	sleep 5 + random 10;
-	_grp setCombatMode "YELLOW";
+	waitUntil {sleep 5; (leader _grp) call BIS_fnc_enemyDetected || {{alive _x} count units _grp < 1}};
 
 	0 = [_grp] spawn lmf_ai_fnc_taskAssault;
 
 	//IF THE INITAL TICKETS WERE HIGHER THAN ONE
 	if (_tickets > 1) then {
-		//WAIT UNTIL EVERYONE DEAD
-		waitUntil {sleep 5; {alive _x} count units _grp < 1};
+		//WAIT UNTIL EVERYONE DEAD OR GROUND PROXIMITY HAS BEEN BROKEN
+		waitUntil {sleep 5; {alive _x} count units _grp < 1 || {[_spawnPos,_range] call _proximityChecker isEqualTo "groundClose"}};
 	};
 
 	//SUBTRACT TICKET

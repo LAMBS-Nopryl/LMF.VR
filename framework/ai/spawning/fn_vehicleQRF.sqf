@@ -36,11 +36,13 @@ private _grp = grpNull;
 
 while {_initTickets > 0} do {
 
-    //IF THE INITAL TICKETS WERE HIGHER THAN ONE
-    if (_tickets > 1) then {
-        //WAIT UNTIL PROXIMTY IS FINE
-        waitUntil {sleep 5; [_spawnPos,_range] call _proximityChecker isEqualTo false};
-    };
+	//CHECK AIR PROXIMITY
+	if ([_spawnPos,_range] call _proximityChecker isEqualTo "airClose") then {
+		//IF TOO CLOSE, WAIT UNTIL IT'S FINE, OR UNTIL GROUND PROXIMITY BREAKS
+		waitUntil {sleep 5; [_spawnPos,_range] call _proximityChecker isEqualTo "airDistance" || {[_spawnPos,_range] call _proximityChecker isEqualTo "groundClose"}};
+	};
+	//EXIT IF GROUND PROXIMITY LIMIT HAS BEEN BROKEN
+	if ([_spawnPos,_range] call _proximityChecker isEqualTo "groundClose") exitWith {};
 
     //IF PROXIMITY IS FINE
     private _veh = objNull;
@@ -59,7 +61,7 @@ while {_initTickets > 0} do {
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
-        waitUntil {sleep 5; behaviour leader _grp == "COMBAT" || {{alive _x} count units _grp < 1 || {!alive _veh}}};
+        waitUntil {sleep 5; (leader _grp) call BIS_fnc_enemyDetected || {{alive _x} count units _grp < 1} || {!alive _veh}};
         0 = [_grp] spawn lmf_ai_fnc_taskAssault;
     };
 
@@ -93,7 +95,7 @@ while {_initTickets > 0} do {
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
-        waitUntil {sleep 5; behaviour leader _grp == "COMBAT" || {{alive _x} count units _grp < 1 || {!alive _veh}}};
+        waitUntil {sleep 5; (leader _grp) call BIS_fnc_enemyDetected || {{alive _x} count units _grp < 1} || {!alive _veh}};
         0 = [_grp] spawn lmf_ai_fnc_taskAssault;
     };
 
@@ -113,10 +115,15 @@ while {_initTickets > 0} do {
         private _grp2 = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp2 deleteGroupWhenEmpty true;
         {_x moveInCargo _veh;} forEach units _grp2;
+        _grp2 setVariable ["lambs_danger_dangerAI","disabled"];
+	    {_x setVariable ["lambs_danger_disableAI",true]} count units _grp2;
+	    {_x disableAI "AUTOCOMBAT"} count units _grp2;
+	    _grp2 enableAttack false;
+	    _grp2 allowFleeing 0;
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
-        waitUntil {sleep 5; behaviour leader _grp == "COMBAT" || {{alive _x} count units _grp < 1 || {!alive _veh || {{alive _x} count units _grp2 < 1}}}};
+        waitUntil {sleep 5; (leader _grp) call BIS_fnc_enemyDetected || {{alive _x} count units _grp < 1} || {!alive _veh} || {{alive _x} count units _grp2 < 1}};
         waitUntil {sleep 3; !(position _veh isFlatEmpty [-1, -1, -1, -1, 0, false] isEqualTo []);};
         doStop driver _veh;
         doGetOut units _grp2;
@@ -164,7 +171,7 @@ while {_initTickets > 0} do {
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
-        waitUntil {sleep 5; behaviour leader _grp == "COMBAT" || {{alive _x} count units _grp < 1 || {!alive _veh || {{alive _x} count units _grp2 < 1}}}};
+        waitUntil {sleep 5; (leader _grp) call BIS_fnc_enemyDetected || {{alive _x} count units _grp < 1} || {!alive _veh} || {{alive _x} count units _grp2 < 1}};
         doGetOut units _grp2;
         _grp2 leaveVehicle _veh;
         waitUntil {sleep 1; isTouchingGround _veh || {{alive _x} count units _grp < 1 || {!alive _veh || {{alive _x} count units _grp2 < 1}}}};
@@ -188,12 +195,12 @@ while {_initTickets > 0} do {
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
     };
 
-    //IF THE INITAL TICKETS WERE HIGHER THAN ONE
-    if (_tickets > 1) then {
-        //WAIT UNTIL EVERYONE DEAD
-        waitUntil {sleep 5; !alive _veh || {{alive _x} count units _grp < 1}};
+	//IF THE INITAL TICKETS WERE HIGHER THAN ONE
+	if (_tickets > 1) then {
+		//WAIT UNTIL EVERYONE DEAD OR GROUND PROXIMITY HAS BEEN BROKEN
+		waitUntil {sleep 5; !alive _veh || {{alive _x} count units _grp < 1} || {[_spawnPos,_range] call _proximityChecker isEqualTo "groundClose"}};
         sleep _respawnTime;
-    };
+	};
 
     //SUBTRACT TICKET
     _initTickets = _initTickets - 1;
