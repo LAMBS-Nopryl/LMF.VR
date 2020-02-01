@@ -33,7 +33,7 @@ for "_i" from 1 to 5 do {_unit addItemToVest _Carbine_Ammo;};
 _unit addBackpack selectRandom _Backpack_Pilot;
 
 _unit addHeadgear selectRandom _Heli_Headgear_C;
-_unit addGoggles selectRandom _Goggles;
+_unit addGoggles selectRandom _Heli_Goggles;
 
 _unit linkItem "ItemWatch";
 _unit linkItem "ItemRadioAcreFlagged";

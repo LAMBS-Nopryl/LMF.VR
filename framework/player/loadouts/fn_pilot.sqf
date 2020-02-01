@@ -34,7 +34,7 @@ _unit addHandgunItem _Pistol_Attach1;
 _unit addHandgunItem _Pistol_Attach2;
 
 _unit addHeadgear selectRandom _Plane_Headgear;
-_unit addGoggles selectRandom _Goggles;
+_unit addGoggles selectRandom _Plane_Goggles;
 
 _unit linkItem "ItemWatch";
 _unit linkItem "ItemRadioAcreFlagged";

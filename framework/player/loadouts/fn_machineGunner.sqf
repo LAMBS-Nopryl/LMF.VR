@@ -27,7 +27,7 @@ _unit addPrimaryWeaponItem _MMG_Bipod;
 
 _unit forceAddUniform selectRandom _Uniform;
 
-_unit addVest selectRandom _Vest_MG;
+_unit addVest selectRandom _Vest;
 _unit addItemToVest _MMG_Ammo;
 for "_i" from 1 to 2 do {_unit addItemToVest _Pistol_Ammo;};
 for "_i" from 1 to 2 do {_unit addItemToVest _Grenade;};

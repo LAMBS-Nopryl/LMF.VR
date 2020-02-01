@@ -19,26 +19,26 @@ removeBackpack _unit;
 removeHeadgear _unit;
 removeGoggles _unit;
 
-_unit addWeapon _Carbine;
-_unit addPrimaryWeaponItem _Carbine_Attach1;
-_unit addPrimaryWeaponItem _Carbine_Attach2;
-_unit addPrimaryWeaponItem _Carbine_Optic;
-_unit addPrimaryWeaponItem _Carbine_Bipod;
+_unit addWeapon _Rifle;
+_unit addPrimaryWeaponItem _Rifle_Attach1;
+_unit addPrimaryWeaponItem _Rifle_Attach2;
+_unit addPrimaryWeaponItem _Rifle_Optic;
+_unit addPrimaryWeaponItem _Rifle_Bipod;
 
 _unit forceAddUniform selectRandom _Uniform;
 
 _unit addVest selectRandom _Vest;
-for "_i" from 1 to 2 do {_unit addItemToVest _Carbine_Ammo;};
-for "_i" from 1 to 2 do {_unit addItemToVest _Carbine_Ammo_T;};
+for "_i" from 1 to 2 do {_unit addItemToVest _Rifle_Ammo;};
+for "_i" from 1 to 2 do {_unit addItemToVest _Rifle_Ammo_T;};
 for "_i" from 1 to 2 do {_unit addItemToVest _Grenade;};
 _unit addItemToVest _Grenade_Smoke;
-for "_i" from 1 to 2 do {_unit addItemToVest _Grenade_Smoke_Grn;};
+for "_i" from 1 to 2 do {_unit addItemToVest _Grenade_Smoke_Alt;};
 
 _unit addBackpack selectRandom _Backpack_RTO;
 _unit addItemToBackpack _ACRE_MMR;
 _unit addItemToBackpack _ACRE_ITR;
-for "_i" from 1 to 3 do {_unit addItemToBackpack _Carbine_Ammo;};
-_unit addItemToBackpack _Carbine_Ammo_T;
+for "_i" from 1 to 3 do {_unit addItemToBackpack _Rifle_Ammo;};
+_unit addItemToBackpack _Rifle_Ammo_T;
 
 _unit addHeadgear selectRandom _Headgear;
 _unit addGoggles selectRandom _Goggles;

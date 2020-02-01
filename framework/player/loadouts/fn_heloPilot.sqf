@@ -36,7 +36,7 @@ _unit addItemToBackpack _ACRE_ITR;
 _unit addItemToBackpack _FlareGun;
 
 _unit addHeadgear selectRandom _Heli_Headgear;
-_unit addGoggles selectRandom _Goggles;
+_unit addGoggles selectRandom _Heli_Goggles;
 
 _unit linkItem "ItemWatch";
 _unit linkItem "ItemRadioAcreFlagged";

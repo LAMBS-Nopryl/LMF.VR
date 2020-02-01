@@ -34,7 +34,7 @@ _unit addBackpack selectRandom _Backpack_Crew;
 _unit addItemToBackpack _ACRE_ITR;
 
 _unit addHeadgear selectRandom _Crew_Headgear;
-_unit addGoggles selectRandom _Goggles;
+_unit addGoggles selectRandom _Crew_Goggles;
 
 _unit addWeapon _Binocular;
 

@@ -28,7 +28,7 @@ _unit addPrimaryWeaponItem _Rifle_GL_Bipod;
 _unit forceAddUniform selectRandom _Uniform;
 _unit addItemToUniform "Laserbatteries";
 
-_unit addVest selectRandom _Vest_G;
+_unit addVest selectRandom _Vest;
 for "_i" from 1 to 2 do {_unit addItemToVest _Rifle_GL_Ammo;};
 for "_i" from 1 to 2 do {_unit addItemToVest _Rifle_GL_Ammo_T;};
 for "_i" from 1 to 2 do {_unit addItemToVest _Rifle_GL_Smoke_Grn;};
@@ -36,7 +36,7 @@ for "_i" from 1 to 2 do {_unit addItemToVest _Rifle_GL_Smoke_Red;};
 for "_i" from 1 to 2 do {_unit addItemToVest _Rifle_GL_Flare;};
 for "_i" from 1 to 2 do {_unit addItemToVest _Grenade;};
 _unit addItemToVest _Grenade_Smoke;
-for "_i" from 1 to 2 do {_unit addItemToVest _Grenade_Smoke_Grn;};
+for "_i" from 1 to 2 do {_unit addItemToVest _Grenade_Smoke_Alt;};
 
 _unit addBackpack selectRandom _Backpack_RTO;
 _unit addItemToBackpack _ACRE_MMR;
