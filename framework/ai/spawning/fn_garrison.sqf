@@ -31,23 +31,27 @@ _grp setFormation "DIAMOND";
 // GARRISON ///////////////////////////////////////////////////////////////////////////////////////
 [_spawnPos, nil, units _grp, _garrisonRadius, _distribution, true, true] call ace_ai_fnc_garrison;
 
-//UNGARRISON SINGLE UNIT WHEN HIT
+// UNGARRISON SINGLE UNIT WHEN HIT
+lmf_ungarrisonHit = {
+	params ["_unit","_instigator"];
+	if (alive _unit) then {
+		[[_unit]] call ace_ai_fnc_unGarrison;
+		//if (_unit knowsAbout _instigator > 1 && {(_unit distance _instigator) < (25 + (random 75))}) then {_unit doMove (getPosATL _instigator);};
+	};
+};
+
+// ADD EVENTHANDLER
 {
 	_x addEventHandler ["Hit", {
 		params ["_unit", "_source", "_damage", "_instigator"];
-		if (alive _unit) then {
-			[[_unit]] call ace_ai_fnc_unGarrison;
-			//if (_unit knowsAbout _instigator > 1 && {(_unit distance _instigator) < (25 + (random 75))}) then {_unit doMove (getPosATL _instigator);};
-		};
+		[_unit,_instigator] call lmf_ungarrisonHit;
 		_unit removeEventHandler ["Hit", _thisEventHandler];
 	}];
 } forEach (units _grp);
 
-//UNGARRISON SINGLE UNIT BASED ON NEARBY ENEMY FIRE, ITS OWN FIRE, OR NEARBY FRIENDLY FIRE
-{
-	_x addEventHandler ["FiredNear", {
-	params ["_unit", "_firer", "_distance", "_weapon", "_muzzle", "_mode", "_ammo", "_gunner"];
-
+// UNGARRISON SINGLE UNIT BASED ON NEARBY ENEMY FIRE, ITS OWN FIRE, OR NEARBY FRIENDLY FIRE
+lmf_ungarrisonFiredNear = {
+	params ["_unit", "_firer"];
 	if (alive _unit) then {
 		//NEARBY ENEMY FIRE
 		if (side _firer != var_enemySide) then {
@@ -70,6 +74,13 @@ _grp setFormation "DIAMOND";
 			};
 		};
 	};
+};
+
+// ADD EVENTHANDLER
+{
+	_x addEventHandler ["FiredNear", {
+	params ["_unit", "_firer", "_distance", "_weapon", "_muzzle", "_mode", "_ammo", "_gunner"];
+	[_unit,_firer] call lmf_ungarrisonFiredNear;
 	_unit removeEventHandler ["FiredNear", _thisEventHandler];
 	}];
 } forEach (units _grp);
