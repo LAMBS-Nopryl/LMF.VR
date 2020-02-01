@@ -8,7 +8,7 @@ class EditorData
 	toggles=5;
 	class ItemIDProvider
 	{
-		nextID=571;
+		nextID=598;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=140;
+		nextID=150;
 	};
 	class Camera
 	{
-		pos[]={441.63516,100.7823,427.63312};
-		dir[]={0.0013902036,-0.84714186,0.53158343};
-		up[]={0.0022159535,0.53131503,0.84717959};
-		aside[]={1.0000865,-8.2074166e-007,-0.0026152749};
+		pos[]={451.60156,55.815952,455.47284};
+		dir[]={0.0079785613,-0.79386449,0.6080786};
+		up[]={0.01041495,0.60808939,0.79380363};
+		aside[]={0.99993348,-5.4526026e-008,-0.013119892};
 	};
 };
 binarizationWanted=0;
@@ -34,6 +34,7 @@ addons[]=
 	"A3_Armor_F_Beta_APC_Wheeled_01",
 	"A3_Air_F_Jets_Plane_Fighter_01",
 	"A3_Soft_F_Beta_Truck_01",
+	"A3_Soft_F_Exp_Truck_01",
 	"A3_Armor_F_EPC_MBT_01",
 	"A3_Armor_F_Tank_AFV_Wheeled_01",
 	"A3_Weapons_F_Ammoboxes",
@@ -56,7 +57,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=19;
+		items=20;
 		class Item0
 		{
 			className="A3_Air_F";
@@ -94,96 +95,103 @@ class AddonsMetaData
 		};
 		class Item5
 		{
+			className="A3_Soft_F_Exp";
+			name="Arma 3 Apex - Unarmored Land Vehicles";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item6
+		{
 			className="A3_Armor_F_EPC";
 			name="Arma 3 Win Episode - Armored Land Vehicles";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item6
+		class Item7
 		{
 			className="A3_Armor_F_Tank";
 			name="Arma 3 Tank - Armored Land Vehicles";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item7
+		class Item8
 		{
 			className="A3_Weapons_F";
 			name="Arma 3 Alpha - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item8
+		class Item9
 		{
 			className="A3_Structures_F_EPC";
 			name="Arma 3 Win Episode - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item9
+		class Item10
 		{
 			className="A3_Structures_F";
 			name="Arma 3 - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item10
+		class Item11
 		{
 			className="A3_Structures_F_Mil";
 			name="Arma 3 - Military Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item11
+		class Item12
 		{
 			className="A3_Structures_F_Orange";
 			name="Arma 3 Orange - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item12
+		class Item13
 		{
 			className="A3_Modules_F";
 			name="Arma 3 Alpha - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item13
+		class Item14
 		{
 			className="A3_Ui_F";
 			name="Arma 3 - User Interface";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item14
+		class Item15
 		{
 			className="A3_Structures_F_Households";
 			name="Arma 3 - Houses";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item15
+		class Item16
 		{
 			className="A3_Structures_F_Argo";
 			name="Arma 3 Malden - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item16
+		class Item17
 		{
 			className="A3_Characters_F";
 			name="Arma 3 Alpha - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item17
+		class Item18
 		{
 			className="A3_Characters_F_Mark";
 			name="Arma 3 Marksmen - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item18
+		class Item19
 		{
 			className="A3_Modules_F_Curator";
 			name="Arma 3 Zeus Update - Scripted Modules";
@@ -1005,7 +1013,7 @@ class Mission
 					{
 						name="LAMBS_Hospital";
 						condition="ace_player in thisList";
-						onActivation="ace_player setDamage 0;" \n "[ace_player,ace_player] call ace_medical_fnc_treatmentAdvanced_fullHealLocal;";
+						onActivation="ace_player setDamage 0;" \n "[ace_player] call ace_medical_treatment_fnc_fullHealLocal;";
 						sizeA=5;
 						sizeB=4;
 						sizeC=3;
@@ -2377,12 +2385,12 @@ class Mission
 					flags=4;
 					class Attributes
 					{
-						name="FOX1_GL_GREEN";
-						description="Grenadier";
+						name="FOX1_R1_GREEN";
+						description="Rifleman";
 						isPlayable=1;
 					};
-					id=536;
-					type="B_Soldier_GL_F";
+					id=571;
+					type="B_soldier_LAT_F";
 					class CustomAttributes
 					{
 						class Attribute0
@@ -2441,7 +2449,7 @@ class Mission
 						description="Assistant Squad Leader";
 						isPlayable=1;
 					};
-					id=538;
+					id=573;
 					type="B_Soldier_TL_F";
 					class CustomAttributes
 					{
@@ -2501,7 +2509,7 @@ class Mission
 						description="Automatic Rifleman";
 						isPlayable=1;
 					};
-					id=540;
+					id=575;
 					type="B_soldier_AR_F";
 					class CustomAttributes
 					{
@@ -2561,7 +2569,7 @@ class Mission
 						description="Rifleman";
 						isPlayable=1;
 					};
-					id=543;
+					id=577;
 					type="B_soldier_LAT_F";
 					class CustomAttributes
 					{
@@ -2621,7 +2629,7 @@ class Mission
 						description="Rifleman";
 						isPlayable=1;
 					};
-					id=544;
+					id=579;
 					type="B_soldier_LAT_F";
 					class CustomAttributes
 					{
@@ -2872,12 +2880,12 @@ class Mission
 					flags=4;
 					class Attributes
 					{
-						name="FOX2_GL_GREEN";
-						description="Grenadier";
+						name="FOX2_R1_GREEN";
+						description="Rifleman";
 						isPlayable=1;
 					};
-					id=550;
-					type="B_Soldier_GL_F";
+					id=580;
+					type="B_soldier_LAT_F";
 					class CustomAttributes
 					{
 						class Attribute0
@@ -2936,7 +2944,7 @@ class Mission
 						description="Assistant Squad Leader";
 						isPlayable=1;
 					};
-					id=552;
+					id=582;
 					type="B_Soldier_TL_F";
 					class CustomAttributes
 					{
@@ -2996,7 +3004,7 @@ class Mission
 						description="Automatic Rifleman";
 						isPlayable=1;
 					};
-					id=554;
+					id=584;
 					type="B_soldier_AR_F";
 					class CustomAttributes
 					{
@@ -3056,7 +3064,7 @@ class Mission
 						description="Rifleman";
 						isPlayable=1;
 					};
-					id=555;
+					id=586;
 					type="B_soldier_LAT_F";
 					class CustomAttributes
 					{
@@ -3116,7 +3124,7 @@ class Mission
 						description="Rifleman";
 						isPlayable=1;
 					};
-					id=557;
+					id=588;
 					type="B_soldier_LAT_F";
 					class CustomAttributes
 					{
@@ -3367,12 +3375,12 @@ class Mission
 					flags=4;
 					class Attributes
 					{
-						name="FOX3_GL_GREEN";
-						description="Grenadier";
+						name="FOX3_R1_GREEN";
+						description="Rifleman";
 						isPlayable=1;
 					};
-					id=563;
-					type="B_Soldier_GL_F";
+					id=589;
+					type="B_soldier_LAT_F";
 					class CustomAttributes
 					{
 						class Attribute0
@@ -3431,7 +3439,7 @@ class Mission
 						description="Assistant Squad Leader";
 						isPlayable=1;
 					};
-					id=565;
+					id=591;
 					type="B_Soldier_TL_F";
 					class CustomAttributes
 					{
@@ -3491,7 +3499,7 @@ class Mission
 						description="Automatic Rifleman";
 						isPlayable=1;
 					};
-					id=567;
+					id=593;
 					type="B_soldier_AR_F";
 					class CustomAttributes
 					{
@@ -3551,7 +3559,7 @@ class Mission
 						description="Rifleman";
 						isPlayable=1;
 					};
-					id=568;
+					id=595;
 					type="B_soldier_LAT_F";
 					class CustomAttributes
 					{
@@ -3611,7 +3619,7 @@ class Mission
 						description="Rifleman";
 						isPlayable=1;
 					};
-					id=570;
+					id=597;
 					type="B_soldier_LAT_F";
 					class CustomAttributes
 					{
