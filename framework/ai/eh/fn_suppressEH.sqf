@@ -16,7 +16,7 @@ private _dist = _unit distance _target;
 if (_dist < 50 || {_dist  > 800}) exitWith {};
 
 //DEFINE PARAMS TO PASS
-private _timesFired = round (3 + random 6);
+private _timesFired = round (1 + random 3);
 private _modes = (getArray (configFile >> "CfgWeapons" >> currentWeapon _unit >> "modes"));
 private _mode = "FullAuto";
 if (_modes findif {"FullAuto" == _x} == -1) then {_mode = "close"};
