@@ -129,9 +129,9 @@ if (_type == _MMG_Gunner) then {
 
 //MAT
 if (_type == _MAT_Gunner) then {
-	if (_Rifle_Ammo select 0 == "") then {_Rifle_Ammo = 0;} else {_Rifle_Ammo = selectRandom _Rifle_Ammo};
+	//if (_Rifle_Ammo select 0 == "") then {_Rifle_Ammo = 0;} else {_Rifle_Ammo = selectRandom _Rifle_Ammo};
 	if (_MAT_Ammo select 0 == "") then {_MAT_Ammo = 0;} else {_MAT_Ammo = selectRandom _MAT_Ammo};
-	[_unit, selectRandom _Rifle, 1, _Rifle_Ammo] call BIS_fnc_addWeapon;
+	//[_unit, selectRandom _Rifle, 1, _Rifle_Ammo] call BIS_fnc_addWeapon;
 	[_unit, selectRandom _MAT, 4, _MAT_Ammo] call BIS_fnc_addWeapon;
 };
 
