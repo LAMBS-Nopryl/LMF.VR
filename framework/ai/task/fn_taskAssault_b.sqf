@@ -77,7 +77,6 @@ while {count units _grp > 0} do {
 			_grp enableIRLasers true;
 			if (20 > (random 100)) then {_grp enableGunLights "ForceOn"};
 			_grp setFormation "WEDGE";
-			_grp setBehaviourStrong "AWARE";
 		};
 
 		//FAR
