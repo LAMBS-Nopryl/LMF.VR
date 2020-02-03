@@ -125,7 +125,7 @@ if !(isNil "Grp_EGL4") then {[Grp_EGL4,"b_plane","EAGLE1"] call lmf_fnc_setCalls
 
 // ADD ACTIONS ////////////////////////////////////////////////////////////////////////////////////
 //MAIN CATEGORY
-private _parentBFT = ["parentBFT","BFT","\A3\ui_f\data\map\markers\nato\b_unknown.paa",{true;},{player == leader (group player)}] call ace_interact_menu_fnc_createAction;
+private _parentBFT = ["parentBFT","Blue Force Tracker","\A3\ui_f\data\map\markers\nato\b_unknown.paa",{true;},{player == leader (group player)}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], _parentBFT] call ace_interact_menu_fnc_addActionToObject;
 
 //SUB CATEGORIES
