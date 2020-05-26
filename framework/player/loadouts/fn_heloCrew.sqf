@@ -48,8 +48,11 @@ if (var_playerMaps == 0) then {
 	_unit addItem "ACE_Flashlight_XL50";
 };
 
-//REST
-for "_i" from 1 to 2 do {_unit addItem "FirstAidKit"};
+//MEDICAL
+for "_i" from 1 to 2 do {_unit addItem "ACE_morphine"};
+for "_i" from 1 to 2 do {_unit addItem "ACE_tourniquet"};
+for "_i" from 1 to 2 do {_unit addItem "ACE_splint"};
+for "_i" from 1 to 4 do {_unit addItem "ACE_packingBandage"};
 
 //NVG
 if (var_playerNVG == 0) then {_unit linkItem _NVG};
@@ -71,6 +74,9 @@ _unit setUnitTrait ["engineer",false];
 
 //RANK
 _unit setRank "CORPORAL";
+
+//ROLE
+lmf_currentRole = "Helicopter Crew";
 
 //INSIGNIA
 private _chooseInsignia = {
