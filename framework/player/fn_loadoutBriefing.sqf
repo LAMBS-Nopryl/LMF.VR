@@ -5,7 +5,7 @@
 	- https://github.com/unitedoperations/uo_briefingkit
 */
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
-private _textToDisplay = "";
+private _textToDisplay = "<br/>";
 
 //GET PICTURE FUNCTION
 private _getPicture = {
@@ -18,18 +18,17 @@ private _getPicture = {
 	format ["<img image='%1' width='%2' height='%3'/>", _image, _dimensions select 0, _dimensions select 1]
 };
 
-//GET ROLE NAME
-private _lobbyName = if !(((roleDescription player) find "@") isEqualto -1) then {((roleDescription player) splitString "@") select 0} else {roleDescription player};
-if (_lobbyName isEqualto "") then {_lobbyName = getText (configFile >> "CfgVehicles" >> typeOf player >> "displayName")};
+_textToDisplay = _textToDisplay +
+format ["<font face='PuristaBold' color='#FFBA26' size='16'>OVERVIEW</font><br/>
+<font color='#D7DBD5'>
+ - Your equipment weighs <font color='#FFBA26'>%1kg<font color='#D7DBD5'><br/>
+ - This page is only accurate at mission start.<br/><br/><br/>
+</font color>
+",round ((loadAbs player) *0.1 * 0.45359237 * 10) / 10];
 
 //START ADDING TO THE BRIEFING TEXT (FIRST INFO LINE)
 _textToDisplay = _textToDisplay +
-	format ["<img image='\A3\Ui_f\data\GUI\Cfg\Ranks\%4_gs.paa' width='16' height='16'/> <font face='PuristaBold' color='#FFBA26' size='14'>%1 - %2</font><font color='#D7DBD5'> - %3kg</font><br/>",
-		name player,
-		_lobbyName,
-		round ((loadAbs player) *0.1 * 0.45359237 * 10) / 10,
-		toLower rank player
-	];
+	format ["<font face='PuristaBold' color='#A3FFA3' size='14'>Uniform: </font><font face='PuristaBold' color='#D7DBD5'>(Click * for info)</font><br/>"];
 
 //APPARAL PICTURE FUNCTION
 private _getApparelPicture = {
@@ -99,7 +98,7 @@ private _weaponName = primaryWeapon player;
 //PRIMARY WEAPON
 if !(_weaponName isEqualto "") then {
 	private _name = getText(configFile >> "CfgWeapons" >> _weaponName >> "displayName");
-	_textToDisplay = _textToDisplay + format ["<font face='PuristaBold' color='#A3FFA3'>Primary: </font><font color='#D7DBD5'>%1</font><br/>", _name] + ([_weaponName, primaryWeaponItems player] call _getWeaponPicture);
+	_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Primary: </font><font face='PuristaBold' color='#D7DBD5'>%1</font><br/>", _name] + ([_weaponName, primaryWeaponItems player] call _getWeaponPicture);
 };
 
 private _allMags = magazines player;
@@ -112,7 +111,7 @@ _primaryMags call _displayMags;
 private _secondaryMags = [];
 if !(_sWeaponName isEqualto "") then {
 	private _name = getText(configFile >> "CfgWeapons" >> _sWeaponName >> "displayName");
-	_textToDisplay = _textToDisplay + format ["<font face='PuristaBold' color='#A3FFA3'>Launcher: </font><font color='#D7DBD5'>%1</font><br/>", _name];
+	_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Launcher: </font><font face='PuristaBold' color='#D7DBD5'>%1</font><br/>", _name];
 	_textToDisplay = _textToDisplay + ([_sWeaponName, secondaryWeaponItems player] call _getWeaponPicture);
 	_secondaryMags = _allMags arrayIntersect (_sWeaponName call _getMuzzleMags);
 	_secondaryMags call _displayMags;
@@ -122,7 +121,7 @@ if !(_sWeaponName isEqualto "") then {
 private _handgunMags = [];
 if !(_hWeaponName isEqualto "") then {
 	private _name = getText(configFile >> "CfgWeapons" >> _hWeaponName >> "displayName");
-	_textToDisplay = _textToDisplay + format ["<font face='PuristaBold' color='#A3FFA3'>Sidearm: </font><font color='#D7DBD5'>%1</font><br/>", _name];
+	_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Sidearm: </font><font face='PuristaBold' color='#D7DBD5'>%1</font><br/>", _name];
 	_textToDisplay = _textToDisplay + ([_hWeaponName, handgunItems player] call _getWeaponPicture);
 	_handgunMags = _allMags arrayIntersect (_hWeaponName call _getMuzzleMags);
 	_handgunMags call _displayMags;
@@ -142,9 +141,9 @@ private _allItems = items player;
 } forEach _allItems;
 _allItems = _allItems - _radios;
 
-_textToDisplay = _textToDisplay + format ["<font face='PuristaBold' color='#A3FFA3'>Magazines and items: </font><font color='#D7DBD5'>(Click count for info.)</font><br/>"];
+_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Other: </font><font face='PuristaBold' color='#D7DBD5'>(Click count for info)</font><br/>"];
 
-//DISPLAY RADIOS THEN MAGAZINES AND LAST INVENTORY AND ASSSIGNED ITEMS
+//DISPLAY RADIOS THEN MAGAZINES AND LAST INVENTORY AND ASSIGNED ITEMS
 {
 	_x params ["_items", "_cfgType"];
 	while {count _items > 0} do {
@@ -156,7 +155,5 @@ _textToDisplay = _textToDisplay + format ["<font face='PuristaBold' color='#A3FF
 	};
 } forEach [[_radios, "CfgWeapons"], [_allMags, "CfgMagazines"], [_allItems, "CfgWeapons"], [(assignedItems player) - ["ItemRadioAcreFlagged"], "CfgWeapons"]];
 
-//FINISH IT OFF WITH WARNING ABOUT ACCURACY
-_textToDisplay = _textToDisplay + "<br/><br/></font><font color='#D7DBD5'>This page is only accurate at mission start.</font>";
-
-player createDiaryRecord ["Diary",["  Starting Kit",_textToDisplay]];
+//CREATE DIARY RECORD
+player creatediaryrecord ["lmf_diary",[format ["Equipment",name player],format ["%1",_textToDisplay]], taskNull, "", false];
