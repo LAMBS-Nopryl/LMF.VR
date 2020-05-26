@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //DISABLE VARIOUS
 enableSentences false;
-enableEnvironment [false, true];
+//enableEnvironment [false, true];
 enableSaving [false,false];
 
 //ZEUS PINGED EH
@@ -30,7 +30,7 @@ enableSaving [false,false];
 }, false, [], true] call CBA_fnc_addClassEventHandler;
 
 //ACRE CHANNEL LABLES
-[] execVM "framework\shared\init\acreChannelLabels.sqf";
+//[] execVM "framework\shared\init\acreChannelLabels.sqf";
 
 //UNCONSCIOUS EH
 ["ace_unconscious", {
@@ -41,24 +41,31 @@ enableSaving [false,false];
     if (isPlayer _unit) then {
         [{ace_player setUnitTrait ["camouflageCoef",var_camoCoef];}, [], 30] call CBA_fnc_waitAndExecute;
     };
+}] call CBA_fnc_addEventHandler;
 
-    //PLAYER AND AI (note: This does not work as unconscious state is dependent on vitals. Need a way to FORCE wake up.)
-    /*
-    [_unit] spawn {
-        params [["_unit", objNull]];
-        while {alive _unit && {_unit getVariable ["ACE_isUnconscious", false]}} do {
-            sleep 5;
-            if (30 > random 100) exitWith {
-                [_unit, false] call ace_medical_fnc_setUnconscious;
-            };
-        sleep 10;
-        };
-    };
-    */
+//BLUE FORCE COMMON
+[] execVM "framework\shared\bft\bft_common.sqf";
+
+//BLUE FORCE TRACKER EHs
+["lmf_bft_createIcon", {
+    params [["_grp",grpNull],["_type","b_inf"],["_txt",""]];
+    if (isNull _grp) exitWith {};
+
+    _grp setGroupId [_txt];
+    clearGroupIcons _grp;
+	_grp addGroupIcon [_type, [0,0]];
+	_grp setgroupIconParams [[0,0.3,0.6,1],_txt,0.75,true];
 
 }] call CBA_fnc_addEventHandler;
 
+["lmf_bft_updateIcon", {
+    params [["_grp",grpNull],["_type","b_inf"]];
+    if (isNull _grp) exitWith {};
 
+	clearGroupIcons _grp;
+	_grp addGroupIcon [_type, [0,0]];
+
+}] call CBA_fnc_addEventHandler;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // SERVER /////////////////////////////////////////////////////////////////////////////////////////
@@ -80,21 +87,10 @@ if (isServer) then {
     //VARIABLE FOR INITPLAYERSAFETY
 	lmf_isSafe = false;
 
-    //UPDATE TOE BRIEFING ENTRY
-	addMissionEventHandler ["PlayerConnected",{
-		["lmf_updateToe",[]] call CBA_fnc_globalEvent;
-	}];
-
-	addMissionEventHandler ["PlayerDisconnected",{
-		[{["lmf_updateToe",[]] call CBA_fnc_globalEvent;}, [], 5] call CBA_fnc_waitAndExecute;
-	}];
-
     //CREATE A RADIO CHANNEL FOR CHAT COMMANDS
     lmf_chatChannel = radioChannelCreate [[0.9,0.1,0.1,1], "Chat", "Chat", [], true];
     publicVariable "lmf_chatChannel";
 };
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // AI /////////////////////////////////////////////////////////////////////////////////////////////
@@ -146,9 +142,9 @@ if (isServer) then {
 if !(hasinterface) exitWith {};
 waitUntil {!isNull player};
 
-//GROUP MARKERS
+//BLUE FORCE TRACKER
 if (var_groupTracker && {!(missionNamespace getVariable ["ace_map_BFT_Enabled",false])}) then {
-    [] execVM "framework\player\init\groupTracker.sqf";
+    [] execVM "framework\shared\bft\bft_init.sqf";
 };
 
 //UNIT TRACKER
@@ -186,17 +182,6 @@ player addEventHandler ["Respawn", {
     _this spawn lmf_player_fnc_respawnEH;
 }];
 
-//DISABLE WAYPOINT MARKERS
-if !(var_playerGear) then {
-    if ((roleDescription player) find "Helicopter Pilot" >= 0 || {(roleDescription player) find "Fighter Pilot" >= 0}) then {}
-    else {
-        onMapSingleClick "_shift";
-    };
-};
-
-//BRIEFING
-[] execVM "framework\player\init\briefing.sqf";
-
 //PLAYER GEAR
 if (var_playerGear) then {
     [player] call lmf_player_fnc_initPlayerGear;
@@ -207,26 +192,30 @@ if (var_playerGear) then {
     }];
 };
 
+//BRIEFING
+[] execVM "framework\player\init\briefing.sqf";
+
 //PLAYER CAMOCOEF
 [{player setUnitTrait ["camouflageCoef",var_camoCoef];}, [], 5] call CBA_fnc_waitAndExecute;
 
 //ACE ACTIONS
 [] execVM "framework\player\init\aceActions.sqf";
 
-//ARSENAL
+//PERSONAL ARSENAL
 if (var_personalArsenal) then {
     [] execVM "framework\player\init\personalArsenal.sqf";
 };
 
-//JIP
-if (CBA_missionTime > 5*60) then {
+//JIP TELEPORT
+if (var_jipTP && {didJIP}) then {
     [] execVM "framework\player\init\jipTeleport.sqf";
 };
 
-//UPDATE TOE EVENT
-["lmf_updateToe",{
-	player setDiaryRecordText [["Diary", lmf_toeBriefing], ["  TO/E",[] call lmf_player_fnc_toeBriefing]];
-}] call CBA_fnc_addEventHandler;
+//ORBAT MAP EH
+addMissionEventHandler ["Map", {
+	params ["_mapIsOpened", "_mapIsForced"];
+    if (_mapIsOpened) then { player setDiaryRecordText [["lmf_diary", lmf_toeBriefing], ["ORBAT",[] call lmf_player_fnc_toeBriefing]]; };
+}];
 
 //INTRO + WARMUP
 [] execVM "framework\player\init\warmup.sqf";

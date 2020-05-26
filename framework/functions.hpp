@@ -28,6 +28,7 @@ class ai {
 		class taskAssault_b {};
         class taskUpdateWP {};
         class taskHunt {};
+		class taskStatic {};
 	};
     class spawning {
         file = "framework\ai\spawning";
@@ -38,6 +39,7 @@ class ai {
         class infantryHunter {};
         class vehicleQRF {};
         class paraQRF {};
+		class staticQRF {};
     };
 };
 class ai_civ {

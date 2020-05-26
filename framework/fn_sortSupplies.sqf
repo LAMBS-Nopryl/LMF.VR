@@ -11,7 +11,7 @@ if !(var_playerGear) exitWith {};
 
 //WHICH SUPPLIES ARE AFFECTED?
 private _type = typeof _supp;
-private _allSupplies = [var_supSmall,var_supLarge,var_supSpecial,var_supExplosives];
+private _allSupplies = [var_supSmall,var_supLarge,var_supSpecial,var_supExplosives,var_supMedical];
 if (_allSupplies findIf {_type == _x} == -1) exitWith {};
 
 //CALL THE FUNCTION
