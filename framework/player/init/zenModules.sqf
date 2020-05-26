@@ -155,10 +155,29 @@ LMF_groupTypes = ["TEAM", "SQUAD", "SENTRY","ATTEAM","AATEAM", "MGTEAM","CUSTOM 
 }] call zen_custom_modules_fnc_register;
 
 //PARA QRF
-["LMF", "AI: PARA QRF",{
+["LMF", "AI: Para QRF",{
 	//PARAMS
 	private _pos = ASLToATL (_this#0);
 
 	//CALL FUNCTION
 	[_pos] remoteExec ["lmf_ai_fnc_paraQRF"];
+}] call zen_custom_modules_fnc_register;
+
+//STATIC WEAPON QRF
+["LMF", "AI: Static Weapon QRF",{
+	private _HWO = ["MORTAR","HMG","HAT"];
+	["Static Weapon QRF",[
+		//PARAMS
+		["COMBO","Group Type",[_HWO,_HWO,0]]
+	],{
+		//PARSE PARAMS
+		params ["_dialog","_pos"];
+		_dialog params ["_type"];
+
+		_pos = ASLToATL _pos;
+
+		// CALL FUNCTION
+		[_pos,_type] remoteExec ["lmf_ai_fnc_staticQRF"];
+
+	},{},_this#0] call zen_dialog_fnc_create;
 }] call zen_custom_modules_fnc_register;

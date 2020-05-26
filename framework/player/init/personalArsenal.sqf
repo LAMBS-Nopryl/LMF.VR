@@ -10,8 +10,8 @@ if !(var_warmup) exitWith {};
 
 #include "..\..\..\settings\cfg_Player.sqf"
 
-waitUntil {time > 10};
-waitUntil {!isNil "lmf_warmup"};
+waitUntil {sleep 1; !isNil "lmf_warmup"};
+waitUntil {sleep 1; time > 7};
 if !(lmf_warmup) exitWith {};
 
 
@@ -44,15 +44,41 @@ if (_specialRoles findIf {_x == _role} == -1) then {
 [ missionNamespace, "arsenalOpened", {
     disableSerialization;
     private _display = _this select 0;
-
     {
 		( _display displayCtrl _x ) ctrlSetTextColor [ 1, 0, 0, 0.3 ];
         ( _display displayCtrl _x ) ctrlRemoveAllEventHandlers "buttonclick";
 		( _display displayCtrl _x ) ctrlEnable false;
-    } forEach [44150,44146,44147,44148,44149,44151,954,930,931,932,933,934,935,938,939,940,941,942,943,944,900,901,902,903,904,905,908,909];
-
+    } forEach [
+		44150, //Random loadout
+		44146, //Save loadout
+		44147, //Load loadout
+		44148, //Export loadout
+		44149, //Import loadout??
+		44151, //Hide interface
+		954, //CONTAINER: Misc. Items
+		930, //RIFLE
+		931, //LAUNCHER
+		932, //HANDGUN
+		933, //UNIFORM
+		934, //VEST
+		935, //BACKPACK
+		938, //NVG
+		939, //BINOCULARS
+		940, //MAP
+		941, //TERMINAL
+		942, //COMMUNICATION
+		943, //NAVIGATION
+		944, //WATCH
+		900, //RIFLE ON CHARACTER
+		901, //LAUNCHER ON CHARACTER
+		902, //HANDGUN ON CHARACTER
+		903, //UNIFORM ON CHARACTER
+		904, //VEST ON CHARACTER
+		905, //BACKPACK ON CHARACTER
+		908, //NVG ON CHARACTER
+		909 //BINOCULARS ON CHARACTER
+	];
 	_display displayAddEventHandler ["KeyDown", "true"];
-
 } ] call BIS_fnc_addScriptedEventHandler;
 
 
@@ -82,6 +108,7 @@ if (_specialRoles findIf {_x == _role} == -1) then {
 }] call BIS_fnc_addScriptedEventHandler;
 
 
-// ADD ACTION /////////////////////////////////////////////////////////////////////////////////////
-private _personalArsenal = ["personalArsenal","Personal Arsenal","\A3\ui_f\data\igui\cfg\weaponicons\MG_ca.paa",{["Open",[false,player, player]] spawn bis_fnc_arsenal; player action ["SwitchWeapon", player, player, 100];},{lmf_warmup}] call ace_interact_menu_fnc_createAction;
-[player, 1, ["ACE_SelfActions","ACE_Equipment"], _personalArsenal] call ace_interact_menu_fnc_addActionToObject;
+// ADD ACTIONS ////////////////////////////////////////////////////////////////////////////////////
+//_text = format ["<t shadow='2' color='#FFBA26'>Personal Arsenal</t>"];
+private _personalArsenal = ["personalArsenal","Personal Arsenal","\a3\3DEN\Data\Displays\Display3DEN\EntityMenu\arsenal_ca.paa",{["Open",[false,player, player]] spawn bis_fnc_arsenal; player action ["SwitchWeapon", player, player, 100];},{lmf_warmup}] call ace_interact_menu_fnc_createAction;
+[player, 1, ["ACE_SelfActions"], _personalArsenal] call ace_interact_menu_fnc_addActionToObject;

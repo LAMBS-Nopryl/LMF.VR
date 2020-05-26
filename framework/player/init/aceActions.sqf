@@ -17,7 +17,7 @@ lmf_spawnerCreateObject = {
 	params ["_vehType",["_spawnPad",objNull,[objNull]]];
 
 	if (rank ace_player == "PRIVATE" || {rank ace_player == "CORPORAL"}) exitWith {
-		titleText ["<t font='PuristaBold' shadow='2' color='#F2513C' size='2'>UNQUALIFIED</t><br/><t font='PuristaBold' shadow='2' color='#FFFFFF' size='1.5'>Must be NCO or Officer.</t>", "PLAIN", 0.3, false, true];
+		titleText ["<t font='PuristaBold' shadow='2' color='#F2513C' size='2'>NOT QUALIFIED</t><br/><t font='PuristaBold' shadow='2' color='#FFFFFF' size='1.5'>Must be NCO or Officer.</t>", "PLAIN", 0.3, false, true];
 	};
 
 	if (count (_spawnPad nearEntities [["Man", "Air", "Land", "Ship"], 7]) > 0) exitWith {
@@ -43,15 +43,15 @@ if !(isNil "ammoSpawner") then {
 	private _ammoSmall = ["ammoSmall","Supplies Small","\A3\ui_f\data\map\vehicleicons\iconCrate_ca.paa",{[var_supSmall, ammoPad] call lmf_spawnerCreateObject;},{true}] call ace_interact_menu_fnc_createAction;
 	private _ammoSpecial = ["ammoSpecial","Supplies Special","\A3\modules_f\data\portraitModule_ca.paa",{[var_supSpecial, ammoPad] call lmf_spawnerCreateObject;},{true}] call ace_interact_menu_fnc_createAction;
 	private _ammoExplosive = ["ammoExplosive","Explosives","\A3\ui_f\data\map\vehicleicons\pictureExplosive_ca.paa",{[var_supExplosives, ammoPad] call lmf_spawnerCreateObject;},{true}] call ace_interact_menu_fnc_createAction;
-	private _ammoMedic = ["ammoMedic","Supplies Medical","\A3\ui_f\data\map\vehicleicons\pictureHeal_ca.paa",{["ACE_medicalSupplyCrate_advanced", ammoPad] call lmf_spawnerCreateObject;},{true}] call ace_interact_menu_fnc_createAction;
+	private _ammoMedic = ["ammoMedic","Medical Supplies","\A3\ui_f\data\map\vehicleicons\pictureHeal_ca.paa",{[var_supMedical, ammoPad] call lmf_spawnerCreateObject;},{true}] call ace_interact_menu_fnc_createAction;
 	private _spareWheel = ["spareWheel","Spare Wheel","",{["ACE_Wheel", ammoPad] call lmf_spawnerCreateObject;},{true}] call ace_interact_menu_fnc_createAction;
 	private _spareTrack = ["spareTrack","Spare Track","",{["ACE_Track", ammoPad] call lmf_spawnerCreateObject;},{true}] call ace_interact_menu_fnc_createAction;
 
 	if (var_supLarge != "") then {[ammoSpawner, 0, ["ACE_MainActions"], _ammolarge] call ace_interact_menu_fnc_addActionToObject;};
 	if (var_supSmall != "") then {[ammoSpawner, 0, ["ACE_MainActions"], _ammoSmall] call ace_interact_menu_fnc_addActionToObject;};
-	if (var_supSpecial != "") then {[ammoSpawner, 0, ["ACE_MainActions"], _ammoSpecial] call ace_interact_menu_fnc_addActionToObject;};
+	//if (var_supSpecial != "") then {[ammoSpawner, 0, ["ACE_MainActions"], _ammoSpecial] call ace_interact_menu_fnc_addActionToObject;};
 	if (var_supExplosives != "") then {[ammoSpawner, 0, ["ACE_MainActions"], _ammoExplosive] call ace_interact_menu_fnc_addActionToObject;};
-	[ammoSpawner, 0, ["ACE_MainActions"], _ammoMedic] call ace_interact_menu_fnc_addActionToObject;
+	if (var_supMedical != "") then {[ammoSpawner, 0, ["ACE_MainActions"], _ammoMedic] call ace_interact_menu_fnc_addActionToObject;};
 	[ammoSpawner, 0, ["ACE_MainActions"], _spareWheel] call ace_interact_menu_fnc_addActionToObject;
 	[ammoSpawner, 0, ["ACE_MainActions"], _spareTrack] call ace_interact_menu_fnc_addActionToObject;
 };
@@ -98,19 +98,19 @@ if !(isNil "airSpawner") then {
 // GEAR SELECTION SYSTEM //////////////////////////////////////////////////////////////////////////
 if !(isNil "crateRoles") then {
 	//MAIN ACTIONS
-	private _parentInfantry = ["parentInfantry","Infantry","\A3\ui_f\data\map\markers\nato\b_inf.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
+	private _parentInfantry = ["parentInfantry","Infantry","a3\ui_f_curator\Data\Displays\RscDisplayCurator\modeUnits_ca.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
 	private _parentHQ = ["parentHQ","Headquarters","\A3\ui_f\data\map\markers\nato\b_hq.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
 	private _parentSquad = ["parentSquad","Squad","\A3\ui_f\data\map\markers\nato\b_inf.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
-	private _parentAirCrew = ["parentAirCrew","Air Vehicle Crew","\A3\ui_f\data\map\markers\nato\b_air.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
-	private _parentGroundCrew = ["parentGroundCrew","Ground Vehicle Crew","\A3\ui_f\data\map\markers\nato\b_armor.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
-	private _resetGear = ["resetGear","Reset Gear","",{[player] call lmf_player_fnc_initPlayerGear},{true}] call ace_interact_menu_fnc_createAction;
+	private _parentAirCrew = ["parentAirCrew","Air Vehicle Crew","\A3\ui_f\data\map\vehicleicons\iconHelicopter_ca.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
+	private _parentGroundCrew = ["parentGroundCrew","Ground Vehicle Crew","\A3\ui_f\data\map\vehicleicons\iconTank_ca.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
+	//private _resetGear = ["resetGear","Reset Gear","",{[player] call lmf_player_fnc_initPlayerGear},{true}] call ace_interact_menu_fnc_createAction;
 
 	[crateRoles, 0, ["ACE_MainActions"], _parentInfantry] call ace_interact_menu_fnc_addActionToObject;
 	[crateRoles, 0, ["ACE_MainActions","parentInfantry"], _parentHQ] call ace_interact_menu_fnc_addActionToObject;
 	[crateRoles, 0, ["ACE_MainActions","parentInfantry"], _parentSquad] call ace_interact_menu_fnc_addActionToObject;
 	[crateRoles, 0, ["ACE_MainActions"], _parentAirCrew] call ace_interact_menu_fnc_addActionToObject;
 	[crateRoles, 0, ["ACE_MainActions"], _parentGroundCrew] call ace_interact_menu_fnc_addActionToObject;
-	[crateRoles, 0, ["ACE_MainActions"], _resetGear] call ace_interact_menu_fnc_addActionToObject;
+	//[crateRoles, 0, ["ACE_MainActions"], _resetGear] call ace_interact_menu_fnc_addActionToObject;
 
 
 	//SUB ACTIONS
@@ -134,14 +134,14 @@ if !(isNil "crateRoles") then {
 	private _grenadier = ["genadier","Grenadier","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_grenadier},{true}] call ace_interact_menu_fnc_createAction;
 	private _rifleman = ["rifleman","Rifleman","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_rifleman},{true}] call ace_interact_menu_fnc_createAction;
 	private _mmgG = ["mmgGunner","Machine Gunner","\A3\ui_f\data\map\vehicleicons\iconManMG_ca.paa",{[player] call lmf_loadout_fnc_machineGunner},{true}] call ace_interact_menu_fnc_createAction;
-	private _mmgA = ["mmgAssistant","Asst. Machine Gunner","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_machineGunnerAssistant},{true}] call ace_interact_menu_fnc_createAction;
+	private _mmgA = ["mmgAssistant","Assistant Machine Gunner","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_machineGunnerAssistant},{true}] call ace_interact_menu_fnc_createAction;
 	private _matG = ["matGunner","AT Gunner","\A3\ui_f\data\map\vehicleicons\iconManAT_ca.paa",{[player] call lmf_loadout_fnc_atGunner},{true}] call ace_interact_menu_fnc_createAction;
-	private _matA = ["matAssistant","Asst. AT Gunner","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_atAssistant},{true}] call ace_interact_menu_fnc_createAction;
+	private _matA = ["matAssistant","Assistant AT Gunner","\A3\ui_f\data\map\vehicleicons\iconMan_ca.paa",{[player] call lmf_loadout_fnc_atAssistant},{true}] call ace_interact_menu_fnc_createAction;
 
 	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _squadLeader] call ace_interact_menu_fnc_addActionToObject;
-	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _squad2ic] call ace_interact_menu_fnc_addActionToObject;
-	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _autorifleman] call ace_interact_menu_fnc_addActionToObject;
-	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _grenadier] call ace_interact_menu_fnc_addActionToObject;
+	//[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _squad2ic] call ace_interact_menu_fnc_addActionToObject;
+	//[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _autorifleman] call ace_interact_menu_fnc_addActionToObject;
+	//[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _grenadier] call ace_interact_menu_fnc_addActionToObject;
 	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _rifleman] call ace_interact_menu_fnc_addActionToObject;
 	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _mmgG] call ace_interact_menu_fnc_addActionToObject;
 	[crateRoles, 0, ["ACE_MainActions","parentInfantry","parentSquad"], _mmgA] call ace_interact_menu_fnc_addActionToObject;
