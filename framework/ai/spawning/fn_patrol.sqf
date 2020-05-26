@@ -23,12 +23,13 @@ params [["_spawnPos", [0,0,0]],["_grpType", "TEAM"],["_patrolRadius", 200]];
 _spawnPos = _spawnPos call CBA_fnc_getPos;
 private _patrolTarget = _spawnPos;
 
-
 // PREPARE AND SPAWN THE GROUP ////////////////////////////////////////////////////////////////////
 private _type = [_grptype] call _typeMaker;
 private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
 _grp deleteGroupWhenEmpty true;
-
+_grp setGroupIDGlobal [format ["Infantry Patrol: %1 (%2)",_grpType, groupId _grp]];
+_grp enableIRLasers false;
+_grp enableGunLights "ForceOff";
 
 // GIVE THEM ORDERS ///////////////////////////////////////////////////////////////////////////////
 [_grp, _patrolTarget, _patrolRadius, 4, "MOVE", "AWARE", "RED", "NORMAL", "STAG COLUMN", "", [10,20,30]] call CBA_fnc_taskPatrol;

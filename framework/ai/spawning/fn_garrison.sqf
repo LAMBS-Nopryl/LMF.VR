@@ -26,17 +26,35 @@ _spawnPos = _spawnPos call CBA_fnc_getPos;
 private _type = [_grptype] call _typeMaker;
 private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
 _grp deleteGroupWhenEmpty true;
+_grp setGroupIDGlobal [format ["Infantry Garrison: %1 (%2)",_grpType, groupId _grp]];
 _grp setFormation "DIAMOND";
+_grp enableIRLasers false;
+_grp enableGunLights "ForceOff";
 
 // GARRISON ///////////////////////////////////////////////////////////////////////////////////////
 [_spawnPos, nil, units _grp, _garrisonRadius, _distribution, true, true] call ace_ai_fnc_garrison;
+
+//CHECK IF UNIT IS IN HOUSE (function by Killzone Kid, slight tweak by Alex2k)
+KK_fnc_inHouse = {
+	lineIntersectsSurfaces [
+		getPosWorld _this, 
+		getPosWorld _this vectorAdd [0, 0, 50], 
+		_this, objNull, true, 1, "GEOM", "NONE"
+	] select 0 params ["","","","_house"];
+	if (isNil "_house") exitWith {false};
+	if (_house isKindOf "House") exitWith {true};
+	false
+};
+{
+	if (!(_x call KK_fnc_inHouse) && {getPosATL _x select 2 > 3} ) then {_x setUnitPos "DOWN";};	
+} forEach (units _grp);
 
 // UNGARRISON SINGLE UNIT WHEN HIT
 lmf_ungarrisonHit = {
 	params ["_unit","_instigator"];
 	if (alive _unit) then {
+		_unit setUnitPos "AUTO";
 		[[_unit]] call ace_ai_fnc_unGarrison;
-		//if (_unit knowsAbout _instigator > 1 && {(_unit distance _instigator) < (25 + (random 75))}) then {_unit doMove (getPosATL _instigator);};
 	};
 };
 
@@ -53,6 +71,7 @@ lmf_ungarrisonHit = {
 lmf_ungarrisonFiredNear = {
 	params ["_unit", "_firer"];
 	if (alive _unit) then {
+		_unit setUnitPos "AUTO";
 		//NEARBY ENEMY FIRE
 		if (side _firer != var_enemySide) then {
 			if (50 > random 100) then {
@@ -73,6 +92,7 @@ lmf_ungarrisonFiredNear = {
 				_unit doMove (getPosATL _firer);
 			};
 		};
+		if (5 > random 100) then {_unit enableGunLights "AUTO"};
 	};
 };
 

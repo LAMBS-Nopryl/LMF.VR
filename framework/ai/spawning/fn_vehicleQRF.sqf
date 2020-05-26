@@ -51,13 +51,17 @@ while {_initTickets > 0} do {
     if (_vicType == "CAR") then {
         _veh = createVehicle [selectRandom _car, _spawnPos, [], 0, "CAN_COLLIDE"];
         _veh setDir _dir;
+        _vehType = getText (configFile >> "CfgVehicles" >> typeOf _veh >> "displayName");
 
         //CREW
         private _type = selectRandom _team;
         _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
+        _grp setGroupIDGlobal [format ["Vehicle QRF: %1 (%2)",_vehType, groupId _grp]];
         _grp addVehicle _veh;
         {_x moveInAny _veh;} forEach units _grp;
+        _grp enableIRLasers false;
+	    _grp enableGunLights "ForceOff";
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
@@ -69,11 +73,13 @@ while {_initTickets > 0} do {
     if (_vicType == "CARARMED") then {
         _veh = createVehicle [selectRandom _carArmed, _spawnPos, [], 0, "CAN_COLLIDE"];
         _veh setDir _dir;
+        _vehType = getText (configFile >> "CfgVehicles" >> typeOf _veh >> "displayName");
 
         //CREW
         private _type = selectRandom _sentry;
         _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
+        _grp setGroupIDGlobal [format ["Vehicle QRF: %1 (%2)",_vehType, groupId _grp]];
         _grp addVehicle _veh;
         {_x moveInAny _veh;} forEach units _grp;
 
@@ -86,12 +92,16 @@ while {_initTickets > 0} do {
     if (_vicType == "TRUCK") then {
         _veh = createVehicle [selectRandom _truck, _spawnPos, [], 0, "CAN_COLLIDE"];
         _veh setDir _dir;
+        _vehType = getText (configFile >> "CfgVehicles" >> typeOf _veh >> "displayName");
 
         //CREW
         private _type = selectRandom _squad;
         _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
+        _grp setGroupIDGlobal [format ["Vehicle QRF: %1 (%2)",_vehType, groupId _grp]];
         {_x moveInAny _veh;} forEach units _grp;
+         _grp enableIRLasers false;
+	    _grp enableGunLights "ForceOff";
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
@@ -103,10 +113,12 @@ while {_initTickets > 0} do {
     if (_vicType == "APC") then {
         _veh = createVehicle [selectRandom _apc, _spawnPos, [], 0, "CAN_COLLIDE"];
         _veh setDir _dir;
+        _vehType = getText (configFile >> "CfgVehicles" >> typeOf _veh >> "displayName");
 
         //CREW
         _grp = [_spawnPos,var_enemySide,_vehicleCrew] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
+        _grp setGroupIDGlobal [format ["Vehicle QRF: %1 (%2)",_vehType, groupId _grp]];
         _grp addVehicle _veh;
         {_x moveInAny _veh;} forEach units _grp;
 
@@ -114,7 +126,10 @@ while {_initTickets > 0} do {
         private _type = selectRandom [selectRandom _squad,selectRandom _team];
         private _grp2 = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp2 deleteGroupWhenEmpty true;
+        _grp2 setGroupIDGlobal [format ["Vehicle QRF: Infantry (%1)", groupId _grp2]];
         {_x moveInCargo _veh;} forEach units _grp2;
+        _grp2 enableIRLasers false;
+	    _grp2 enableGunLights "ForceOff";
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
@@ -135,10 +150,12 @@ while {_initTickets > 0} do {
     if (_vicType == "TANK") then {
         _veh = createVehicle [selectRandom _tank, _spawnPos, [], 0, "CAN_COLLIDE"];
         _veh setDir _dir;
+        _vehType = getText (configFile >> "CfgVehicles" >> typeOf _veh >> "displayName");
 
         //CREW
         _grp = [_spawnPos,var_enemySide,_vehicleCrew] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
+        _grp setGroupIDGlobal [format ["Vehicle QRF: %1 (%2)",_vehType, groupId _grp]];
         _grp addVehicle _veh;
         {_x moveInAny _veh;} forEach units _grp;
 
@@ -151,10 +168,12 @@ while {_initTickets > 0} do {
     if (_vicType == "HELITRANSPORT") then {
         _veh = createVehicle [selectRandom _heli_Transport, _spawnPos, [], 0, "CAN_COLLIDE"];
         _veh setDir _dir;
+        _vehType = getText (configFile >> "CfgVehicles" >> typeOf _veh >> "displayName");
 
         //CREW
         _grp = [_spawnPos,var_enemySide,_heliCrew] call BIS_fnc_spawnGroup;
         _grp deleteGroupWhenEmpty true;
+        _grp setGroupIDGlobal [format ["Vehicle QRF: %1 (%2)",_vehType, groupId _grp]];
         _grp addVehicle _veh;
         {_x moveInAny _veh;} forEach units _grp;
 
@@ -162,7 +181,10 @@ while {_initTickets > 0} do {
         private _type = selectRandom _squad;
         private _grp2 = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
         _grp2 deleteGroupWhenEmpty true;
+        _grp2 setGroupIDGlobal [format ["Vehicle QRF: Infantry (%1)", groupId _grp2]];
         {_x moveInCargo _veh;} forEach units _grp2;
+        _grp2 enableIRLasers false;
+	    _grp2 enableGunLights "ForceOff";
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
@@ -179,11 +201,13 @@ while {_initTickets > 0} do {
     if (_vicType == "HELIATTACK") then {
         _veh = createVehicle [selectRandom _heli_Attack, _spawnPos, [], 0, "CAN_COLLIDE"];
         _veh setDir _dir;
+        _vehType = getText (configFile >> "CfgVehicles" >> typeOf _veh >> "displayName");
 
         //CREW
         _grp = createGroup var_enemySide;
         [_veh, _grp, false, "",_Pilot] call BIS_fnc_spawnCrew;
         _grp deleteGroupWhenEmpty true;
+        _grp setGroupIDGlobal [format ["Vehicle QRF: %1 (%2)",_vehType, groupId _grp]];
 
         //TASK
         _grp setBehaviour "AWARE";

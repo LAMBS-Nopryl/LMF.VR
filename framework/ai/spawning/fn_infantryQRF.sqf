@@ -43,13 +43,15 @@ while {_initTickets > 0} do {
 	private _type = [_grptype] call _typeMaker;
 	private _grp = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
 	_grp deleteGroupWhenEmpty true;
+	_grp setGroupIDGlobal [format ["Infantry QRF: %1 (%2)",_grpType, groupId _grp]];
 
 	private _wp = _grp addWaypoint [_spawnPos,0];
 	_wp setWaypointType "GUARD";
 	_grp setFormation "STAG COLUMN";
+	_grp enableIRLasers false;
+	_grp enableGunLights "ForceOff";
 
 	waitUntil {sleep 5; (leader _grp) call BIS_fnc_enemyDetected || {{alive _x} count units _grp < 1}};
-
 	0 = [_grp] spawn lmf_ai_fnc_taskAssault;
 
 	//IF THE INITAL TICKETS WERE HIGHER THAN ONE

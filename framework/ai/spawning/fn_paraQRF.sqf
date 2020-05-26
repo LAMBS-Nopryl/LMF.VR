@@ -45,6 +45,7 @@ while {_initTickets > 0} do {
 	//CREW
 	private _grp = [_spawnPos,var_enemySide,_heliCrew] call BIS_fnc_spawnGroup;
 	_grp deleteGroupWhenEmpty true;
+	_grp setGroupIDGlobal [format ["Para QRF: Heli crew (%1)", groupId _grp]];
 	_grp addVehicle _veh;
 	{_x moveInAny _veh} forEach units _grp;
 
@@ -52,7 +53,10 @@ while {_initTickets > 0} do {
 	private _type = selectRandom _squad;
 	private _grp2 = [_spawnPos,var_enemySide,_type] call BIS_fnc_spawnGroup;
 	_grp2 deleteGroupWhenEmpty true;
+	_grp2 setGroupIDGlobal [format ["Para QRF: Paratroopers (%1)", groupId _grp2]];
 	{_x moveInCargo _veh} count units _grp2;
+	_grp2 enableIRLasers false;
+	_grp2 enableGunLights "ForceOff";
 
 	//ORDERS
 	private _wp = _grp addWaypoint [getPos _veh,0];

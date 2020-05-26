@@ -63,6 +63,10 @@ _mgTeam =	[
 	[_Squad_Leader,_MMG_Gunner,_Grenadier,_Rifleman]
 ];
 
+_static =	[
+	[_Rifleman,_Rifleman]
+];
+
 _vehicleCrew = [_Crew,_Crew,_Crew];
 _heliCrew = [_Pilot,_Pilot];
 
@@ -86,6 +90,9 @@ private _typeMaker = {
 		if (_type == "ATTEAM") then {_selection = selectRandom _atteam};;
 		if (_type == "AATEAM") then {_selection = selectRandom _aateam};
 		if (_type == "MGTEAM") then {_selection = selectRandom _mgteam};
+		if (_type == "HMG") then {_selection = selectRandom _static};
+		if (_type == "MORTAR") then {_selection = selectRandom _static};
+		if (_type == "HAT") then {_selection = selectRandom _static};
 	};
 	_selection
 };
