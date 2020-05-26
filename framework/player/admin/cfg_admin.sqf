@@ -20,6 +20,9 @@ private _adminList =  [
 "_SP_PLAYER_"
 ];
 
+//DISALLOW USE BEFORE MISSION LOAD
+if (getClientStateNumber < 10) exitWith {systemChat "Admin tools are only available in-game."};
+
 //CHECK IF ADMIN
 if (admin owner _unit > 0 || {_adminList findIf {_x == _uid} != -1}) then {_admin = true};
 
