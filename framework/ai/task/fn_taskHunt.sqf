@@ -12,7 +12,7 @@ private _assaultRange = 50 + (random 50);
 private _randDist = _assaultRange + (50 + (random 100));
 _grp enableIRLasers false;
 _grp enableGunLights "ForceOff";
-_grp setVariable ["lambs_danger_dangerAI","disabled"];
+_grp setVariable ["lambs_danger_disableGroupAI", true];
 _grp enableAttack false;
 _grp setBehaviour "SAFE";
 {doStop _x} count units _grp;
@@ -37,7 +37,7 @@ if !(isNull objectParent leader _grp) then {
 
 
 //DO THE HUNTING
-while {count units _grp > 0} do {
+while {{alive _x} count (units _grp) > 0} do {
 	private _tracker = leader _grp;
 	private _nearestdist = _radius;
 	private _availabletargets = (switchableUnits + playableUnits - entities "HeadlessClient_F");
@@ -54,6 +54,10 @@ while {count units _grp > 0} do {
 
 	//ORDERS
 	if !(isNull _nearest) then {
+
+		//DELETE ANY WAYPOINTS
+		{deleteWaypoint ((wayPoints _grp) select 0);} count wayPoints _grp;
+
 		private _units = units _grp;
 		{
 			private _targetPos = getposATL _nearest;
@@ -89,6 +93,10 @@ while {count units _grp > 0} do {
 		if (var_debug) then {systemChat format ["DEBUG: taskHunt: %1 targets %2 (%3) at %4 Meters",_grp,name _nearest,_grp knowsAbout _nearest,floor (leader _grp distance _nearest)]};
 	} else {
 		_cycle = 120;
+		if (waypoints _grp isEqualTo []) then {
+			private _wp =_grp addWaypoint [getPos leader _grp, 0];
+			_wp setWaypointType "GUARD";
+		};
 	};
 
 	//WAIT

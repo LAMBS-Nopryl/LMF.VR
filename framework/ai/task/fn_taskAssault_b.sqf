@@ -8,19 +8,48 @@
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
 params [["_grp",grpNull,[grpNull]],["_range",500,[0]]];
 private _cycle = 30;
-private _assaultRange = 50 + (random 50);
+private _assaultRange = 50 + (random 100);
 private _randDist = _assaultRange + (50 + (random 100));
 _grp enableIRLasers false;
 _grp enableGunLights "ForceOff";
 _grp setSpeedMode "FULL";
-_grp setCombatMode "RED";
-_grp allowFleeing 0;
 _grp enableAttack false;
-{_x setSkill ["courage", 1];} count units _grp;
-{doStop _x} count units _grp;
+
+lmf_ai_infantryRush = {
+	params ["_grp","_rushPos"];
+		if (_grp getvariable ["lmf_ai_isRushing",false]) exitWith {};
+		_grp setVariable ["lmf_ai_isRushing", true];
+
+		{_x disableAI "AUTOCOMBAT"} count (units _grp);
+		_grp setBehaviourStrong "AWARE";
+		{_x setUnitPos "AUTO"} count units _grp;
+
+		[_grp, 0] setWaypointPosition [ATLToASL _rushPos, -1];
+		[_grp, 1] setWaypointPosition [ATLToASL _rushPos, -1];
+		{_x doMove _rushPos} count units _grp;
+
+		if ( ((leader _grp) distance2D _rushPos) < 50 ) then {
+			if (50 > random 100) then {_grp setFormation "DIAMOND";};
+		} else {_grp setFormation selectRandom ["WEDGE","LINE"];};
+};
+
+lmf_ai_infantryDefault = {
+	params ["_grp","_rushPos"];
+		_grp setVariable ["lmf_ai_isRushing", false];
+		{_x enableAI "AUTOCOMBAT"} count (units _grp);
+		_grp setBehaviourStrong "AWARE";
+		{_x setUnitPos "AUTO"} count units _grp;
+
+		[_grp, 0] setWaypointPosition [getPosASL (leader _grp), -1];
+		[_grp, 1] setWaypointPosition [getPosASL (leader _grp), -1];
+
+		if ( ((leader _grp) distance2D _rushPos) < 50 ) then {
+			if (50 > random 100) then {_grp setFormation "DIAMOND";};
+		} else {_grp setFormation selectRandom ["WEDGE","LINE"];};
+};
 
 // START THE HUNT SCRIPT //////////////////////////////////////////////////////////////////////////
-while {count units _grp > 0} do {
+while {{alive _x} count (units _grp) > 0} do {
 	private _tracker = leader _grp;
 	private _nearestdist = _range;
 	private _availabletargets = (switchableUnits + playableUnits - entities "HeadlessClient_F");
@@ -37,6 +66,8 @@ while {count units _grp > 0} do {
 
 	// ORDERS ///////////////////////////////////////////////////////////////////////////////////////
 	if !(isNull _nearest) then {
+		_assaultPos = getPosATL _nearest;
+		_pause = 30 + (random 30);
 
 		//DISMOUNT VEHICLES
 		if !(isNull objectParent leader _grp) then {
@@ -58,39 +89,57 @@ while {count units _grp > 0} do {
 			_grp enableIRLasers true;
 			_grp enableGunLights "ForceOn";
 
-			_newGroup = createGroup [var_enemySide, true];
-			(units _grp) joinSilent _newGroup;
-			_newGroup deleteGroupWhenEmpty true;
-
-			_newGroup setVariable ["lambs_danger_dangerAI","disabled"];
-			{_x setVariable ["lambs_danger_disableAI",true]} count units _newGroup;
-			{_x disableAI "AUTOCOMBAT"} count units _newGroup;
-			_newGroup setBehaviourStrong "AWARE";
-			_newGroup enableAttack false;
-			_newGroup allowFleeing 0;
-
-			0 = [_newGroup,1000] spawn lmf_ai_fnc_taskHunt;
+			if (_tracker knowsAbout _nearest > 1) then {
+				[_grp,_assaultPos,_pause] spawn {
+					params ["_grp","_assaultPos","_pause"];
+					[_grp,_assaultPos] call lmf_ai_infantryRush;
+					sleep _pause;
+					[_grp,_assaultPos] call lmf_ai_infantryDefault;
+				};
+			};
 		};
 
 		//MEDIUM
 		if (_nearestdist < _randDist && _nearestdist > _assaultRange) then {
 			_grp enableIRLasers true;
+			_grp enableGunLights "ForceOff";
 			if (20 > (random 100)) then {_grp enableGunLights "ForceOn"};
-			_grp setFormation "WEDGE";
+
+			if (_tracker knowsAbout _nearest > 1) then {
+				if (40 > (random 100)) then {
+					[_grp,_assaultPos,_pause] spawn {
+						params ["_grp","_assaultPos","_pause"];
+						[_grp,_assaultPos] call lmf_ai_infantryRush;
+						sleep _pause;
+						[_grp,_assaultPos] call lmf_ai_infantryDefault;
+					};
+				};
+			};
 		};
 
 		//FAR
 		if (_nearestdist > _randDist) then {
+			_grp enableIRLasers false;
 			if (20 > (random 100)) then {_grp enableIRLasers true};
 			_grp enableGunLights "ForceOff";
-			_grp setFormation "LINE";
+
+			if (_tracker knowsAbout _nearest > 1) then {
+				if (20 > (random 100)) then {
+					[_grp,_assaultPos,_pause] spawn {
+						params ["_grp","_assaultPos","_pause"];
+						[_grp,_assaultPos] call lmf_ai_infantryRush;
+						sleep _pause;
+						[_grp,_assaultPos] call lmf_ai_infantryDefault;
+					};
+				};
+			};
 		};
 
-		//ANY DISTANCE
+		//IF GROUP KNOWS ABOUT TARGET
 		if (_tracker knowsAbout _nearest > 1) then {
-			[_grp, 0] setWaypointPosition [getPosASL _nearest, -1];
-			[_grp, 1] setWaypointPosition [getPosASL _nearest, -1];
-			{_x doMove (getposATL _nearest)} count units _grp;
+			[_grp, 0] setWaypointPosition [ATLToASL _assaultPos, -1];
+			[_grp, 1] setWaypointPosition [ATLToASL _assaultPos, -1];
+			{_x doMove _assaultPos} count units _grp;
 		};
 
 		_cycle = _nearestdist/8;
@@ -105,12 +154,13 @@ while {count units _grp > 0} do {
 		};
 		_grp enableIRLasers false;
 		_grp enableGunLights "ForceOff";
-		_grp setFormation "STAG COLUMN";
+		{_x enableAI "AUTOCOMBAT"} count units _grp;
 		_grp setBehaviourStrong "AWARE";
+		_grp setFormation "STAG COLUMN";
 	};
 
   	//WAIT
-  	if (_cycle < 30) then {_cycle = 30};
+  	if (_cycle < 10) then {_cycle = 10};
   	if (_cycle > 180) then {_cycle = 180};
   	sleep _cycle;
 };
