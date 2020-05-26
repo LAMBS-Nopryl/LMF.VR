@@ -87,7 +87,7 @@ _unit forceAddUniform _s_Uniform;
 _unit addVest _s_Vest;
 _unit addHeadgear _s_Headgear;
 _unit addBackpack _s_Backpack; clearAllItemsFromBackpack _unit;
-if (10 > random 100) then {_unit addGoggles _s_Goggles};
+_unit addGoggles _s_Goggles;
 
 
 // WEAPONS ////////////////////////////////////////////////////////////////////////////////////////
@@ -129,10 +129,15 @@ if (_type == _MMG_Gunner) then {
 
 //MAT
 if (_type == _MAT_Gunner) then {
-	//if (_Rifle_Ammo select 0 == "") then {_Rifle_Ammo = 0;} else {_Rifle_Ammo = selectRandom _Rifle_Ammo};
 	if (_MAT_Ammo select 0 == "") then {_MAT_Ammo = 0;} else {_MAT_Ammo = selectRandom _MAT_Ammo};
-	//[_unit, selectRandom _Rifle, 1, _Rifle_Ammo] call BIS_fnc_addWeapon;
 	[_unit, selectRandom _MAT, 4, _MAT_Ammo] call BIS_fnc_addWeapon;
+
+	[_unit,_Rifle_Ammo,_Rifle] spawn {
+		params ["_unit","_Rifle_Ammo","_Rifle"];
+		waitUntil {sleep 5; (count (_unit targets [true, 50]) > 0) };
+		if (_Rifle_Ammo select 0 == "") then {_Rifle_Ammo = 0;} else {_Rifle_Ammo = selectRandom _Rifle_Ammo};
+		[_unit, selectRandom _Rifle, 6, _Rifle_Ammo] call BIS_fnc_addWeapon;
+	};
 };
 
 //MARK
@@ -168,7 +173,8 @@ if (50 > random 100) then {_unit addItem selectRandom _Grenade;};
 if (50 > random 100) then {_unit addItem selectRandom _Grenade_Smoke;};
 
 //ADD FAK
-if (20 > random 100) then {for "_i" from 0 to 2 do {_unit addItem "ACE_fieldDressing";};};
+if (40 > random 100) then {for "_i" from 0 to (random 2) do {_unit addItem "ACE_packingBandage";};};
+if (20 > random 100) then {for "_i" from 0 to (random 2) do {_unit addItem "ACE_morphine";};};
 
 //WEAPON ATTACH
 removeAllPrimaryWeaponItems _unit;
@@ -186,3 +192,17 @@ if (_var_enemyGoodies && {30 > random 100}) then {
 
 //MISC
 if (_unit == leader group _unit || {_type == _MAT_Gunner || {_type == _Crew}}) then {_unit addWeapon "Binocular"};
+
+if (_type == _Rifleman) then {
+	if (5 > random 100) then {
+		if (isNull (unitBackpack _unit)) then {_unit addBackpack _s_Backpack;};
+		for "_i" from 1 to (random 6) do {_unit addItemToBackpack (selectRandom _Grenade_Smoke);};
+		for "_i" from 1 to (random 6) do {_unit addItemToBackpack "ACE_morphine";};
+		for "_i" from 1 to (random 6) do {_unit addItemToBackpack "ACE_epinephrine";};
+		for "_i" from 1 to (random 4) do {_unit addItemToBackpack "ACE_tourniquet";};
+		for "_i" from 1 to (random 6) do {_unit addItemToBackpack "ACE_splint";};
+		for "_i" from 1 to (random 4) do {_unit addItemToBackpack "ACE_bloodIV";};
+		for "_i" from 1 to (random 20) do {_unit addItemToBackpack "ACE_packingBandage";};
+		[_unit,"lambs_medic"] call bis_fnc_setUnitInsignia;
+	};
+};
