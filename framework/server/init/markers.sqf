@@ -19,7 +19,7 @@ if !(isNil "crateRoles") then {
 	_gearSelectMkr = createMarker ["mrk_gearSelect", getPosASL crateRoles];
 	_gearSelectMkr setMarkerType "b_inf";
 	_gearSelectMkr setMarkerSize [0.75,0.75];
-	_gearSelectMkr setMarkerColor var_markerSide;
+	_gearSelectMkr setMarkerColor "ColorWEST";
 	_gearSelectMkr setMarkerText "";
 	_gearSelectMkr setMarkerAlpha 1;
 };
@@ -28,7 +28,7 @@ if !(isNil "ammoSpawner") then {
 	_crateSpawnMkr = createMarker ["mrk_crateSpawn", getPosASL ammoSpawner];
 	_crateSpawnMkr setMarkerType "b_service";
 	_crateSpawnMkr setMarkerSize [0.75,0.75];
-	_crateSpawnMkr setMarkerColor var_markerSide;
+	_crateSpawnMkr setMarkerColor "ColorWEST";
 	_crateSpawnMkr setMarkerText "";
 	_crateSpawnMkr setMarkerAlpha 1;
 	};
@@ -37,7 +37,7 @@ if !(isNil "groundSpawner") then {
 	_vehSpawnMkr = createMarker ["mrk_vehSpawn", getPosASL groundSpawner];
 	_vehSpawnMkr setMarkerType "b_motor_inf";
 	_vehSpawnMkr setMarkerSize [0.75,0.75];
-	_vehSpawnMkr setMarkerColor var_markerSide;
+	_vehSpawnMkr setMarkerColor "ColorWEST";
 	_vehSpawnMkr setMarkerText "";
 	_vehSpawnMkr setMarkerAlpha 1;
 };
@@ -46,7 +46,7 @@ if !(isNil "airSpawner") then {
 	_vehSpawnMkr = createMarker ["mrk_airSpawn", getPosASL airSpawner];
 	_vehSpawnMkr setMarkerType "b_air";
 	_vehSpawnMkr setMarkerSize [0.75,0.75];
-	_vehSpawnMkr setMarkerColor var_markerSide;
+	_vehSpawnMkr setMarkerColor "ColorWEST";
 	_vehSpawnMkr setMarkerText "";
 	_vehSpawnMkr setMarkerAlpha 1;
 };
@@ -55,7 +55,7 @@ if !(isNil "RRR") then {
 	_RRRMkr = createMarker ["mrk_RRR", getPosASL RRR];
 	_RRRMkr setMarkerType "b_maint";
 	_RRRMkr setMarkerSize [0.75,0.75];
-	_RRRMkr setMarkerColor var_markerSide;
+	_RRRMkr setMarkerColor "ColorWEST";
 	_RRRMkr setMarkerText "";
 	_RRRMkr setMarkerAlpha 1;
 };
@@ -64,7 +64,7 @@ if !(isNil "LAMBS_Hospital") then {
 	_HospMkr = createMarker ["mrk_hospital", getPosASL LAMBS_Hospital];
 	_HospMkr setMarkerType "b_med";
 	_HospMkr setMarkerSize [0.75,0.75];
-	_HospMkr setMarkerColor var_markerSide;
+	_HospMkr setMarkerColor "ColorWEST";
 	_HospMkr setMarkerText "";
 	_HospMkr setMarkerAlpha 1;
 };
