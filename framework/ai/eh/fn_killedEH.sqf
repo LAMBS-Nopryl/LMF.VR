@@ -6,6 +6,11 @@
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
 params ["_unit"];
 if !(local _unit) exitWith {};
+
+_hmd = hmd _unit;
+_binocular = binocular _unit;
+
+_unit unlinkItem _hmd;
+_unit removeWeapon _binocular;
+
 removeAllPrimaryWeaponItems _unit;
-_unit unlinkItem "NVGoggles_OPFOR";
-_unit removeWeapon "Binocular";
