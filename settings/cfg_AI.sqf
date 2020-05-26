@@ -22,84 +22,92 @@ private _var_enemyGoodies = false; // Give additional medical supplies? (default
 
 
 // CLOTHING ///////////////////////////////////////////////////////////////////////////////////////
-private _Uniform = ["U_O_CombatUniform_oucamo"]; // Uniform(s)
-private _Vest = ["V_HarnessOGL_gry", "V_HarnessO_gry"]; // Vest(s)
-private _Backpack_Light = ["B_FieldPack_oucamo"]; // Backpack(s)
-private _Backpack_Heavy = ["B_Carryall_oucamo"]; // Backpack(s) used for MMG, MAT and AA
-private _Headgear = ["H_HelmetLeaderO_oucamo", "H_HelmetO_oucamo"]; // Headgear(s)
-private _Goggles = ["G_Balaclava_blk"]; // Facewear(s)
+private _Uniform = ["U_I_CombatUniform","U_I_CombatUniform_shortsleeve"]; // Uniform(s)
+private _Vest = ["V_PlateCarrierIA1_dgtl","V_PlateCarrierIA2_dgtl"]; // Vest(s)
+private _Headgear = ["H_HelmetIA"]; // Headgear(s)
+private _Goggles = [""]; // Facewear(s)
+
+//BACKPACKS
+private _Backpack_Light = ["B_AssaultPack_dgtl"]; // Backpack(s)
+private _Backpack_Heavy = ["B_Carryall_oli"]; // Backpack(s) used for MMG, MAT and AA
+private _Backpack_HMG_Gun = ["I_HMG_02_high_weapon_F"]; // HMG Gunbag
+private _Backpack_HMG_Pod = ["I_HMG_02_support_high_F"]; // HMG Podbag
+private _Backpack_MORTAR_Gun = ["I_Mortar_01_weapon_F"]; // MORTAR Gunbag
+private _Backpack_MORTAR_Pod = ["I_Mortar_01_support_F"]; // MORTAR Podbag
+private _Backpack_HAT_Gun = ["I_AT_01_weapon_F"]; // HAT Gunbag
+private _Backpack_HAT_Pod = ["I_HMG_01_support_high_F"]; // HAT Podbag
 
 //HELICOPTER CREW AND PILOTS
-private _Heli_Uniform = ["U_O_PilotCoveralls"]; // Same as Uniform(s) but for Pilots
-private _Heli_Vest = ["V_Rangemaster_belt"]; // Same as Vest(s) but for Pilots
-private _Heli_Headgear = ["H_PilotHelmetHeli_O"]; // Same as Headgear(s) but for Pilots
+private _Heli_Uniform = ["U_I_HeliPilotCoveralls"]; // Same as Uniform(s) but for Pilots
+private _Heli_Vest = ["V_BandollierB_oli"]; // Same as Vest(s) but for Pilots
+private _Heli_Headgear = ["H_PilotHelmetHeli_I"]; // Same as Headgear(s) but for Pilots
 
 //VEHICLE CREW
-private _Crew_Uniform = ["U_O_CombatUniform_oucamo"]; // Same as Uniform(s) but for Pilots
-private _Crew_Vest = ["V_HarnessO_gry"]; // Same as Vest(s) but for Pilots
-private _Crew_Headgear = ["H_HelmetSpecO_blk"]; // Same as Headgear(s) but for Pilots
+private _Crew_Uniform = ["U_Tank_green_F"]; // Same as Uniform(s) but for Pilots
+private _Crew_Vest = ["V_Rangemaster_belt"]; // Same as Vest(s) but for Pilots
+private _Crew_Headgear = ["H_HelmetCrew_I"]; // Same as Headgear(s) but for Pilots
 
 
 // WEAPONS ////////////////////////////////////////////////////////////////////////////////////////
-private _Pistol = ["hgun_Pistol_heavy_02_F"]; // Pistol(s)
-private _Pistol_Ammo = [""]; // Pistol Magazine(s)
+private _Pistol = ["hgun_ACPC2_F"]; // Pistol(s)
+private _Pistol_Ammo = ["9Rnd_45ACP_Mag"]; // Pistol Magazine(s)
 
-private _Carbine = ["arifle_Katiba_C_F"]; // Carbine(s)
-private _Carbine_Ammo = ["30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green"]; // Carbine Magazine(s)
+private _Carbine = ["arifle_Mk20C_F"]; // Carbine(s)
+private _Carbine_Ammo = ["30Rnd_556x45_Stanag"]; // Carbine Magazine(s)
 
-private _Rifle = ["arifle_Katiba_F"]; // Rifle(s)
-private _Rifle_Ammo = ["30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green"]; // Rifle Magazine(s)
+private _Rifle = ["arifle_Mk20C_F"]; // Rifle(s)
+private _Rifle_Ammo = ["30Rnd_556x45_Stanag"]; // Rifle Magazine(s)
 
-private _Rifle_GL = ["arifle_Katiba_GL_F"]; // Rifle(s) with Underslungs
-private _Rifle_GL_Ammo = ["30Rnd_65x39_caseless_green_mag_Tracer", "30Rnd_65x39_caseless_green"]; // Rifle Magazine(s)
-private _Rifle_GL_Smoke = ["1Rnd_SmokeGreen_Grenade_shell"]; // Underslung Smoke(s)
-private _Rifle_GL_Flare = ["UGL_FlareGreen_F"]; // Underslung Flare(s)
+private _Rifle_GL = ["arifle_Mk20_GL_F"]; // Rifle(s) with Underslungs
+private _Rifle_GL_Ammo = ["30Rnd_556x45_Stanag"]; // Rifle Magazine(s)
+private _Rifle_GL_Smoke = ["1Rnd_Smoke_Grenade_shell"]; // Underslung Smoke(s)
+private _Rifle_GL_Flare = ["ACE_40mm_Flare_white"]; // Underslung Flare(s)
 
-private _DMR = ["srifle_DMR_01_F"]; // Designated Marksman Rifle(s)
+private _DMR = ["srifle_EBR_F"]; // Designated Marksman Rifle(s)
 private _DMR_Ammo = [""]; // DNR Magazine(s)
 
-private _LMG = ["LMG_Zafir_F"]; // Light Machine Gun(s)
-private _LMG_Ammo = [""]; // LMG Magazine(s)
+private _LMG = ["LMG_Mk200_F"]; // Light Machine Gun(s)
+private _LMG_Ammo = ["200Rnd_65x39_cased_Box"]; // LMG Magazine(s)
 
-private _MMG = ["MMG_01_hex_F"]; // Medium Machine Gun(s)
-private _MMG_Ammo = [""]; // MMG Magazine(s)
+private _MMG = ["LMG_Mk200_F"]; // Medium Machine Gun(s)
+private _MMG_Ammo = ["200Rnd_65x39_cased_Box"]; // MMG Magazine(s)
 
-private _LAT = ["launch_RPG32_F"]; // Light Anti-Tank(s)
-private _LAT_Ammo = ["RPG32_HE_F"]; // LAT Magazine(s)
+private _LAT = ["launch_NLAW_F"]; // Light Anti-Tank(s)
+private _LAT_Ammo = [""]; // LAT Magazine(s)
 
-private _MAT = ["launch_O_Vorona_brown_F"]; // Medium Anti-Tank(s)
-private _MAT_Ammo = ["Vorona_HEAT"]; // MAT Magazine(s)
+private _MAT = ["launch_MRAWS_olive_rail_F"]; // Medium Anti-Tank(s)
+private _MAT_Ammo = ["MRAWS_HEAT_F"]; // MAT Magazine(s)
 
-private _AA = ["launch_O_Titan_F"]; // Anti-Air(s)
+private _AA = ["launch_I_Titan_F"]; // Anti-Air(s)
 private _AA_Ammo = ["Titan_AA"]; // AA Magazine(s)
 
-private _Grenade = ["HandGrenade"]; // HE Grenade(s)
-private _Grenade_Smoke = ["SmokeShellBlue", "SmokeShellOrange", "SmokeShellPurple"]; // Smoke Grenade(s)
+private _Grenade = ["MiniGrenade","HandGrenade"]; // HE Grenade(s)
+private _Grenade_Smoke = ["SmokeShell"]; // Smoke Grenade(s)
 
 private _Attach = ["acc_flashlight"]; // Weapon Attachement(s)
-private _Optic = ["optic_Arco", "optic_ACO_grn"]; // Weapon Optic(s)
+private _Optic = ["optic_ACO_grn"]; // Weapon Optic(s)
 
 
 // VEHICLES ///////////////////////////////////////////////////////////////////////////////////////
-private _car =  ["O_MRAP_02_F"]; // Car(s)
-private _carArmed =  ["O_MRAP_02_hmg_F", "O_LSV_02_armed_F"]; // Armed Car(s)
-private _truck =  ["O_Truck_02_covered_F", "O_Truck_03_covered_F"]; // Truck(s)
-private _apc =  ["O_APC_Tracked_02_cannon_F", "O_APC_Wheeled_02_rcws_v2_F"]; // APC(s)
-private _tank =  ["O_MBT_04_cannon_F", "O_MBT_04_command_F"]; // Tank(s)
-private _heli_Transport =  ["O_Heli_Light_02_unarmed_F", "O_Heli_Transport_04_covered_F"]; // Transport Helo(s)
-private _heli_Attack =  ["O_Heli_Attack_02_dynamicLoadout_F"]; // Attack Helo(s)
+private _car =  ["I_MRAP_03_hmg_F"]; // Car(s)
+private _carArmed =  ["I_MRAP_03_hmg_F"]; // Armed Car(s)
+private _truck =  ["I_Truck_02_covered_F"]; // Truck(s)
+private _apc =  ["I_APC_tracked_03_cannon_F"]; // APC(s)
+private _tank =  ["I_MBT_03_cannon_F"]; // Tank(s)
+private _heli_Transport =  ["I_Heli_Transport_02_F"]; // Transport Helo(s)
+private _heli_Attack =  ["I_Heli_light_03_dynamicLoadout_F"]; // Attack Helo(s)
 
 //CAMOS  (Applied to all defined vehicles that are spawned. Leave empty if no camo.)
 private _car_Camo =  [""]; // camo(s) for car(s)
 private _carArmed_Camo =  [""]; // camo(s) for armed car(s)
 private _truck_Camo =  [""]; // camo(s) for truck(s)
 private _apc_Camo =  [""]; // camos(s) for apc(s)
-private _tank_Camo =  ["Grey"]; // camo(s) for tank(s)
-private _heli_Transport_Camo =  ["Opfor", "Black"]; // camo(s) for helo(s)
+private _tank_Camo =  [""]; // camo(s) for tank(s)
+private _heli_Transport_Camo =  [""]; // camo(s) for helo(s)
 private _heli_Attack_Camo =  [""]; // camo(s) for attack helo(s)
 
 //AMMO BLACKLIST
-private _ammoBlacklist = ["96Rnd_40mm_G_belt"];
+private _ammoBlacklist = [""];
 
 
 // DEFINE AI UNITS ////////////////////////////////////////////////////////////////////////////////
@@ -138,7 +146,7 @@ if (var_enemySide == INDEPENDENT) then {
 	_Autorifleman = "I_Soldier_AR_F";
 	_Crew = "I_crew_F";
 	_Grenadier = "I_Soldier_GL_F";
-	_MMG_Gunner = "I_support_MG_F";
+	_MMG_Gunner = "I_Soldier_unarmed_F";
 	_Marksman = "I_Soldier_M_F";
 	_AA_Gunner = "I_Soldier_AA_F";
 	_MAT_Gunner = "I_Soldier_AT_F";
