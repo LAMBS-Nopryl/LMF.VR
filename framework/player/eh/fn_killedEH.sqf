@@ -16,6 +16,10 @@ if (typename var_respawnType == "STRING") then {
 		setPlayerRespawnTime 1000000;
 	};
 
+	if (var_respawnType != "WAVE" && var_respawnType != "OFF") then {
+		setPlayerRespawnTime 1000000;
+	};
+
 };
 
 if (typename var_respawnType == "SCALAR") then {
@@ -33,6 +37,51 @@ cutText ["","BLACK OUT",4,true];
 
 //SLEEP FOR A WHILE
 sleep 6;
+
+//MESSAGE TO DEAD PLAYERS
+_deadPlayers = [] call ace_spectator_fnc_players;
+_msgPool = [
+	" is dead as a doornail.",
+	" became a frag for the other team.",
+	" sleeps with the fishes.",
+	" came, saw, died.",
+	"'s healthbar reached zero.",
+	" kicked the bucket.",
+	" is pushing up daisies.",
+	" has become living-challenged.",
+	" is definitely done dancing.",
+	" flatlined.",
+	" has become worm food.",
+	" is taking a dirt nap.",
+	" bit the dust.",
+	" went belly up.",
+	" is dead as a dodo.",
+	" was killed in action.",
+	" shuffled off this mortal coil.",
+	" is six feet under.",
+	"'s earthly career ended.",
+	" kicked the oxygen habit.",
+	" has gone the way of all flesh.",
+	" was annihilated.",
+	" crossed the river Styx.",
+	" was fragged.",
+	" ceased to be.",
+	" met an untimely end.",
+	" walked the plank.",
+	" went to the happy hunting grounds.",
+	", available now with 100% less life.",
+	" forgot to drink a health-potion.",
+	" returns home on their shield.",
+	" gets to meet the eternal shepherd.",
+	" has been sheared for the last time.",
+	" joins the great flock."
+];
+_txt = parseText format [
+    "<t size='0.6' shadow='2' color='#FFBA26'>%1<t color='#D7DBD5'>%2",
+    name player,
+	selectRandom _msgPool
+];
+{[_txt,0,0.9,8,0] remoteExec ["BIS_fnc_dynamicText",_x,false]} forEach _deadPlayers;
 
 //ACE SPECTATOR INTERFACE
 [true] call ace_spectator_fnc_setSpectator;
