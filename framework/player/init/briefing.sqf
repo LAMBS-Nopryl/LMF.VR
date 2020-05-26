@@ -70,7 +70,7 @@ Admin tools are only available in-game.</font color><br/><br/>
 
 // TESTERS ////////////////////////////////////////////////////////////////////////////////////////
 if (_testers != "") then {
-player createDiaryrecord ["lmf_diary",["  Credits",format ["
+player createDiaryrecord ["lmf_diary",["Credits",format ["
 <font color='#D7DBD5'>%1</font color>
 ",_testers]], taskNull, "", false];
 };
@@ -89,12 +89,10 @@ player creatediaryrecord ["lmf_diary",[format ["OPORD"],format ["
 %2
 <br/><font face='PuristaBold' color='#D7DBD5'>Friendly Forces:</font><br/>
 %3
-<br/><font face='PuristaBold' color='#D7DBD5'>Other Considerations:</font><br/>
-%4
 <br/><font face='PuristaBold' size='16' color='#FFBA26'>MISSION:</font><br/>
-<font color='#D7DBD5'>%5</font color>
-<br/><font face='PuristaBold' size='16' color='#FFBA26'>EXECUTION:</font><br/>
-%6
+<font color='#D7DBD5'>%4</font color>
+<br/><br/><font face='PuristaBold' size='16' color='#FFBA26'>EXECUTION:</font><br/>
+%5
 <br/><font face='PuristaBold' size='16' color='#FFBA26'>ADMINISTRATION:</font><br/>
-%7
-",_brf_situation,_brf_enemy call _collect,_brf_friend call _collect,_brf_remarks call _collect,_brf_mission,_brf_execution call _collect,(_brf_administration call _collect) select [0,count (_brf_administration call _collect) - 5]]],taskNull,"",false];
+%6
+",_brf_situation,_brf_enemy call _collect,_brf_friend call _collect,_brf_mission,_brf_execution call _collect,(_brf_administration call _collect) select [0,count (_brf_administration call _collect) - 5]]],taskNull,"",false];
