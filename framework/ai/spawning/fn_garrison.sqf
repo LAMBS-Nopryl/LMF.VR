@@ -9,8 +9,9 @@
 		2) Group Type [OPTIONAL] ("squad", "team", "sentry","atTeam","aaTeam", "mgTeam" or number of soldiers.) (default: "TEAM")
 		3) Garrison Radius. [OPTIONAL] (number) (default: 100)
 		4) Distribution [OPTIONAL] (0 = fill evenly, 1 = building by building) (default: 1)
+		5) Fill From Top Down [OPTIONAL] (true = start garrisoning from the roof down, false = random garrison) (default: false)
 
-	- EXAMPLE: 0 = [this,"TEAM",100,1] spawn lmf_ai_fnc_garrison;
+	- EXAMPLE: 0 = [this,"TEAM",100,1,false] spawn lmf_ai_fnc_garrison;
 */
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
 waitUntil {CBA_missionTime > 0};
@@ -19,7 +20,7 @@ if !(_spawner) exitWith {};
 
 #include "cfg_spawn.sqf"
 
-params [["_spawnPos", [0,0,0]],["_grpType", "TEAM"],["_garrisonRadius", 100],["_distribution", 1]];
+params [["_spawnPos", [0,0,0]],["_grpType", "TEAM"],["_garrisonRadius", 100],["_distribution", 1],["_topdown", false]];
 _spawnPos = _spawnPos call CBA_fnc_getPos;
 
 // PREPARE AND SPAWN THE GROUP ////////////////////////////////////////////////////////////////////
@@ -30,9 +31,11 @@ _grp setGroupIDGlobal [format ["Infantry Garrison: %1 (%2)",_grpType, groupId _g
 _grp setFormation "DIAMOND";
 _grp enableIRLasers false;
 _grp enableGunLights "ForceOff";
+_grp setVariable ["lambs_danger_dangerAI","disabled"];
+{_x setVariable ["lambs_danger_disableAI",true]} count units _grp;
 
 // GARRISON ///////////////////////////////////////////////////////////////////////////////////////
-[_spawnPos, nil, units _grp, _garrisonRadius, _distribution, true, true] call ace_ai_fnc_garrison;
+[_spawnPos, nil, units _grp, _garrisonRadius, _distribution, _topdown, true] call ace_ai_fnc_garrison;
 
 //CHECK IF UNIT IS IN HOUSE (function by Killzone Kid, slight tweak by Alex2k)
 KK_fnc_inHouse = {
