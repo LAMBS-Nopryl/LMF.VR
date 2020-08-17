@@ -12,7 +12,7 @@ private _collect = {
 	_lines = _this;
 	private _newline = "";
 	{
-		_newline = _newline + " <font color='#D7DBD5'>- " + _x + "</font><br/>";
+		_newline = _newline + " - " + _x + "</font><br/>";
 	} foreach _lines;
 	_newline
 };
@@ -23,7 +23,7 @@ private _collect = {
 
     player removeDiarySubject "cba_help_docs";
 	player removeDiarySubject "Units";
-	player removeDiarySubject "Players";
+	//player removeDiarySubject "Players";
 	player removeDiarySubject "Diary";
 	player removeDiarySubject "Statistics";
 };
@@ -36,18 +36,19 @@ player createDiarySubject ["Admin","LMF"];
 
 // INFO
 player creatediaryrecord ["Admin",["Info", format ["
-<br/><font face='PuristaBold' color='#FFBA26' size='16'>LAMBS MISSION FRAMEWORK </font>
+<br/><font face='PuristaBold' color='#FFBA26' size='16'>LAMBS MISSION FRAMEWORK </font><br/>
 <img image='\a3\Modules_F_Curator\Data\portraitAnimalsSheep_ca.paa' color='#36940c' width='20' height='20'/>
 <img image='\a3\Modules_F_Curator\Data\portraitAnimalsSheep_ca.paa' color='#317dcc' width='20' height='20'/>
 <img image='\a3\Modules_F_Curator\Data\portraitAnimalsSheep_ca.paa' color='#8a4acf' width='20' height='20'/>
 <img image='\a3\Modules_F_Curator\Data\portraitAnimalsSheep_ca.paa' color='#a11017' width='20' height='20'/><br/>
-<font color='#D7DBD5'>Version: <font color='#FFBA26'>%1</font color>
-", var_version]], taskNull, "", false];
+<font>Version: <font color='#FFBA26'>%1</font color>
+<br/><br/><font >Current mission: %2 (by: %3)</font>
+", var_version,briefingName,var_author]], taskNull, "", false];
 
 // ADMIN TOOLS
 player creatediaryrecord ["Admin",["Admin Tools", format ["
 <br/><font face='PuristaBold' color='#FFBA26' size='16'>OVERVIEW</font><br/>
-<font color='#D7DBD5'>This will only work if you are an admin or whitelisted as one in LMF.<br/>
+<font >This will only work if you are an admin or whitelisted as one in LMF.<br/>
 Admin tools are only available in-game.</font color><br/><br/>
 
 <font face='PuristaBold' color='#A3FFA3'>START MISSION:</font><br/>
@@ -71,7 +72,7 @@ Admin tools are only available in-game.</font color><br/><br/>
 // TESTERS ////////////////////////////////////////////////////////////////////////////////////////
 if (_testers != "") then {
 player createDiaryrecord ["lmf_diary",["Credits",format ["
-<font color='#D7DBD5'>%1</font color>
+<font >%1</font color>
 ",_testers]], taskNull, "", false];
 };
 
@@ -84,13 +85,13 @@ lmf_toeBriefing = player creatediaryrecord ["lmf_diary",["ORBAT",[] call lmf_pla
 // BRIEFING ///////////////////////////////////////////////////////////////////////////////////////
 player creatediaryrecord ["lmf_diary",[format ["OPORD"],format ["
 <br/><font face='PuristaBold' color='#FFBA26' size='16'>SITUATION:</font><br/>
-<font color='#D7DBD5'>%1</font color>
-<br/><br/><font face='PuristaBold' color='#D7DBD5'>Enemy Forces:</font><br/>
+<font >%1</font color>
+<br/><br/><font face='PuristaBold' >Enemy Forces:</font><br/>
 %2
-<br/><font face='PuristaBold' color='#D7DBD5'>Friendly Forces:</font><br/>
+<br/><font face='PuristaBold' >Friendly Forces:</font><br/>
 %3
 <br/><font face='PuristaBold' size='16' color='#FFBA26'>MISSION:</font><br/>
-<font color='#D7DBD5'>%4</font color>
+<font >%4</font color>
 <br/><br/><font face='PuristaBold' size='16' color='#FFBA26'>EXECUTION:</font><br/>
 %5
 <br/><font face='PuristaBold' size='16' color='#FFBA26'>ADMINISTRATION:</font><br/>

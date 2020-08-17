@@ -20,15 +20,15 @@ private _getPicture = {
 
 _textToDisplay = _textToDisplay +
 format ["<font face='PuristaBold' color='#FFBA26' size='16'>OVERVIEW</font><br/>
-<font color='#D7DBD5'>
- - Your equipment weighs <font color='#FFBA26'>%1kg<font color='#D7DBD5'><br/>
- - This page is only accurate at mission start.<br/><br/><br/>
+<font color='#FFFFFF'>
+Your equipment weighs <font color='#FFBA26'>%1kg<font color='#FFFFFF'><br/>
+This page is only accurate at mission start<br/><br/><br/>
 </font color>
 ",round ((loadAbs player) *0.1 * 0.45359237 * 10) / 10];
 
 //START ADDING TO THE BRIEFING TEXT (FIRST INFO LINE)
 _textToDisplay = _textToDisplay +
-	format ["<font face='PuristaBold' color='#A3FFA3' size='14'>Uniform: </font><font face='PuristaBold' color='#D7DBD5'>(Click * for info)</font><br/>"];
+	format ["<font face='PuristaBold' color='#A3FFA3' size='14'>Uniform: </font><font face='PuristaBold' color='#FFFFFF'>(Click * for info)</font><br/>"];
 
 //APPARAL PICTURE FUNCTION
 private _getApparelPicture = {
@@ -98,7 +98,7 @@ private _weaponName = primaryWeapon player;
 //PRIMARY WEAPON
 if !(_weaponName isEqualto "") then {
 	private _name = getText(configFile >> "CfgWeapons" >> _weaponName >> "displayName");
-	_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Primary: </font><font face='PuristaBold' color='#D7DBD5'>%1</font><br/>", _name] + ([_weaponName, primaryWeaponItems player] call _getWeaponPicture);
+	_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Primary: </font><font face='PuristaBold' color='#FFFFFF'>%1</font><br/>", _name] + ([_weaponName, primaryWeaponItems player] call _getWeaponPicture);
 };
 
 private _allMags = magazines player;
@@ -111,7 +111,7 @@ _primaryMags call _displayMags;
 private _secondaryMags = [];
 if !(_sWeaponName isEqualto "") then {
 	private _name = getText(configFile >> "CfgWeapons" >> _sWeaponName >> "displayName");
-	_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Launcher: </font><font face='PuristaBold' color='#D7DBD5'>%1</font><br/>", _name];
+	_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Launcher: </font><font face='PuristaBold' color='#FFFFFF'>%1</font><br/>", _name];
 	_textToDisplay = _textToDisplay + ([_sWeaponName, secondaryWeaponItems player] call _getWeaponPicture);
 	_secondaryMags = _allMags arrayIntersect (_sWeaponName call _getMuzzleMags);
 	_secondaryMags call _displayMags;
@@ -121,7 +121,7 @@ if !(_sWeaponName isEqualto "") then {
 private _handgunMags = [];
 if !(_hWeaponName isEqualto "") then {
 	private _name = getText(configFile >> "CfgWeapons" >> _hWeaponName >> "displayName");
-	_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Sidearm: </font><font face='PuristaBold' color='#D7DBD5'>%1</font><br/>", _name];
+	_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Sidearm: </font><font face='PuristaBold' color='#FFFFFF'>%1</font><br/>", _name];
 	_textToDisplay = _textToDisplay + ([_hWeaponName, handgunItems player] call _getWeaponPicture);
 	_handgunMags = _allMags arrayIntersect (_hWeaponName call _getMuzzleMags);
 	_handgunMags call _displayMags;
@@ -141,7 +141,7 @@ private _allItems = items player;
 } forEach _allItems;
 _allItems = _allItems - _radios;
 
-_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Other: </font><font face='PuristaBold' color='#D7DBD5'>(Click count for info)</font><br/>"];
+_textToDisplay = _textToDisplay + format ["<br/><font face='PuristaBold' color='#A3FFA3'>Other: </font><font face='PuristaBold' color='#FFFFFF'>(Click count for info)</font><br/>"];
 
 //DISPLAY RADIOS THEN MAGAZINES AND LAST INVENTORY AND ASSIGNED ITEMS
 {
