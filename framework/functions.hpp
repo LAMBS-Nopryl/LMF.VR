@@ -40,6 +40,7 @@ class ai {
         class vehicleQRF {};
         class paraQRF {};
 		class staticQRF {};
+		class supplyDrop {};
     };
 };
 class ai_civ {
@@ -73,6 +74,12 @@ class player {
         class hitEH {};
         class killedEH {};
         class respawnEH {};
+	};
+	class player_deploy {
+		file = "framework\player\forwardDeploy";
+		class attachChute {};
+		class deployCleanUp {};
+		class forwardDeployTroops {};
 	};
 };
 class admin {
@@ -117,7 +124,7 @@ class loadouts {
 		class platoonSergeant {};
         class medic {};
 		class rto {};
-		class fac {};
+		class fo {};
 		class squadLeader {};
 		class teamLeader {};
         class autorifleman {};

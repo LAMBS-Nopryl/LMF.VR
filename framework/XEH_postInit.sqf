@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //DISABLE VARIOUS
 enableSentences false;
-//enableEnvironment [false, true];
+enableEnvironment [false, true];
 enableSaving [false,false];
 
 //ZEUS PINGED EH
@@ -67,6 +67,16 @@ enableSaving [false,false];
 
 }] call CBA_fnc_addEventHandler;
 
+//SUPPLY DROP
+if !(var_supplyDropLimit isEqualTo 0) then {
+	[] execVM "framework\shared\init\supplyDrop.sqf";
+};
+
+//FORWARD DEPLOY
+if (var_forwardDeploy) then {
+	[] execVM "framework\shared\init\forwardDeploy.sqf";
+};
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // SERVER /////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,6 +100,15 @@ if (isServer) then {
     //CREATE A RADIO CHANNEL FOR CHAT COMMANDS
     lmf_chatChannel = radioChannelCreate [[0.9,0.1,0.1,1], "Chat", "Chat", [], true];
     publicVariable "lmf_chatChannel";
+
+    //TESTING SETTINGS FOR FRIENDLY AI
+    if !(isDedicated) then {
+        if (var_playerGear) then {
+            {
+                [_x] call lmf_player_fnc_initPlayerGear;
+            } forEach (playableUnits + switchableUnits);
+        };
+    };
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -192,6 +211,12 @@ if (var_playerGear) then {
     }];
 };
 
+//WEAPON SAFETY
+[] spawn {
+    waitUntil {sleep 1; time > 1};
+    [player, currentWeapon player, currentMuzzle player] call ace_safemode_fnc_lockSafety;
+};
+
 //BRIEFING
 [] execVM "framework\player\init\briefing.sqf";
 
@@ -220,15 +245,13 @@ addMissionEventHandler ["Map", {
 //INTRO + WARMUP
 [] execVM "framework\player\init\warmup.sqf";
 
-//ZEUS MODULES
+//ZEN MODULES
 if !(isNil "zen_custom_modules_fnc_register") then {
 	[] execVM "framework\player\init\zenModules.sqf";
 };
 
-//ARES MODULES
-if !(isnil "Ares_fnc_RegisterCustomModule") then {
-    [] execVM "framework\player\init\achillesModules.sqf";
-};
+//MEDICAL HELP MESSAGES
+[] execVM "framework\player\init\medicalHelpMessages.sqf";
 
 //CHAT COMMANDS
 ["lmf_chatMessage", {
@@ -259,12 +282,12 @@ if !(isnil "Ares_fnc_RegisterCustomModule") then {
 [] execVM "framework\player\init\chatCommands.sqf";
 
 //CHANNEL SETUP
-0 enableChannel false;
-1 enableChannel true;
-2 enableChannel false;
-3 enableChannel true;
-4 enableChannel false;
-5 enableChannel false;
+0 enableChannel false; //Global
+1 enableChannel true; //Side
+2 enableChannel false; //Command
+3 enableChannel true; //Group
+4 enableChannel false; //Vehicle
+5 enableChannel false; //Direct
 
 //APPLY TEXTURES TO LAPTOPS
 if !(isNil "ammoSpawner") then {ammoSpawner setObjectTexture [0, "framework\fx\supplies.jpg"];};
