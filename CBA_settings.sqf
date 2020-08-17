@@ -6,3 +6,7 @@
 	  play your mission on.
 */
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+//DUI
+force force diwako_dui_enable_compass_dir = 1;
+force force diwako_dui_enable_occlusion = true;
