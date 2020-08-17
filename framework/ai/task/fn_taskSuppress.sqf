@@ -25,6 +25,12 @@ private _time = _timesFired + time;
 _distanceToTarget = _unit distance2D _target;
 _skillOld = skill _unit;
 _skillNew = ((_distanceToTarget/100) * _skillOld);
+
+if (stance _unit == "CROUCH") then {
+	_skillNew = (_skillNew * 0.65);
+	_timesFired = round (_timesFired * 0.65);
+};
+
 if (_skillNew < _skillOld) then {_skillNew = _skillOld};
 _unit setSkill _skillnew;
 _unit doWatch _target;

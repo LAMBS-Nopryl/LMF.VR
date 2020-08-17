@@ -21,14 +21,14 @@ lmf_ai_infantryRush = {
 		_grp setVariable ["lmf_ai_isRushing", true];
 
 		{_x disableAI "AUTOCOMBAT"} count (units _grp);
-		_grp setBehaviourStrong "AWARE";
+		_grp setBehaviour "AWARE";
 		{_x setUnitPos "AUTO"} count units _grp;
 
 		[_grp, 0] setWaypointPosition [ATLToASL _rushPos, -1];
 		[_grp, 1] setWaypointPosition [ATLToASL _rushPos, -1];
 		{_x doMove _rushPos} count units _grp;
 
-		if ( ((leader _grp) distance2D _rushPos) < 50 ) then {
+		if ( ((leader _grp) distance2D _rushPos) < 35 ) then {
 			if (50 > random 100) then {_grp setFormation "DIAMOND";};
 		} else {_grp setFormation selectRandom ["WEDGE","LINE"];};
 };
@@ -36,14 +36,11 @@ lmf_ai_infantryRush = {
 lmf_ai_infantryDefault = {
 	params ["_grp","_rushPos"];
 		_grp setVariable ["lmf_ai_isRushing", false];
+
 		{_x enableAI "AUTOCOMBAT"} count (units _grp);
-		_grp setBehaviourStrong "AWARE";
 		{_x setUnitPos "AUTO"} count units _grp;
 
-		[_grp, 0] setWaypointPosition [getPosASL (leader _grp), -1];
-		[_grp, 1] setWaypointPosition [getPosASL (leader _grp), -1];
-
-		if ( ((leader _grp) distance2D _rushPos) < 50 ) then {
+		if ( ((leader _grp) distance2D _rushPos) < 35 ) then {
 			if (50 > random 100) then {_grp setFormation "DIAMOND";};
 		} else {_grp setFormation selectRandom ["WEDGE","LINE"];};
 };
@@ -100,43 +97,40 @@ while {{alive _x} count (units _grp) > 0} do {
 		};
 
 		//MEDIUM
-		if (_nearestdist < _randDist && _nearestdist > _assaultRange) then {
+		if (_nearestdist < _randDist && {_nearestdist > _assaultRange}) then {
 			_grp enableIRLasers true;
 			_grp enableGunLights "ForceOff";
 			if (20 > (random 100)) then {_grp enableGunLights "ForceOn"};
 
-			if (_tracker knowsAbout _nearest > 1) then {
-				if (40 > (random 100)) then {
+			if (_tracker knowsAbout _nearest > 1 && {40 > (random 100)}) then {
 					[_grp,_assaultPos,_pause] spawn {
 						params ["_grp","_assaultPos","_pause"];
 						[_grp,_assaultPos] call lmf_ai_infantryRush;
 						sleep _pause;
 						[_grp,_assaultPos] call lmf_ai_infantryDefault;
 					};
-				};
 			};
 		};
 
 		//FAR
-		if (_nearestdist > _randDist) then {
+		if (_nearestdist > _randDist && {_nearestdist < _range}) then {
 			_grp enableIRLasers false;
 			if (20 > (random 100)) then {_grp enableIRLasers true};
 			_grp enableGunLights "ForceOff";
 
-			if (_tracker knowsAbout _nearest > 1) then {
-				if (20 > (random 100)) then {
-					[_grp,_assaultPos,_pause] spawn {
-						params ["_grp","_assaultPos","_pause"];
-						[_grp,_assaultPos] call lmf_ai_infantryRush;
-						sleep _pause;
-						[_grp,_assaultPos] call lmf_ai_infantryDefault;
-					};
+			if (_tracker knowsAbout _nearest > 1 && {20 > (random 100)}) then {
+				[_grp,_assaultPos,_pause] spawn {
+					params ["_grp","_assaultPos","_pause"];
+					[_grp,_assaultPos] call lmf_ai_infantryRush;
+					sleep _pause;
+					[_grp,_assaultPos] call lmf_ai_infantryDefault;
 				};
 			};
 		};
 
 		//IF GROUP KNOWS ABOUT TARGET
-		if (_tracker knowsAbout _nearest > 1) then {
+		if (_tracker knowsAbout _nearest > 1 && {_nearestdist < _range}) then {
+			_grp setFormation selectRandom ["WEDGE","LINE"];
 			[_grp, 0] setWaypointPosition [ATLToASL _assaultPos, -1];
 			[_grp, 1] setWaypointPosition [ATLToASL _assaultPos, -1];
 			{_x doMove _assaultPos} count units _grp;
@@ -147,7 +141,7 @@ while {{alive _x} count (units _grp) > 0} do {
     	//DEBUG
     	if (var_debug) then {systemChat format ["DEBUG: taskAssault: %1 targets %2 (%3) at %4 Meters",_grp,name _nearest,_grp knowsAbout _nearest,floor (leader _grp distance _nearest)]};
     } else {
-		_cycle = 90;
+		_cycle = 60;
 		if (waypoints _grp isEqualTo []) then {
 			private _wp =_grp addWaypoint [getPos leader _grp, 0];
 			_wp setWaypointType "GUARD";
@@ -155,12 +149,12 @@ while {{alive _x} count (units _grp) > 0} do {
 		_grp enableIRLasers false;
 		_grp enableGunLights "ForceOff";
 		{_x enableAI "AUTOCOMBAT"} count units _grp;
-		_grp setBehaviourStrong "AWARE";
+		{_x setUnitPos "AUTO"} count units _grp;
 		_grp setFormation "STAG COLUMN";
 	};
 
   	//WAIT
-  	if (_cycle < 10) then {_cycle = 10};
+  	if (_cycle < 30) then {_cycle = 30};
   	if (_cycle > 180) then {_cycle = 180};
   	sleep _cycle;
 };
