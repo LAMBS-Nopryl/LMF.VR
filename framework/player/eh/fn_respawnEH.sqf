@@ -21,14 +21,7 @@ if (var_playerGear) then {
 };
 
 //REINFORCEMENT GROUP
-if (isnil "grpReinforcements") then {
-        grpReinforcements = createGroup [playerSide,false];
-        publicVariable "grpReinforcements";
-        [player] joinSilent grpReinforcements;
-        (group player) setGroupIdGlobal ["Reinforcements"];
-    } else {
-        [player] joinSilent grpReinforcements;
-};
+[player] joinSilent grpReinforcements;
 
 //CHANNEL SETUP
 0 enableChannel false;
