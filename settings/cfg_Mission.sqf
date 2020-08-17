@@ -10,7 +10,7 @@ var_location = "Altis"; // Location where scenario takes place, which can be see
 var_debug = false; // For mission testing, will turn on some debug options. (default: false)
 var_warmup = true; // Start mission with warmup? (default: true)
 var_jipTP = true; // Allow players that JIP to teleport? (default: true)
-var_enemySide = INDEPENDENT; // What side is the enemy? (WEST,EAST,INDEPENDENT) (default: EAST)
+var_enemySide = EAST; // What side is the enemy? (WEST,EAST,INDEPENDENT) (default: EAST)
 var_civPanic = true; // Will civs panic when there is a firefight? (default: true)
 
 //RESPAWN
@@ -38,6 +38,14 @@ var_supLarge = "B_supplyCrate_F"; // Supply Spawnpad large supplies
 var_supSpecial = "Box_NATO_WpsSpecial_F"; // Supply Spawnpad special supplies
 var_supExplosives = "Box_NATO_AmmoOrd_F"; // Supply Spawnpad explosives supplies
 var_supMedical = "ACE_medicalSupplyCrate"; // Supply Spawnpad medical supplies
+
+//SUPPLY DROP
+var_supplyDropLimit = 3; // How many supply drops should team leaders be able to call in?
+var_suppDropPlane = "C_Plane_Civil_01_F"; // What plane should do the supply drop?
+
+//FORWARD DEPLOY (check framework\shared\init\forwardDeploy.sqf for info)
+var_forwardDeploy = true; // Should group leaders be able to register for a forward deployment during warmup?
+var_deployHeight = 0; // At what height should players forward deploy? 0 = ground (everything higher than 0 but lower than 200 will become 200)
 
 //PLAYER GEAR (Only relevant if var_playerGear = true;)
 var_personalArsenal = true; // Give players access to a limited arsenal during briefing stage. (default: true)
