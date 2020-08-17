@@ -7,12 +7,13 @@
 //DO THE INTRO
 waitUntil {time > 0};
 cutText  ["", "BLACK FADED", 10, true];
+player setUnitTrait ["camouflageCoef",0];
 player enableSimulation false;
-private _date = str (date select 0);
-private _time = [daytime,"HH:MM"] call BIS_fnc_timeToString;
-sleep 4;
-private _tile = parseText format ["<t font='PuristaBold' color='#FFBA26' size='2' align='Right'>%1, </t><t font='PuristaBold'color='#D7DBD5' size='2' align='Right'>%2",var_location,_date];
-[_tile, true, nil, 6, 0.7, 0] spawn BIS_fnc_textTiles;
+//private _date = str (date select 0);
+//private _time = [daytime,"HH:MM"] call BIS_fnc_timeToString;
+//sleep 4;
+//private _tile = parseText format ["<t font='PuristaBold' color='#FFBA26' size='2' align='Right'>%1, </t><t font='PuristaBold'color='#D7DBD5' size='2' align='Right'>%2",var_location,_date];
+//[_tile, true, nil, 6, 0.7, 0] spawn BIS_fnc_textTiles;
 sleep 8;
 waitUntil {!isNil "lmf_warmup"};
 cutText  ["", "BLACK IN", 10, true];
@@ -102,6 +103,7 @@ ctrlDelete _ctrl;
 //START MISSION ///////////////////////////////////////////////////////////////////////////////////
 //ENABLE WEAPONS AND ALLOW DAMAGE
 [false] call lmf_admin_fnc_playerSafety;
+player setUnitTrait ["camouflageCoef",var_camoCoef];
 
 //MISSION INTRO
 [
