@@ -25,9 +25,9 @@ if (_allTypesAA findif {_type == _x} == -1) then {
 
 
 // APPLY SKILL ////////////////////////////////////////////////////////////////////////////////////
-private _skill_untrained = skill _unit * selectRandom [0.01,0.03,0.05,0.10,0.15];
-private _skill_regular = skill _unit * selectRandom [0.35,0.45,0.50,0.55,0.60];
-private _skill_elite = skill _unit * selectRandom [0.85,0.90,0.95,1.05,1.10];
+private _skill_untrained = skill _unit * selectRandom [0.25,0.35,0.45,0.55,0.65];
+private _skill_regular = skill _unit * selectRandom [0.80,0.85,0.90,0.95,1.00];
+private _skill_elite = skill _unit * selectRandom [1.10,1.20,1.30,1.40,1.50];
 if (_var_enemySkill == 0) then {_unit setSkill _skill_untrained;};
 if (_var_enemySkill == 1) then {_unit setSkill _skill_regular;};
 if (_var_enemySkill == 2) then {_unit setSkill _skill_elite;};
@@ -192,17 +192,3 @@ if (_var_enemyGoodies && {30 > random 100}) then {
 
 //MISC
 if (_unit == leader group _unit || {_type == _MAT_Gunner || {_type == _Crew}}) then {_unit addWeapon "Binocular"};
-
-if (_type == _Rifleman) then {
-	if (5 > random 100) then {
-		if (isNull (unitBackpack _unit)) then {_unit addBackpack _s_Backpack;};
-		for "_i" from 1 to (random 6) do {_unit addItemToBackpack (selectRandom _Grenade_Smoke);};
-		for "_i" from 1 to (random 6) do {_unit addItemToBackpack "ACE_morphine";};
-		for "_i" from 1 to (random 6) do {_unit addItemToBackpack "ACE_epinephrine";};
-		for "_i" from 1 to (random 4) do {_unit addItemToBackpack "ACE_tourniquet";};
-		for "_i" from 1 to (random 6) do {_unit addItemToBackpack "ACE_splint";};
-		for "_i" from 1 to (random 4) do {_unit addItemToBackpack "ACE_bloodIV";};
-		for "_i" from 1 to (random 20) do {_unit addItemToBackpack "ACE_packingBandage";};
-		[_unit,"lambs_medic"] call bis_fnc_setUnitInsignia;
-	};
-};
