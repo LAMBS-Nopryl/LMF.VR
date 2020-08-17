@@ -44,6 +44,7 @@ _unit addHeadgear selectRandom _Headgear;
 _unit addGoggles selectRandom _Goggles;
 
 _unit linkItem "ItemWatch";
+_unit linkItem "ItemCompass";
 _unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
@@ -52,7 +53,6 @@ if (var_personalRadio) then {_unit addItem _ACRE_PRR};
 //MAP
 if (var_playerMaps == 0) then {
 	_unit linkItem "ItemMap";
-	_unit linkItem "ItemCompass";
 	_unit addItem "ACE_Flashlight_XL50";
 };
 
@@ -84,7 +84,8 @@ _unit setUnitTrait ["engineer",false];
 _unit setRank "CORPORAL";
 
 //ROLE
-lmf_currentRole = "RTO";
+//lmf_currentRole = "Radio Telephone Operator";
+_unit setVariable ["lmf_currentRole", "Radio Telephone Operator", true];
 
 //INSIGNIA
 private _chooseInsignia = {

@@ -50,6 +50,7 @@ _unit addHandgunItem _Pistol_Attach2;
 _unit addWeapon _Binocular;
 
 _unit linkItem "ItemWatch";
+_unit linkItem "ItemCompass";
 _unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
@@ -58,7 +59,6 @@ if (var_personalRadio) then {_unit addItem _ACRE_PRR};
 //MAP
 if (var_playerMaps != 2) then {
 	_unit linkItem "ItemMap";
-	_unit linkItem "ItemCompass";
 	_unit addItem "ACE_Flashlight_XL50";
 };
 
@@ -82,12 +82,13 @@ _unit setUnitTrait ["engineer",false];
 _unit setRank "SERGEANT";
 
 //ROLE
-lmf_currentRole = "Platoon Sergeant";
+//lmf_currentRole = "Platoon Sergeant";
+_unit setVariable ["lmf_currentRole", "Platoon Sergeant", true];
 
 //INSIGNIA
 private _chooseInsignia = {
 	private _exists = isClass (configFile >> "CfgUnitInsignia" >> _this);
 	(["",_this] select _exists)
 };
-player_insignia = "lambs_or5" call _chooseInsignia;
+player_insignia = "lambs_or6" call _chooseInsignia;
 [_unit,player_insignia] call bis_fnc_setUnitInsignia;

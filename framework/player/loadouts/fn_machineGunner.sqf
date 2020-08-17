@@ -45,6 +45,7 @@ _unit addHandgunItem _Pistol_Attach1;
 _unit addHandgunItem _Pistol_Attach2;
 
 _unit linkItem "ItemWatch";
+_unit linkItem "ItemCompass";
 _unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
@@ -53,7 +54,6 @@ if (var_personalRadio) then {_unit addItem _ACRE_PRR};
 //MAP
 if (var_playerMaps == 0) then {
 	_unit linkItem "ItemMap";
-	_unit linkItem "ItemCompass";
 	_unit addItem "ACE_Flashlight_XL50";
 };
 
@@ -77,7 +77,8 @@ _unit setUnitTrait ["engineer",false];
 _unit setRank "PRIVATE";
 
 //ROLE
-lmf_currentRole = "Machine Gunner";
+//lmf_currentRole = "Machine Gunner";
+_unit setVariable ["lmf_currentRole", "Machine Gunner", true];
 
 //INSIGNIA
 private _chooseInsignia = {

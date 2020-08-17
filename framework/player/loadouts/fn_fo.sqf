@@ -51,6 +51,7 @@ _unit addGoggles selectRandom _Goggles;
 _unit addWeapon "Laserdesignator";
 
 _unit linkItem "ItemWatch";
+_unit linkItem "ItemCompass";
 _unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
@@ -59,7 +60,6 @@ if (var_personalRadio) then {_unit addItem _ACRE_PRR};
 //MAP
 if (var_playerMaps != 2) then {
 	_unit linkItem "ItemMap";
-	_unit linkItem "ItemCompass";
 	_unit addItem "ACE_Flashlight_XL50";
 };
 
@@ -91,7 +91,8 @@ _unit setUnitTrait ["engineer",false];
 _unit setRank "CORPORAL";
 
 //ROLE
-lmf_currentRole = "FAC";
+//lmf_currentRole = "Forward Observer";
+_unit setVariable ["lmf_currentRole", "Forward Observer", true];
 
 //INSIGNIA
 private _chooseInsignia = {

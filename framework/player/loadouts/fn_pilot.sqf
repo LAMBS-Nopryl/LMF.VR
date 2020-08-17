@@ -37,6 +37,7 @@ _unit addHeadgear selectRandom _Plane_Headgear;
 _unit addGoggles selectRandom _Plane_Goggles;
 
 _unit linkItem "ItemWatch";
+_unit linkItem "ItemCompass";
 _unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
@@ -44,7 +45,6 @@ if (var_personalRadio) then {_unit addItem _ACRE_PRR};
 
 //MAP
 _unit linkItem "ItemMap";
-_unit linkItem "ItemCompass";
 _unit addItem "ACE_Flashlight_XL50";
 
 //MEDICAL
@@ -67,7 +67,8 @@ _unit setUnitTrait ["engineer",true];
 _unit setRank "CAPTAIN";
 
 //ROLE
-lmf_currentRole = "Fighter Pilot";
+//lmf_currentRole = "Pilot";
+_unit setVariable ["lmf_currentRole", "Pilot", true];
 
 //INSIGNIA
 private _chooseInsignia = {

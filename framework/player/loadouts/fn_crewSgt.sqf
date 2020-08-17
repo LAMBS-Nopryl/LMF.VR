@@ -39,6 +39,7 @@ _unit addGoggles selectRandom _Crew_Goggles;
 _unit addWeapon _Binocular;
 
 _unit linkItem "ItemWatch";
+_unit linkItem "ItemCompass";
 _unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
@@ -47,7 +48,6 @@ if (var_personalRadio) then {_unit addItem _ACRE_PRR};
 //MAP
 if (var_playerMaps != 2) then {
 	_unit linkItem "ItemMap";
-	_unit linkItem "ItemCompass";
 	_unit addItem "ACE_Flashlight_XL50";
 };
 
@@ -79,12 +79,8 @@ _unit setUnitTrait ["engineer",true];
 _unit setRank "SERGEANT";
 
 //ROLE
-if (_unit == leader (group _unit)) then {
-	lmf_currentRole = "Vehicle Commander";
-} else {
-	lmf_currentRole = "Vehicle Platoon Sergeant";
-};
-
+//lmf_currentRole = "Vehicle Commander";
+_unit setVariable ["lmf_currentRole", "Vehicle Commander", true];
 
 //INSIGNIA
 private _chooseInsignia = {

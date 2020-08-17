@@ -42,6 +42,7 @@ _unit addHeadgear selectRandom _Headgear;
 _unit addGoggles selectRandom _Goggles;
 
 _unit linkItem "ItemWatch";
+_unit linkItem "ItemCompass";
 _unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
@@ -55,7 +56,6 @@ if (var_backpacksAll) then {
 //MAP
 if (var_playerMaps == 0) then {
 	_unit linkItem "ItemMap";
-	_unit linkItem "ItemCompass";
 	_unit addItem "ACE_Flashlight_XL50";
 };
 
@@ -87,7 +87,8 @@ _unit setUnitTrait ["engineer",false];
 _unit setRank "PRIVATE";
 
 //ROLE
-lmf_currentRole = "Rifleman";
+//lmf_currentRole = "Rifleman";
+_unit setVariable ["lmf_currentRole", "Rifleman", true];
 
 //INSIGNIA
 private _chooseInsignia = {

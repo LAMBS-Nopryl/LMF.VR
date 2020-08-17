@@ -42,6 +42,7 @@ _unit addGoggles selectRandom _Goggles;
 _unit addWeapon _Binocular;
 
 _unit linkItem "ItemWatch";
+_unit linkItem "ItemCompass";
 _unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
@@ -50,7 +51,6 @@ if (var_personalRadio) then {_unit addItem _ACRE_PRR};
 //MAP
 if (var_playerMaps == 0) then {
 	_unit linkItem "ItemMap";
-	_unit linkItem "ItemCompass";
 	_unit addItem "ACE_Flashlight_XL50";
 };
 
@@ -82,7 +82,8 @@ _unit setUnitTrait ["engineer",false];
 _unit setRank "PRIVATE";
 
 //ROLE
-lmf_currentRole = "Assistant AT Gunner";
+//lmf_currentRole = "Assistant AT Gunner";
+_unit setVariable ["lmf_currentRole", "Assistant Anti-Tank Gunner", true];
 
 //INSIGNIA
 private _chooseInsignia = {

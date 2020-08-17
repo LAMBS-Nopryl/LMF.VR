@@ -39,7 +39,7 @@ _unit forceAddUniform selectRandom _Uniform;
 _unit addVest selectRandom _Vest;
 for "_i" from 1 to 4 do {_unit addItemToVest _Carbine_Ammo;};
 for "_i" from 1 to 2 do {_unit addItemToVest _Carbine_Ammo_T;};
-for "_i" from 1 to 2 do {_unit addItemToVest _Grenade;};
+//for "_i" from 1 to 2 do {_unit addItemToVest _Grenade;};
 for "_i" from 1 to 6 do {_unit addItemToVest _Grenade_Smoke;};
 
 _unit addBackpack selectRandom _Backpack_Medic;
@@ -50,6 +50,7 @@ _unit addHeadgear selectRandom _Headgear;
 _unit addGoggles selectRandom _Goggles;
 
 _unit linkItem "ItemWatch";
+_unit linkItem "ItemCompass";
 _unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
@@ -58,7 +59,6 @@ if (var_personalRadio) then {_unit addItem _ACRE_PRR};
 //MAP
 if (var_playerMaps == 0) then {
 	_unit linkItem "ItemMap";
-	_unit linkItem "ItemCompass";
 	_unit addItem "ACE_Flashlight_XL50";
 };
 
@@ -87,10 +87,11 @@ _unit setUnitTrait ["medic",true];
 _unit setUnitTrait ["engineer",false];
 
 //RANK
-_unit setRank "CORPORAL";
+_unit setRank "PRIVATE";
 
 //ROLE
-lmf_currentRole = "Medic";
+//lmf_currentRole = "Medic";
+_unit setVariable ["lmf_currentRole", "Medic", true];
 
 //INSIGNIA
 private _chooseInsignia = {

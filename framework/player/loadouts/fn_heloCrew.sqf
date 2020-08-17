@@ -36,6 +36,7 @@ _unit addHeadgear selectRandom _Heli_Headgear_C;
 _unit addGoggles selectRandom _Heli_Goggles;
 
 _unit linkItem "ItemWatch";
+_unit linkItem "ItemCompass";
 _unit linkItem "ItemRadioAcreFlagged";
 
 //RADIO
@@ -44,7 +45,6 @@ if (var_personalRadio) then {_unit addItem _ACRE_PRR};
 //MAP
 if (var_playerMaps == 0) then {
 	_unit linkItem "ItemMap";
-	_unit linkItem "ItemCompass";
 	_unit addItem "ACE_Flashlight_XL50";
 };
 
@@ -76,7 +76,8 @@ _unit setUnitTrait ["engineer",false];
 _unit setRank "CORPORAL";
 
 //ROLE
-lmf_currentRole = "Helicopter Crew";
+//lmf_currentRole = "Helicopter Crew";
+_unit setVariable ["lmf_currentRole", "Helicopter Crew", true];
 
 //INSIGNIA
 private _chooseInsignia = {
