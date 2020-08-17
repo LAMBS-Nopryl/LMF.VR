@@ -69,7 +69,11 @@ while {{alive _x} count (units _grp) > 1} do {
 	_gunner enableAI "CHECKVISIBLE";
 
 	//WAIT UNTIL TARGET SPOTTED
-	waitUntil {sleep 5; !isNull (_gunner findNearestEnemy _gunner) || {{alive _x} count units _grp < 1}};
+	if (_type == "HAT") then {
+		waitUntil {sleep 5; count ((leader _grp) targets [true, 1000]) > 0 && (((leader _grp) targets [true, 1000]) findIf {_x isKindOf "LandVehicle"}) == 0 || {{alive _x} count units _grp < 1}};
+	} else {
+		waitUntil {sleep 5; !isNull (_gunner findNearestEnemy _gunner) || count ((leader _grp) targets [true, 1000]) > 0 || {{alive _x} count units _grp < 1}};
+	};
 
 	//DEPLOY THE WEAPON
 	if ((_gunner distance2D (_gunner findNearestEnemy _gunner)) < 75) exitWith {_grp setCombatMode "YELLOW"; 0 = [_grp] spawn lmf_ai_fnc_taskAssault;};
@@ -105,7 +109,7 @@ while {{alive _x} count (units _grp) > 1} do {
 			private _targetPos = getPos (selectRandom _enemyTargetsGround);
 
 			//HOLD FIRE IF FRIENDLY UNITS IN TARGET AREA
-			private _unitsInRange = _targetPos nearEntities ["Man", 200];
+			private _unitsInRange = _targetPos nearEntities ["Man", 100];
 			private _friendlyUnitsInRange = _unitsInRange select {side _x == var_enemySide && {alive _x} && {!(_x in (units _grp))}};
 			if (count _friendlyUnitsInRange > 0) exitWith {[_gunner,_assistant,_backPackWeapon,_backPackPod] spawn _a2k_staticReset;};
 
