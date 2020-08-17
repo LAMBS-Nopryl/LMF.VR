@@ -9,8 +9,9 @@
 		1) Spawn Position.
 		2) Group Type [OPTIONAL] ("squad", "team", "sentry","atTeam","aaTeam", "mgTeam" or number of soldiers.) (default: "TEAM")
 		3) Patrol Radius. [OPTIONAL] (default: 200)
+		4) Patrol Speed. [OPTIONAL] ("FAST", "SLOW") (default: "SLOW")
 
-	- EXAMPLE: 0 = [this,"TEAM",200] spawn lmf_ai_fnc_patrol;
+	- EXAMPLE: 0 = [this,"TEAM",200,"FAST"] spawn lmf_ai_fnc_patrol;
 */
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
 waitUntil {CBA_missionTime > 0};
@@ -19,9 +20,11 @@ if !(_spawner) exitWith {};
 
 #include "cfg_spawn.sqf"
 
-params [["_spawnPos", [0,0,0]],["_grpType", "TEAM"],["_patrolRadius", 200]];
+params [["_spawnPos", [0,0,0]],["_grpType", "TEAM"],["_patrolRadius", 200],["_patrolSpeed", "SLOW"]];
 _spawnPos = _spawnPos call CBA_fnc_getPos;
 private _patrolTarget = _spawnPos;
+if (_patrolSpeed == "SLOW") then {_patrolSpeed = "SAFE"};
+if (_patrolSpeed == "FAST") then {_patrolSpeed = "AWARE"};
 
 // PREPARE AND SPAWN THE GROUP ////////////////////////////////////////////////////////////////////
 private _type = [_grptype] call _typeMaker;
@@ -32,7 +35,7 @@ _grp enableIRLasers false;
 _grp enableGunLights "ForceOff";
 
 // GIVE THEM ORDERS ///////////////////////////////////////////////////////////////////////////////
-[_grp, _patrolTarget, _patrolRadius, 4, "MOVE", "AWARE", "RED", "NORMAL", "STAG COLUMN", "", [10,20,30]] call CBA_fnc_taskPatrol;
+[_grp, _patrolTarget, _patrolRadius, 4, "MOVE", _patrolSpeed, "RED", "NORMAL", "STAG COLUMN", "", [10,20,30]] call CBA_fnc_taskPatrol;
 
 waitUntil {sleep 5; behaviour leader _grp == "COMBAT" || {{alive _x} count units _grp < 1}};
 

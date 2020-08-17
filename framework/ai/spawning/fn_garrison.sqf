@@ -37,7 +37,7 @@ _grp setVariable ["lambs_danger_dangerAI","disabled"];
 // GARRISON ///////////////////////////////////////////////////////////////////////////////////////
 [_spawnPos, nil, units _grp, _garrisonRadius, _distribution, _topdown, true] call ace_ai_fnc_garrison;
 
-//CHECK IF UNIT IS IN HOUSE (function by Killzone Kid, slight tweak by Alex2k)
+//CHECK IF UNIT IS IN HOUSE
 KK_fnc_inHouse = {
 	lineIntersectsSurfaces [
 		getPosWorld _this, 
@@ -49,7 +49,7 @@ KK_fnc_inHouse = {
 	false
 };
 {
-	if (!(_x call KK_fnc_inHouse) && {getPosATL _x select 2 > 3} ) then {_x setUnitPos "DOWN";};	
+	if (!(_x call KK_fnc_inHouse) && {getPosATL _x select 2 > 3} ) then {_x setUnitPos selectRandom ["MIDDLE","DOWN"]};
 } forEach (units _grp);
 
 // UNGARRISON SINGLE UNIT WHEN HIT
@@ -81,21 +81,22 @@ lmf_ungarrisonFiredNear = {
 				[[_unit]] call ace_ai_fnc_unGarrison;
 				if (_unit knowsAbout _firer > 1) then {_unit doMove (getPosATL _firer);};
 			};
+			if (50 > random 100) then {_unit enableGunLights "AUTO"};
 		};
 		//OWN FIRE
 		if (_firer == _unit) then {
 			if (50 > random 100) then {
 				[[_unit]] call ace_ai_fnc_unGarrison;
 			};
+			if (50 > random 100) then {_unit enableGunLights "AUTO"};
 		};
 		//NEARBY FRIENDLY FIRE
 		if (_firer != _unit && {side _firer == var_enemySide}) then {
-			if (20 > random 100) then {
+			if (25 > random 100) then {
 				[[_unit]] call ace_ai_fnc_unGarrison;
 				_unit doMove (getPosATL _firer);
 			};
 		};
-		if (5 > random 100) then {_unit enableGunLights "AUTO"};
 	};
 };
 

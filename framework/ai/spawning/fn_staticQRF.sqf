@@ -1,6 +1,15 @@
-// AI MORTAR QRF //////////////////////////////////////////////////////////////////////////////////
+// AI STATIC QRF //////////////////////////////////////////////////////////////////////////////////
 /*
-	-
+	- Spawns a group with a heavy static weapon that acts as QRF.
+	- It is important to note that the player proximity check for spawning will only occur if spawn tickets
+	  are set to higher a number than 1.
+
+	- USAGE:
+		1) Spawn Position.
+		2) Group Type [OPTIONAL] ("HMG", "MORTAR" or "HAT".) (default: "HMG")
+		3) Spawn Tickets [OPTIONAL] (default: 1)
+
+	- EXAMPLE: 0 = [this,"MORTAR",99] spawn lmf_ai_fnc_staticQRF;
 */
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
 waitUntil {CBA_missionTime > 0};
@@ -9,7 +18,7 @@ if !(_spawner) exitWith {};
 
 #include "cfg_spawn.sqf"
 
-params [["_spawnPos", [0,0,0]],["_grpType", "TEAM"],["_tickets", 1]];
+params [["_spawnPos", [0,0,0]],["_grpType", "HMG"],["_tickets", 1]];
 _spawnPos = _spawnPos call CBA_fnc_getPos;
 private _range = 500;
 

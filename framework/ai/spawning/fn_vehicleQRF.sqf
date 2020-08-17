@@ -133,7 +133,8 @@ while {_initTickets > 0} do {
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
-        waitUntil {sleep 5; (leader _grp) call BIS_fnc_enemyDetected || {{alive _x} count units _grp < 1} || {!alive _veh} || {{alive _x} count units _grp2 < 1}};
+        //waitUntil {sleep 5; (leader _grp) call BIS_fnc_enemyDetected || {{alive _x} count units _grp < 1} || {!alive _veh} || {{alive _x} count units _grp2 < 1}};
+        waitUntil {sleep 5; (behaviour (leader _grp) == "COMBAT" && {count ((leader _grp) targets [true, 400]) > 0}) || {{alive _x} count units _grp < 1} || {!alive _veh} || {{alive _x} count units _grp2 < 1}};
         waitUntil {sleep 3; !(position _veh isFlatEmpty [-1, -1, -1, -1, 0, false] isEqualTo []);};
         doStop driver _veh;
         doGetOut units _grp2;
@@ -176,6 +177,8 @@ while {_initTickets > 0} do {
         _grp setGroupIDGlobal [format ["Vehicle QRF: %1 (%2)",_vehType, groupId _grp]];
         _grp addVehicle _veh;
         {_x moveInAny _veh;} forEach units _grp;
+        _veh flyInHeightASL [100,100,100];
+        _veh flyInHeight 100;
 
         //PASSENGERS
         private _type = selectRandom _squad;
@@ -188,13 +191,27 @@ while {_initTickets > 0} do {
 
         //TASK
         0 = [_grp] spawn lmf_ai_fnc_taskUpdateWP;
-        waitUntil {sleep 5; (leader _grp) call BIS_fnc_enemyDetected || {{alive _x} count units _grp < 1} || {!alive _veh} || {{alive _x} count units _grp2 < 1}};
+        //waitUntil {sleep 5; (leader _grp) call BIS_fnc_enemyDetected || {{alive _x} count units _grp < 1} || {!alive _veh} || {{alive _x} count units _grp2 < 1}};
+        waitUntil {sleep 5; (behaviour (leader _grp) == "COMBAT" && {count ((leader _grp) targets [true, 600]) > 0}) || {{alive _x} count units _grp < 1} || {!alive _veh} || {{alive _x} count units _grp2 < 1}};
         doGetOut units _grp2;
         _grp2 leaveVehicle _veh;
         waitUntil {sleep 1; isTouchingGround _veh || {{alive _x} count units _grp < 1 || {!alive _veh || {{alive _x} count units _grp2 < 1}}}};
         private _wp = _grp2 addWaypoint [getPos _veh,0];
         _wp setWaypointType "GUARD";
         0 = [_grp2] spawn lmf_ai_fnc_taskAssault;
+
+        //MAKE HELICOPTER FLY AWAY AND DESPAWN ONCE OUT OF SIGHT
+        private _dropPos = getPos _veh;
+        private _flyAwayDir = _spawnPos getDir _dropPos;
+        _grp setCombatMode "BLUE";
+        _grp setBehaviourStrong "CARELESS";
+        sleep 5;
+        _veh doMove (_spawnPos getPos [(_spawnPos distance2D _dropPos) + 10000,_flyAwayDir - 180]);
+		waitUntil {sleep 5; allPlayers findIf {_x distance2D _veh < 5000} == -1 || {!alive _veh || {count units _grp < 1}}};
+		if (alive _veh && {count units _grp > 0}) then {
+			{_veh deleteVehicleCrew _x} count crew _veh;
+			deleteVehicle _veh;
+		};
     };
 
     //IF ATTACK HELICOPTER
