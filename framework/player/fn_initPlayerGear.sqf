@@ -17,7 +17,7 @@ if (_role isEqualTo _PlatoonLeader) exitWith {_unit call lmf_loadout_fnc_platoon
 if (_role isEqualTo _PlatoonSgt) exitWith {_unit call lmf_loadout_fnc_platoonSergeant};
 if (_role isEqualTo _Medic) exitWith {_unit call lmf_loadout_fnc_medic};
 if (_role isEqualTo _RTO) exitWith {_unit call lmf_loadout_fnc_rto};
-if (_role isEqualTo _FAC) exitWith {_unit call lmf_loadout_fnc_fac};
+if (_role isEqualTo _FO) exitWith {_unit call lmf_loadout_fnc_fo};
 if (_role isEqualTo _SquadLeader) exitWith {_unit call lmf_loadout_fnc_squadLeader};
 if (_role isEqualTo _TeamLeader) exitWith {_unit call lmf_loadout_fnc_teamLeader};
 if (_role isEqualTo _Autorifleman) exitWith {_unit call lmf_loadout_fnc_autorifleman};
