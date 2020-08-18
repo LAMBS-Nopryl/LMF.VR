@@ -71,7 +71,11 @@ while {{alive _x} count (units _grp) > 1} do {
 	//WAIT UNTIL TARGET SPOTTED
 	if (_type == "HAT") then {
 		waitUntil {sleep 5; count ((leader _grp) targets [true, 1000]) > 0 && (((leader _grp) targets [true, 1000]) findIf {_x isKindOf "LandVehicle"}) == 0 || {{alive _x} count units _grp < 1}};
-	} else {
+	};
+	if (_type == "MORTAR") then {
+		waitUntil {sleep 5; !isNull (_gunner findNearestEnemy _gunner) || count ((leader _grp) targets [true, 3000]) > 0 || {{alive _x} count units _grp < 1}};
+	};
+	if (_type == "HMG") then {
 		waitUntil {sleep 5; !isNull (_gunner findNearestEnemy _gunner) || count ((leader _grp) targets [true, 1000]) > 0 || {{alive _x} count units _grp < 1}};
 	};
 
@@ -102,14 +106,14 @@ while {{alive _x} count (units _grp) > 1} do {
 			_grp setCombatMode "BLUE";
 
 			//GET TARGET POSITION
-			private _enemyTargets = (leader _grp) targets [true, 4000];
+			private _enemyTargets = (leader _grp) targets [true, 3000];
 			if (_enemyTargets isEqualTo []) exitWith {[_gunner,_assistant,_backPackWeapon,_backPackPod] spawn _a2k_staticReset;};
 			private _enemyTargetsGround = _enemyTargets select {(getPos _x) select 2 < 25};
 			if (_enemyTargetsGround isEqualTo []) exitWith {[_gunner,_assistant,_backPackWeapon,_backPackPod] spawn _a2k_staticReset;};
 			private _targetPos = getPos (selectRandom _enemyTargetsGround);
 
 			//HOLD FIRE IF FRIENDLY UNITS IN TARGET AREA
-			private _unitsInRange = _targetPos nearEntities ["Man", 100];
+			private _unitsInRange = _targetPos nearEntities ["Man", 150];
 			private _friendlyUnitsInRange = _unitsInRange select {side _x == var_enemySide && {alive _x} && {!(_x in (units _grp))}};
 			if (count _friendlyUnitsInRange > 0) exitWith {[_gunner,_assistant,_backPackWeapon,_backPackPod] spawn _a2k_staticReset;};
 
@@ -125,7 +129,7 @@ while {{alive _x} count (units _grp) > 1} do {
 
 				//START BARRAGE
 				for "_i" from 0 to (3 + (random 5)) do {
-					if (count _friendlyUnitsInRange > 0 || count (magazines (vehicle _gunner)) == 0) exitWith {[_gunner,_assistant,_backPackWeapon,_backPackPod] spawn _a2k_staticReset;};
+					if (count _friendlyUnitsInRange > 0 || count (magazines (vehicle _gunner)) == 0) exitWith {};
 					_grp setCombatMode "BLUE";
 
 					//FORGET TARGETS TO PREVENT AUTONOMOUS SHOOTING
