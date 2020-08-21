@@ -82,3 +82,50 @@ class CfgDebriefingSections {
 		variable = "acex_killTracker_outputText";
 	};
 };
+
+//NOTIFICATIONS
+class CfgNotifications {
+
+    class Default
+    {
+        title = "";
+        iconPicture = "";
+        iconText = "";
+        description = "";
+        color[] = {1,1,1,1};
+        duration = 5;
+        priority = 0;
+        difficulty[] = {};
+    };
+
+    class LMFvictory
+    {
+        title = "VICTORY";
+        iconPicture = "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\instructor_ca.paa";
+        iconText = "+%2";
+        description = "%1";
+        color[] = {0.639,1,0.639,1};
+        duration = 10;
+    };
+
+    class LMFdefeat
+    {
+        title = "DEFEAT";
+        iconPicture = "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\instructor_ca.paa";
+        iconText = "+%2";
+        description = "%1";
+        color[] =  {0.859,0.263,0.263,1};
+        duration = 10;
+    };
+
+    class LMFnotification
+    {
+        title = "NOTIFICATION";
+        iconPicture = "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\instructor_ca.paa";
+        iconText = "+%2";
+        description = "%1";
+        color[] =  {1,0.729,0.149,1};
+        duration = 10;
+    };
+
+};
