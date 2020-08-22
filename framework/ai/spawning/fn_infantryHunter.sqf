@@ -48,7 +48,7 @@ while {_initTickets > 0} do {
 
 	_grp setVariable ["lambs_danger_dangerAI","disabled"];
 	{_x setVariable ["lambs_danger_disableAI",true]} count units _grp;
-	//{_x disableAI "AUTOCOMBAT"} count units _grp;
+	{_x disableAI "AUTOCOMBAT"} count units _grp;
 	_grp enableAttack false;
 	_grp allowFleeing 0;
 	_grp enableIRLasers false;

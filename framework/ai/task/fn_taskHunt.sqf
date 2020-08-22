@@ -71,8 +71,6 @@ while {{alive _x} count (units _grp) > 0} do {
 		_grp setBehaviour "AWARE";
 		_grp setSpeedMode "FULL";
 
-		{_x enableAI "AUTOCOMBAT"} count _units;
-
 		//CLOSE
 		if (_nearestdist < _assaultRange) then {
 			_grp enableIRLasers true;
