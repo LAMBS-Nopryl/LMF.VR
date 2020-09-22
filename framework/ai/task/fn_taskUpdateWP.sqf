@@ -15,8 +15,10 @@ while {{alive _x} count (units _grp) > 0} do {
 	_wp setWaypointType "GUARD";
 
 	if ( !isNull ((leader _grp) findNearestEnemy (leader _grp)) ) then {
-		[_grp, 0] setWaypointPosition [getPosATL ((leader _grp) findNearestEnemy (leader _grp)), 25]; //getPosASL and -1 for exact position.
-		[_grp, 1] setWaypointPosition [getPosATL ((leader _grp) findNearestEnemy (leader _grp)), 25]; //getPosASL and -1 for exact position.
+		private _movePos = getPosATL ((leader _grp) findNearestEnemy (leader _grp));
+		if ((_movePos select 2) > 25) exitWith {};
+		[_grp, 0] setWaypointPosition [_movePos, 25]; //getPosASL and -1 for exact position.
+		[_grp, 1] setWaypointPosition [_movePos, 25]; //getPosASL and -1 for exact position.
 	};
 
 	sleep 180;
