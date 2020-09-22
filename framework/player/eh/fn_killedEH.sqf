@@ -4,9 +4,10 @@
 */
 // INIT ///////////////////////////////////////////////////////////////////////////////////////////
 params ["_unit"];
+if (isNull _unit) exitWith {};
 
 //CALCULATE RESPAWNTIME
-if (typename var_respawnType == "STRING") then {
+if (var_respawnType isEqualType "") then {
 
 	if (var_respawnType == "WAVE") then {
 		setPlayerRespawnTime (var_respawnTime - ((floor CBA_missionTime) % var_respawnTime));
@@ -22,7 +23,7 @@ if (typename var_respawnType == "STRING") then {
 
 };
 
-if (typename var_respawnType == "SCALAR") then {
+if (var_respawnType isEqualType 0) then {
 	setPlayerRespawnTime var_respawnType;
 };
 
