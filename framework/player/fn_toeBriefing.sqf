@@ -16,9 +16,8 @@ _allUniqueGroups sort true;
 
 {
 	//GET INFO
-	private _grp = _x #1;
+	private _grp = _x select 1;
 	private _id = groupID _grp;
-	if (count _allUniqueGroups > 1 && {count (units _grp) < 2}) exitWith {};
 
 	//IF NEW GROUP
 	if (_grp != _grp2) then {
@@ -28,14 +27,8 @@ _allUniqueGroups sort true;
 	//ENTRY FOR SOLDIER
 	{
 		_brf_platoon = _brf_platoon + format ["<img image='\A3\Ui_f\data\GUI\Cfg\Ranks\%1_gs.paa' color='#FFFFFF' width='16' height='16'/>",toLower rank _x];
-		private _fontColorName = "#D7DBD5";
-		if (assignedTeam _x == "MAIN") then {_fontColorName = "#FFFFFF"};
-		if (assignedTeam _x == "RED") then {_fontColorName = "#E60000"};
-		if (assignedTeam _x == "GREEN") then {_fontColorName = "#00E600"};
-		if (assignedTeam _x == "BLUE") then {_fontColorName = "#459CFF"};
-		if (assignedTeam _x == "YELLOW") then {_fontColorName = "#E6E600"};
-		_brf_platoon = _brf_platoon + format [" <font color='%1'> " +  name _x + "</font><br/>",_fontColorName];
-	} forEach units _grp;
+		_brf_platoon = _brf_platoon + " <font color='#FFFFFF'> " +  name _x + "</font><br/>";
+	} forEach (units _grp);
 
 	//UPDATE OLD
 	_grp2 = _grp;
