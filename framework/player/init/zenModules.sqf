@@ -118,7 +118,7 @@ LMF_groupTypes = ["TEAM", "SQUAD", "SENTRY","ATTEAM","AATEAM", "MGTEAM","CUSTOM 
 		//PARAMS
 		["COMBO","Group Type",[LMF_groupTypes,LMF_groupTypes,0]],
 		["SLIDER","Custom Amount",[1,60,4,0]],
-		["EDIT","Hunting Radius",["500"]]
+		["EDIT","Hunting Radius",["3000"]]
 	],{
 		//PARSE PARAMS
 		params ["_dialog","_pos"];
