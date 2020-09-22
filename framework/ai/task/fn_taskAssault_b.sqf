@@ -18,6 +18,7 @@ _grp enableAttack false;
 lmf_ai_infantryRush = {
 	params ["_grp","_rushPos"];
 		if (_grp getvariable ["lmf_ai_isRushing",false]) exitWith {};
+		if ((_rushPos select 2) > 25) exitWith {};
 		_grp setVariable ["lmf_ai_isRushing", true];
 
 		{_x disableAI "AUTOCOMBAT"} count (units _grp);
@@ -130,6 +131,7 @@ while {{alive _x} count (units _grp) > 0} do {
 
 		//IF GROUP KNOWS ABOUT TARGET
 		if (_tracker knowsAbout _nearest > 1 && {_nearestdist < _range}) then {
+			if ((_assaultPos select 2) > 25) exitWith {};
 			_grp setFormation selectRandom ["WEDGE","LINE"];
 			[_grp, 0] setWaypointPosition [ATLToASL _assaultPos, -1];
 			[_grp, 1] setWaypointPosition [ATLToASL _assaultPos, -1];
