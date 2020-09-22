@@ -69,13 +69,13 @@ while {{alive _x} count (units _grp) > 1} do {
 
 	//WAIT UNTIL TARGET SPOTTED
 	if (_type == "HAT") then {
-		waitUntil {sleep 5; count ((leader _grp) targets [true, 1000]) > 0 && (((leader _grp) targets [true, 1000]) findIf {_x isKindOf "LandVehicle"}) == 0 || {{alive _x} count units _grp < 1}};
+		waitUntil {sleep 5; count (((leader _grp) targets [true, 1000]) select {side _x != var_enemySide && {_x isKindOf "LandVehicle"}}) > 0 || {{alive _x} count units _grp < 1}};
 	};
 	if (_type == "MORTAR") then {
-		waitUntil {sleep 5; count ((leader _grp) targets [true, 1500]) > 0 || {{alive _x} count units _grp < 1}};
+		waitUntil {sleep 5; count (((leader _grp) targets [true, 1500]) select {side _x != var_enemySide && {getPos _x select 2 < 25}}) > 0 || {{alive _x} count units _grp < 1}};
 	};
 	if (_type == "HMG") then {
-		waitUntil {sleep 5; count ((leader _grp) targets [true, 800]) > 0 || {{alive _x} count units _grp < 1}};
+		waitUntil {sleep 5; count (((leader _grp) targets [true, 800]) select {side _x != var_enemySide}) > 0 || {{alive _x} count units _grp < 1}};
 	};
 
 	//DEPLOY THE WEAPON
@@ -127,7 +127,7 @@ while {{alive _x} count (units _grp) > 1} do {
 
 			if (vehicle _gunner != _gunner && {canFire (vehicle _gunner)} && {_targetPos inRangeOfArtillery [[(vehicle _gunner)], currentMagazine (vehicle _gunner)]}) then {
 				//ADJUST ACCURACY
-				_accuracy = _accuracy - 20;
+				_accuracy = _accuracy - 50;
 
 				//START BARRAGE
 				for "_i" from 0 to (3 + (random 5)) do {
@@ -154,7 +154,15 @@ while {{alive _x} count (units _grp) > 1} do {
 
 
 	//WAIT UNTIL NO KNOWN ENEMY OR OUT OF AMMO
-	waitUntil {sleep 5; count ((leader _grp) targets [true, 1500]) == 0 || {count (magazines (vehicle _gunner)) == 0} || {(vehicle _gunner) == _gunner} || {{alive _x} count units _grp < 1}};
+	if (_type == "HAT") then {
+		waitUntil {sleep 5; count (((leader _grp) targets [true, 1000]) select {side _x != var_enemySide && {_x isKindOf "LandVehicle"}}) == 0 || {count (magazines (vehicle _gunner)) == 0} || {(vehicle _gunner) == _gunner} || {{alive _x} count units _grp < 1}};
+	};
+	if (_type == "MORTAR") then {
+		waitUntil {sleep 5; count (((leader _grp) targets [true, 1500]) select {side _x != var_enemySide && {getPos _x select 2 < 25}}) == 0 || {count (magazines (vehicle _gunner)) == 0} || {(vehicle _gunner) == _gunner} || {{alive _x} count units _grp < 1}};
+	};
+	if (_type == "HMG") then {
+		waitUntil {sleep 5; count (((leader _grp) targets [true, 800]) select {side _x != var_enemySide}) == 0 || {{alive _x} count units _grp < 1}};
+	};
 	[_gunner,_assistant,_backPackWeapon,_backPackPod] spawn _a2k_staticReset;
 	sleep 30;
 };
