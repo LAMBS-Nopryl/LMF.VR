@@ -149,7 +149,7 @@ private _statement = {
 	]] call CBA_fnc_waitUntilAndExecute;
 };
 
-private _parentSupplyDrop = ["parentSupplyDrop","Call Supply Drop","",{true},{!visibleMap && {player isEqualTo (leader group player)}}] call ace_interact_menu_fnc_createAction;
+private _parentSupplyDrop = ["parentSupplyDrop","Call Supply Drop","A3\ui_f\data\GUI\Cfg\CommunicationMenu\supplydrop_ca.paa",{true},{!visibleMap && {player isEqualTo (leader group player)}}] call ace_interact_menu_fnc_createAction;
 [player,1,["ACE_SelfActions"],_parentSupplyDrop] call ace_interact_menu_fnc_addActionToObject;
 
 private _dropLarge = ["lmf_supp_ammoLarge","Supplies Large","\A3\ui_f\data\map\vehicleicons\iconCrateAmmo_ca.paa",_statement,{true},{},[var_supLarge]] call ace_interact_menu_fnc_createAction;

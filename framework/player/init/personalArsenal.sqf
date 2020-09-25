@@ -110,5 +110,5 @@ if (_specialRoles findIf {_x == _role} == -1) then {
 
 // ADD ACTIONS ////////////////////////////////////////////////////////////////////////////////////
 //_text = format ["<t shadow='2' color='#FFBA26'>Personal Arsenal</t>"];
-private _personalArsenal = ["personalArsenal","Personal Arsenal","\a3\3DEN\Data\Displays\Display3DEN\EntityMenu\arsenal_ca.paa",{["Open",[false,player, player]] spawn bis_fnc_arsenal; player action ["SwitchWeapon", player, player, 100];},{lmf_warmup}] call ace_interact_menu_fnc_createAction;
+private _personalArsenal = ["personalArsenal","Personal Arsenal","A3\ui_f_orange\Data\CfgOrange\Missions\orange_escape_ca.paa",{["Open",[false,player, player]] spawn bis_fnc_arsenal; player action ["SwitchWeapon", player, player, 100];},{lmf_warmup}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], _personalArsenal] call ace_interact_menu_fnc_addActionToObject;

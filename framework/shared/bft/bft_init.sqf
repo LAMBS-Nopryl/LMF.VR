@@ -13,13 +13,13 @@ setGroupIconsSelectable true;
 
 // ADD ACTIONS ////////////////////////////////////////////////////////////////////////////////////
 //MAIN CATEGORY
-private _parentBFT = ["parentBFT","Blue Force Tracker","\a3\Modules_F_Curator\Data\portraitAnimalsSheep_ca.paa",{true;},{player == leader (group player)}] call ace_interact_menu_fnc_createAction;
+private _parentBFT = ["parentBFT"," Blue Force Tracker","\a3\Modules_F_Curator\Data\portraitAnimalsSheep_ca.paa",{true;},{player == leader (group player)}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], _parentBFT] call ace_interact_menu_fnc_addActionToObject;
 
 //SUB CATEGORIES
-private _parentGround = ["parentGround","Ground","a3\ui_f_curator\Data\Displays\RscDisplayCurator\modeUnits_ca.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
+private _parentGround = ["parentGround","Ground","A3\3den\Data\Displays\Display3DEN\PanelRight\modeGroups_ca.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions","parentBFT"], _parentGround] call ace_interact_menu_fnc_addActionToObject;
-private _parentAir = ["parentAir","Air","\A3\ui_f\data\map\vehicleicons\iconHelicopter_ca.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
+private _parentAir = ["parentAir","Air","A3\ui_f\data\GUI\Rsc\RscDisplayGarage\helicopter_ca.paa",{true;},{true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions","parentBFT"], _parentAir] call ace_interact_menu_fnc_addActionToObject;
 
 //MARKER UPDATE SYSTEM
